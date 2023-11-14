@@ -1,6 +1,6 @@
 # AgoraMining
 
-Dieses Projekt entsteht im Rahmen der Ausbildung zum Fachinformatiker Anwendungsentwicklung. Es soll in einer Gruppenarbeit über 5 Wochen eine Software entwickelt werden.
+Dieses Projekt entsteht im Rahmen der Ausbildung zum Fachinformatiker Anwendungsentwicklung am Oberstufenzentrum Informations- und Medizintechnik in Berlin. Es soll in einer Gruppenarbeit über 5 Wochen eine Software entwickelt werden.
 
 ## Aufgabenstellung
 
