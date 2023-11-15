@@ -10,6 +10,9 @@
 ### Benutzer und Zielgruppe:
 > Zielgruppen und Benutzer werden definiert.
 
+Da dieses Projekt im Rahmen der Ausbildung in der Berufsschule bearbeitet und abgegeben wird, gibt es keine konkreten Benutzer und Zielgruppen.
+Weil der Arbeitsauftrag vom Lehrer kommt, könnte man die Lehrerschaft des Oberstufenzentrums für Informations- und Medizintechnik als Zielgruppe und Benutzer angesehen werden kann.
+
 ### Projektumfangsdefinition: 
 > Klarstellung der Funktionen und Aufgaben, die im Projekt enthalten sind.
 
