@@ -10,7 +10,6 @@ struct HelloAgoraTemplate<'a> {
 #[tokio::main]
 async fn main() {
     let app = Router::new()
-        // credits doesnt get displayed
         .route("/", get(|| async { HelloAgoraTemplate { text: "by Denis, Hanna & Lucas" } }))
         .route("/hanna", get(|| async { HelloAgoraTemplate { text: "Das ist Hannas Seite - für Testzwecke" } }));
 
