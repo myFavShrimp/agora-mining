@@ -1,0 +1,26 @@
+[package]
+name = "agora-mining"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+askama = { version = "0.12.1", features = ["with-axum"] }
+askama_axum = "0.3.0"
+axum = "0.6.20"
+tokio = { version = "1.33.0", features = ["full"] }
+tower = { version = "0.4", features = ["util"] }
+turf = "0.7.0"
+
+[package.metadata.turf]
+load_paths = ["variables"]
+minify = false
+
+[package.metadata.turf.class_names]
+template = "agora-mining_<original_name>_<id>"
+
+[package.metadata.turf.browser_targets]
+chrome = [80, 1, 2]
+firefox = 65
+safari = [12, 3]
