@@ -1,6 +1,6 @@
 | Nr  | Kriterium | Beschreibung | Punkte
 | --- | --- | --- | --- |
-| 1  | ER-Modell und Relationales Modell für DBS erstellen  | In einem Datensatz sollen jeweils die Energiedaten dvon einer Stunde gespeichert werden, gut auswertbares Datumsformat, Lösung für Windkraft vor 2015  | 10  |
+| 1  | ER-Modell und Relationales Modell für DBS erstellen  | In einem Datensatz sollen jeweils die Energiedaten von einer Stunde gespeichert werden, gut auswertbares Datumsformat  | 10  |
 | 2  | User Storys  | Erstellen Sie ein Anwendungsfalldiagramm und beschreiben Sie die daraus resultierenden User Stories.  | 10  |
 | 3  | Auslesen der relevanten Daten aus der Webseite  | Ungefilterte Wiedergabe auf der Konsole  | 5  |
 | 4  | Anzeigen der aktuellen Stromerzeugung  | z.B.: Strukturierte Ausgabe von Daten  | 10  |
