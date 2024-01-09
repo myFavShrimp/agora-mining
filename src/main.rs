@@ -1,5 +1,5 @@
 use askama::Template;
-use axum::{extract::Path, routing::get, Router};
+use axum::{routing::get, Router};
 
 #[derive(Template)]
 #[template(path = "hello_agora.html")]
