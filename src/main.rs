@@ -1,5 +1,5 @@
 use askama::Template;
-use axum::{routing::get, Router};
+use axum::{response::IntoResponse, routing::get, Router};
 
 #[derive(Template)]
 #[template(path = "hello_agora.html")]
@@ -18,17 +18,14 @@ async fn main() {
                 }
             }),
         )
-        .route(
-            "/hanna",
-            get(|| async {
-                HelloAgoraTemplate {
-                    text: "Das ist Hannas Seite - für Testzwecke",
-                }
-            }),
-        );
+        .route("/hanna", get(refresh_data_handler));
 
     axum::Server::bind(&"0.0.0.0:8080".parse().unwrap())
         .serve(app.into_make_service())
         .await
         .unwrap();
+}
+
+async fn refresh_data_handler() -> impl IntoResponse {
+    println!("HANNA ist doof");
 }
