@@ -8,7 +8,7 @@ struct HelloAgoraTemplate<'a> {
 }
 
 #[tokio::main]
-async fn main() {
+async fn main() -> eyre::Result<()> {
     let app = Router::new()
         .route(
             "/",
@@ -20,10 +20,10 @@ async fn main() {
         )
         .route("/hanna", get(refresh_data_handler));
 
-    axum::Server::bind(&"0.0.0.0:8080".parse().unwrap())
-        .serve(app.into_make_service())
-        .await
-        .unwrap();
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:8080").await.unwrap();
+    axum::serve(listener, app).await?;
+
+    Ok(())
 }
 
 async fn refresh_data_handler() -> impl IntoResponse {
