@@ -53,22 +53,35 @@ async fn refresh_data_handler() -> impl IntoResponse {
         .header(AGORA_API_KEY_HEADER_NAME, AGORA_API_KEY_HEADER_VALUE)
         .body(
             r#"
-            {
-            	"filters": {
-            		"from": "2014-01-01",
-            		"to": "2015-01-01",
-            		"generation": [
-            			"Wind offshore",
-            			"Wind onshore"
-            		]
-            	},
-            	"x_coordinate": "date_id",
-            	"y_coordinate": "value",
-            	"view_name": "live_gen_plus_emi_de_hourly",
-            	"kpi_name": "conventional_power_generation",
-            	"z_coordinate": "generation"
-            }
-        "#,
+                {
+                    "filters": {
+                        "from": "2024-01-06",
+                        "to": "2024-01-10",
+                        "generation": [
+                            "Total electricity demand",
+                            "Biomass",
+                            "Hydro",
+                            "Wind offshore",
+                            "Wind onshore",
+                            "Solar",
+                            "Total conventional power plant",
+                            "Nuclear",
+                            "Lignite",
+                            "Hard Coal",
+                            "Natural Gas",
+                            "Pumped storage generation",
+                            "Other",
+                            "Grid emission factor",
+                            "Total grid emissions"
+                        ]
+                    },
+                    "x_coordinate": "date_id",
+                    "y_coordinate": "value",
+                    "view_name": "live_gen_plus_emi_de_hourly",
+                    "kpi_name": "power_generation",
+                    "z_coordinate": "generation"
+                }
+            "#,
         )
         .send()
         .await;
