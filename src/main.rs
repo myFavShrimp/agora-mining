@@ -10,14 +10,25 @@ struct HelloAgoraTemplate<'a> {
 #[tokio::main]
 async fn main() {
     let app = Router::new()
-        .route("/", get(|| async { HelloAgoraTemplate { text: "by Denis, Hanna & Lucas" } }))
-        .route("/hanna", get(|| async { HelloAgoraTemplate { text: "Das ist Hannas Seite - für Testzwecke" } }));
+        .route(
+            "/",
+            get(|| async {
+                HelloAgoraTemplate {
+                    text: "by Denis, Hanna & Lucas",
+                }
+            }),
+        )
+        .route(
+            "/hanna",
+            get(|| async {
+                HelloAgoraTemplate {
+                    text: "Das ist Hannas Seite - für Testzwecke",
+                }
+            }),
+        );
 
     axum::Server::bind(&"0.0.0.0:8080".parse().unwrap())
         .serve(app.into_make_service())
         .await
         .unwrap();
 }
-
-
-
