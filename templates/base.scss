@@ -1,0 +1,60 @@
+@import "color";
+
+html {
+  background-color: $agora-background;
+  font-family: Arial, sans-serif;
+  color: $agora-on-background;
+
+  .navBar {
+    background-color: $agora-container-primary;
+    height: 75px;
+
+    ul {
+      padding: 10px;
+      margin: 0;
+
+      li {
+        display: inline-block;
+        margin: 5px;
+        padding: 10px;
+        vertical-align: top;
+
+        a {
+          color: $agora-container-primary-text;
+
+          .spinner {
+            position: relative;
+            display: none;
+            width: 1.15rem;
+            height: 1.15rem;
+            border: 5px solid $agora-container-primary-text;
+            border-bottom-color: #55006b;
+            border-radius: 50%;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+          }
+
+          &.htmx-request {
+            .spinner {
+              display: inline-block;
+            }
+
+            .linkText {
+              opacity: 25%;
+            }
+          }
+
+          @keyframes rotation {
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+        }
+      }
+    }
+
+  }
+}

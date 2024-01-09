@@ -20,6 +20,7 @@ turf = "0.7.0"
 load_paths = ["variables"]
 minify = false
 class_names.template = "agora-mining_<original_name>_<id>"
+class_names.excludes = ["htmx-.*"]
 
 [package.metadata.turf.browser_targets]
 chrome = [80, 1, 2]
