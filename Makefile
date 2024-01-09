@@ -1,4 +1,4 @@
-iwatch:
+watch:
 	cargo watch -x run
 
 link-env:
