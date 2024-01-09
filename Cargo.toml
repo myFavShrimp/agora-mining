@@ -16,9 +16,7 @@ turf = "0.7.0"
 [package.metadata.turf]
 load_paths = ["variables"]
 minify = false
-
-[package.metadata.turf.class_names]
-template = "agora-mining_<original_name>_<id>"
+class_names.template = "agora-mining_<original_name>_<id>"
 
 [package.metadata.turf.browser_targets]
 chrome = [80, 1, 2]
