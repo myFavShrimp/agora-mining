@@ -1,6 +1,6 @@
 use askama::Template;
-use axum::{http::StatusCode, response::IntoResponse, routing::get, Router};
-use serde::Deserialize;
+use axum::{http::StatusCode, response::IntoResponse, routing::get, Json, Router};
+use serde::{Deserialize, Serialize};
 
 #[derive(Template)]
 #[template(path = "hello_agora.html")]
@@ -27,13 +27,47 @@ async fn main() -> eyre::Result<()> {
     Ok(())
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug)]
+enum GenerationKind {
+    #[serde(rename = "Biomass")]
+    Biomass,
+    #[serde(rename = "Grid emission factor")]
+    GridEmissionFactor,
+    #[serde(rename = "Hard Coal")]
+    HardCoal,
+    #[serde(rename = "Hydro")]
+    Hydro,
+    #[serde(rename = "Lignite")]
+    Lignite,
+    #[serde(rename = "Natural Gas")]
+    NaturalGas,
+    #[serde(rename = "Nuclear")]
+    Nuclear,
+    #[serde(rename = "Other")]
+    Other,
+    #[serde(rename = "Pumped storage generation")]
+    PumpedStorageGeneration,
+    #[serde(rename = "Solar")]
+    Solar,
+    #[serde(rename = "Total conventional power plant")]
+    TotalConventionalPowerPlant,
+    #[serde(rename = "Total electricity demand")]
+    TotalElectricityDemand,
+    #[serde(rename = "Total grid emissions")]
+    TotalGridEmissions,
+    #[serde(rename = "Wind offshore")]
+    WindOffshore,
+    #[serde(rename = "Wind onshore")]
+    WindOnshore,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
 struct AgoraApiResponseData {
     data: Vec<(String, f64, String)>,
     columns: Vec<String>,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 struct AgoraApiResponse {
     status: bool,
     data: AgoraApiResponseData,
@@ -44,8 +78,6 @@ static AGORA_API_KEY_HEADER_NAME: &str = "api-key";
 static AGORA_API_KEY_HEADER_VALUE: &str = "agora_live_62ce76dd202927.67115829";
 
 async fn refresh_data_handler() -> impl IntoResponse {
-    println!("HANNA ist doof");
-
     let reqwest_client = reqwest::Client::new();
 
     let agora_response = reqwest_client
@@ -55,24 +87,24 @@ async fn refresh_data_handler() -> impl IntoResponse {
             r#"
                 {
                     "filters": {
-                        "from": "2024-01-06",
+                        "from": "2012-01-01",
                         "to": "2024-01-10",
                         "generation": [
-                            "Total electricity demand",
                             "Biomass",
+                            "Grid emission factor",
+                            "Hard Coal",
                             "Hydro",
-                            "Wind offshore",
-                            "Wind onshore",
+                            "Lignite",
+                            "Natural Gas",
+                            "Nuclear",
+                            "Other",
+                            "Pumped storage generation",
                             "Solar",
                             "Total conventional power plant",
-                            "Nuclear",
-                            "Lignite",
-                            "Hard Coal",
-                            "Natural Gas",
-                            "Pumped storage generation",
-                            "Other",
-                            "Grid emission factor",
-                            "Total grid emissions"
+                            "Total electricity demand",
+                            "Total grid emissions",
+                            "Wind offshore",
+                            "Wind onshore"
                         ]
                     },
                     "x_coordinate": "date_id",
@@ -86,10 +118,11 @@ async fn refresh_data_handler() -> impl IntoResponse {
         .send()
         .await;
 
-    println!(
-        "{:#?}",
-        agora_response.unwrap().json::<AgoraApiResponse>().await
-    );
+    let agora_response_data = agora_response
+        .unwrap()
+        .json::<AgoraApiResponse>()
+        .await
+        .unwrap();
 
-    (StatusCode::OK, "ok")
+    (StatusCode::OK, Json(agora_response_data))
 }

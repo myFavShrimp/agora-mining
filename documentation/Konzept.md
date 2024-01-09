@@ -36,10 +36,12 @@ Die analytische Funktionen zur Interpretation der Energiedaten, wie Trendanalyse
 > Detaillierte Zeitpläne, um den Fortschritt zu verfolgen.
 
 #### Ressourcenplan
-> PLanung der bneötigten Ressourcen (Hard-/Software, Räumlichkeiten, ...)
+> Planung der benötigten Ressourcen (Hard-/Software, Räumlichkeiten, ...)
 
 #### Entwicklungsprozess
 > Welches Modell wurde bei der Bearbeitung verfolgt?
+
+Scrum
 
 ## 2. Anforderungsdokumentation
 ### Funktions- und technische Spezifikationen 
@@ -54,7 +56,8 @@ Die analytische Funktionen zur Interpretation der Energiedaten, wie Trendanalyse
 
 ### Benutzeroberflächendesign 
 > Entwürfe und Spezifikationen für die Benutzeroberfläche.
-Normalize.css Verwendung für Cross-Browser kompatibilität, da es browser unterschiedlich darstellen.
+
+Wir verwenden Normalize.css, um browserübergreifende Konsistenz in der Darstellung von HTML-Elementen zu gewährleisten. Es bietet den Vorteil, standardisierte und vorhersagbare Stilgrundlagen zu schaffen, ohne dabei unnötige oder problematische Zurücksetzungen vorzunehmen. Durch die gezielte Normalisierung werden konsistente Designs über verschiedene Browser hinweg ermöglicht, wodurch Entwickler weniger Zeit mit der Bewältigung von Browserinkonsistenzen verbringen und sich stattdessen auf die Gestaltung benutzerfreundlicher Benutzeroberflächen konzentrieren können.
 
 ## 4. Testdokumentation
 ### Testplan
