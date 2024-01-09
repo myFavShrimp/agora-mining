@@ -22,8 +22,12 @@ html {
         a {
           color: $agora-container-primary-text;
 
+          .linkText {
+            position: absolute
+          }
+
           .spinner {
-            position: relative;
+            position: absolute;
             display: none;
             width: 1.15rem;
             height: 1.15rem;
