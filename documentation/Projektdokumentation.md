@@ -75,24 +75,58 @@ Die Investition in das Projekt zielt primär darauf ab, den Ausbildungsfortschri
 
 #### Schlussfolgerung:
 Die Wirtschaftlichkeitsanalyse zeigt, dass die Investitionen in erster Linie auf die Ausbildung der Teammitglieder abzielen. Die erwarteten Nutzen liegen in der Entwicklung von Fähigkeiten, dem pädagogischen Wert des Projekts und der potenziellen Anwendbarkeit der entwickelten Lösung für zukünftige Szenarien.
+### Qualitätsanforderungen
+>  Welche Qualitätsanforderungen werden an die Anwendung gestellt, z.B. hinsichtlich Performance, Usability, Effizienz etc. (siehe (ISO/IEC 9126-1, 2001))?
 
-## Anforderungsdokumentation
-### Funktions- und technische Spezifikationen 
-> Detaillierte Beschreibung der Anforderungen und Funktionalitäten des Systems.
+### Anforderungen
+| Nr  | Kriterium | Beschreibung | Punkte
+| --- | --- | --- | --- |
+| 1  | ER-Modell und Relationales Modell für DBS erstellen  | In einem Datensatz sollen jeweils die Energiedaten von einer Stunde gespeichert werden, gut auswertbares Datumsformat  | 10  |
+| 2  | User Storys  | Erstellen Sie ein Anwendungsfalldiagramm und beschreiben Sie die daraus resultierenden User Stories.  | 10  |
+| 3  | Auslesen der relevanten Daten aus der Webseite  | Ungefilterte Wiedergabe auf der Konsole  | 5  |
+| 4  | Anzeigen der aktuellen Stromerzeugung  | z.B.: Strukturierte Ausgabe von Daten  | 10  |
+| 5  | Anzeigen aller Datensätze des über die Webseite ausgewählten Zeitraums  | z.B.: Strukturierte Ausgabe von Daten  | 10  |
+| 6  | Erstellen einer GUI mit Auswahl eines Zeitraums  | Kann auch erstmal ohne Funktion sein, das Datum soll über einen Kalender ausgewählt werden (Bibliothek nutzen)  | 5  |
+| 7  | Datenbankanbindung  | Über eine Methode kann ein Datensatz in die Datenbank eingetragen werden. Testklasse mit Beispieldaten verwenden.  | 5  |
+| 8  | Alle Daten in DBS speichern  | Es existiert ein Button, der die Daten des gesamten Zeitraums von der Webseite holt und in das DBS einspeichert.  | 10  |
+| 9  | Installationsdokumentation  | Information an die Lehrkraft, wie das Programm installiert, konfiguriert und gestartet wird.  | 10  |
+| 10  | _Content Cell_  | _Content Cell_  | _Content Cell_  |
+| S1  | Nachträgliches Hinzufügen von Daten  | Es werden die neusten Daten von der Webseite geholt und mit den Daten im DBS vereint. Es soll nichts altes gelöscht werden.  | 10  |
+| S2  | Die GUI ist optisch ansprechend  | _Content Cell_  | 5  |
+| S3  | _Content Cell_  | _Content Cell_  | _Content Cell_  |
+| K1  | Entwicklerdokumentation  | Sie beschreiben Ihr Vorgehen, Techniken, Bibliotheken, so dass jemand anderes ihre Software warten kann.  | 10  |
+| K2  | _Content Cell_  | _Content Cell_  | _Content Cell_  |
 
-## Designdokumente
-### Technologiestack
-> Dokumentation die für die Durchführung des Projekts benutzt worden sind.
-
-### Datenbankdesign 
-> Struktur der Datenbank, Tabellen, Beziehungen, etc.
+## Entwurfsphase
+### Zielplattform 
+> Beschreibung der Kriterien zur Auswahl der Zielplattform (u.a. Programmiersprache, Datenbank, Client/Server, Hardware).
 
 ### Benutzeroberflächendesign 
-> Entwürfe und Spezifikationen für die Benutzeroberfläche.
+> Entscheidung für die gewählte Benutzeroberfläche (z.B. GUI, Webinterface).
+
+> Beschreibung des visuellen Entwurfs der konkreten Oberfläche (z.B. Mockups, Menüführung).
+
+> Ggfs. Erläuterung von angewendeten Richtlinien zur Usability und Verweis auf Corporate Design
+
+### Datenmodell
+> ntwurf/Beschreibung der Datenstrukturen (z.B. ERM und/oder Tabellenmodell, XMLSchemas) mit kurzer Beschreibung der wichtigsten (!) verwendeten Entitäten.
+### Maßnahmen zur Qualitätssicherung
+>  Welche Maßnahmen werden ergriffen, um die Qualität des Projektergebnisses (siehe Kapitel 3.5) zu sichern (z.B. automatische Tests, Anwendertests)?
+
+> Ggfs. Definition von Testfällen und deren Durchführung (durch Programme/Benutzer).
+
+## Implementierungsphase
+### Datenstruktur
+> eschreibung der angelegten Datenbank (z.B. Generierung von SQL aus Modellierungswerkzeug oder händisches Anlegen), XML-Schemas usw.
+
+### Benutzeroberfläche
+> Beschreibung der Implementierung der Benutzeroberfläche, falls dies separat zur Implementierung der Geschäftslogik erfolgt (z.B. bei HTML-Oberflächen und Stylesheets).
+> Ggfs. Beschreibung des Corporate Designs und dessen Umsetzung in der Anwendung.
+> Screenshots der Anwendung
 
 Wir verwenden Normalize.css, um browserübergreifende Konsistenz in der Darstellung von HTML-Elementen zu gewährleisten. Es bietet den Vorteil, standardisierte und vorhersagbare Stilgrundlagen zu schaffen, ohne dabei unnötige oder problematische Zurücksetzungen vorzunehmen. Durch die gezielte Normalisierung werden konsistente Designs über verschiedene Browser hinweg ermöglicht, wodurch Entwickler weniger Zeit mit der Bewältigung von Browserinkonsistenzen verbringen und sich stattdessen auf die Gestaltung benutzerfreundlicher Benutzeroberflächen konzentrieren können.
 
-## 4. Testdokumentation
+## Testdokumentation
 ### Testplan
 > Übersicht über den Testprozess, Testarten und Testumfang.
 
@@ -101,3 +135,8 @@ Wir verwenden Normalize.css, um browserübergreifende Konsistenz in der Darstell
 
 ### Testergebnisse 
 > Dokumentation der Ergebnisse, einschließlich Fehlerberichte und behobener Fehler.
+
+## Fazit
+### Soll-/Ist-Vergleich
+### Lessons Learned
+### Ausblick
