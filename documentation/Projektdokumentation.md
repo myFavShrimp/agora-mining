@@ -76,6 +76,8 @@ Die Investition in das Projekt zielt primär darauf ab, den Ausbildungsfortschri
 #### Schlussfolgerung:
 Die Wirtschaftlichkeitsanalyse zeigt, dass die Investitionen in erster Linie auf die Ausbildung der Teammitglieder abzielen. Die erwarteten Nutzen liegen in der Entwicklung von Fähigkeiten, dem pädagogischen Wert des Projekts und der potenziellen Anwendbarkeit der entwickelten Lösung für zukünftige Szenarien.
 ### Qualitätsanforderungen
+>  Welche Qualitätsanforderungen werden an die Anwendung gestellt, z.B. hinsichtlich Performance, Usability, Effizienz etc. (siehe (ISO/IEC 9126-1, 2001))?
+
 ### Anforderungen
 | Nr  | Kriterium | Beschreibung | Punkte
 | --- | --- | --- | --- |
@@ -95,23 +97,36 @@ Die Wirtschaftlichkeitsanalyse zeigt, dass die Investitionen in erster Linie auf
 | K1  | Entwicklerdokumentation  | Sie beschreiben Ihr Vorgehen, Techniken, Bibliotheken, so dass jemand anderes ihre Software warten kann.  | 10  |
 | K2  | _Content Cell_  | _Content Cell_  | _Content Cell_  |
 
-## Anforderungsdokumentation
-### Funktions- und technische Spezifikationen 
-> Detaillierte Beschreibung der Anforderungen und Funktionalitäten des Systems.
-
-## Designdokumente
-### Technologiestack
-> Dokumentation die für die Durchführung des Projekts benutzt worden sind.
-
-### Datenbankdesign 
-> Struktur der Datenbank, Tabellen, Beziehungen, etc.
+## Entwurfsphase
+### Zielplattform 
+> Beschreibung der Kriterien zur Auswahl der Zielplattform (u.a. Programmiersprache, Datenbank, Client/Server, Hardware).
 
 ### Benutzeroberflächendesign 
-> Entwürfe und Spezifikationen für die Benutzeroberfläche.
+> Entscheidung für die gewählte Benutzeroberfläche (z.B. GUI, Webinterface).
+
+> Beschreibung des visuellen Entwurfs der konkreten Oberfläche (z.B. Mockups, Menüführung).
+
+> Ggfs. Erläuterung von angewendeten Richtlinien zur Usability und Verweis auf Corporate Design
+
+### Datenmodell
+> ntwurf/Beschreibung der Datenstrukturen (z.B. ERM und/oder Tabellenmodell, XMLSchemas) mit kurzer Beschreibung der wichtigsten (!) verwendeten Entitäten.
+### Maßnahmen zur Qualitätssicherung
+>  Welche Maßnahmen werden ergriffen, um die Qualität des Projektergebnisses (siehe Kapitel 3.5) zu sichern (z.B. automatische Tests, Anwendertests)?
+
+> Ggfs. Definition von Testfällen und deren Durchführung (durch Programme/Benutzer).
+
+## Implementierungsphase
+### Datenstruktur
+> eschreibung der angelegten Datenbank (z.B. Generierung von SQL aus Modellierungswerkzeug oder händisches Anlegen), XML-Schemas usw.
+
+### Benutzeroberfläche
+> Beschreibung der Implementierung der Benutzeroberfläche, falls dies separat zur Implementierung der Geschäftslogik erfolgt (z.B. bei HTML-Oberflächen und Stylesheets).
+> Ggfs. Beschreibung des Corporate Designs und dessen Umsetzung in der Anwendung.
+> Screenshots der Anwendung
 
 Wir verwenden Normalize.css, um browserübergreifende Konsistenz in der Darstellung von HTML-Elementen zu gewährleisten. Es bietet den Vorteil, standardisierte und vorhersagbare Stilgrundlagen zu schaffen, ohne dabei unnötige oder problematische Zurücksetzungen vorzunehmen. Durch die gezielte Normalisierung werden konsistente Designs über verschiedene Browser hinweg ermöglicht, wodurch Entwickler weniger Zeit mit der Bewältigung von Browserinkonsistenzen verbringen und sich stattdessen auf die Gestaltung benutzerfreundlicher Benutzeroberflächen konzentrieren können.
 
-## 4. Testdokumentation
+## Testdokumentation
 ### Testplan
 > Übersicht über den Testprozess, Testarten und Testumfang.
 
@@ -120,3 +135,8 @@ Wir verwenden Normalize.css, um browserübergreifende Konsistenz in der Darstell
 
 ### Testergebnisse 
 > Dokumentation der Ergebnisse, einschließlich Fehlerberichte und behobener Fehler.
+
+## Fazit
+### Soll-/Ist-Vergleich
+### Lessons Learned
+### Ausblick
