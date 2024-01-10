@@ -1,15 +1,12 @@
 # Konzept
-## 1. Projektpläne
-### Einleitung
-> Beschreibung der Projekthintergründe, Ziele. Evt. noch Projektumfled?
-
-#### Projektbeschreibung
+## Einleitung
+### Projektbeschreibung
 Dieses Projekt entsteht im Rahmen der Ausbildung zum Fachinformatiker Anwendungsentwicklung am Oberstufenzentrum Informations- und Medizintechnik in Berlin. Es soll in einer Gruppenarbeit über 5 Wochen eine Software entwickelt werden. Die Aufgabe ist die Entwicklung einer Software zum Extrahieren von Energiedaten der Website [Agora](https://www.agora-energiewende.de/service/agorameter/) und Überführung in eine Datenbank.
 
-#### Projektziel
+### Projektziel
 Die herausfordernde Aufgabe beinhaltet die Automatisierung der Datenerfassung, -verarbeitung und -speicherung mit einem klaren Fokus auf die Auswahl und Verarbeitung von Energiedaten für einen bestimmten Zeitraum.
 
-#### Projektschnittstellen
+### Projektschnittstellen
 > Personelle Schnittstellen & Organisatorische Schnittstellen
 
 Da dieses Projekt im Rahmen der Ausbildung in der Berufsschule bearbeitet und abgegeben wird, gibt es keine konkreten Benutzer und Zielgruppen. Weil der Arbeitsauftrag vom Lehrer kommt, könnte die Lehrerschaft des Oberstufenzentrums für Informations- und Medizintechnik als Zielgruppe und Benutzer betrachtet werden. Das Ergebnis muss abschließend Herrn Tenbusch vorgstellt werden.
@@ -26,28 +23,64 @@ Das DBMS fungiert als essenzieller Verwalter unserer Daten. Es ermöglicht die e
 **Agora-Website:**
 Die technische Schnittstelle zur Agora-Website ist von zentraler Bedeutung für die automatisierte Datenerfassung. Hierbei werden die benötigten Energiedaten der Website [Agora](https://www.agora-energiewende.de/service/agorameter/) mit der Agora-API abgegriffen und verwendet. Diese Schnittstelle agiert als Bindeglied zwischen unserer Software und dem umfassenden Informationsangebot der Agora-Plattform. Kontinuierliche Überwachung und Anpassung sind erforderlich, um etwaige Veränderungen auf der Agora-Website zeitnah zu berücksichtigen.
 
-#### Projektabgrenzung
+### Projektabgrenzung
 > Beschreibt was das Projekt nicht machen soll
 
 Die analytische Funktionen zur Interpretation der Energiedaten, wie Trendanalysen oder Vorhersagen, sind nicht Teil dieses Projekts. Die Software konzentriert sich auf die Datenerfassung und -speicherung. Außerdem ist es nur für schulische Zwecke konzipiert und wird nicht für kommerzielle Zwecke oder breite öffentliche Nutzung entwickelt. Abschließend ist nicht vorgesehen, dass die Anwendung eine Schnittstelle mit anderen externen Systemen herstellt. Die Schnittstellen beschränken sich lediglich auf die Agora-Website und das DBMS.
 
-### Projektplanung
-#### Zeitplan und Meilensteine
+## Projektplanung
+### Meilensteine
 > Detaillierte Zeitpläne, um den Fortschritt zu verfolgen.
 
-#### Ressourcenplan
+| Woche  | Meilenstein
+| --- | --- |
+| 1  | Projektauswahl  |
+| 1  | Organisation des Projekts  |
+| 1  | Benötigtes Wissen aneignen  |
+| 2  | Projektgrundlagen erstellen  |
+| 2  | Agora-API sichten und den Key abgleichen  |
+| 3  | Frontend-Navigationsleiste fertigstellen  |
+| 3  | Backend-Datenbank fertigstellen und Abfragen ermöglichen  |
+
+### Abweichungen von der Projektaufgabenstellung
+
+### Ressourcenplan
 > Planung der benötigten Ressourcen (Hard-/Software, Räumlichkeiten, ...)
 
-#### Entwicklungsprozess
+### Entwicklungsprozess
 > Welches Modell wurde bei der Bearbeitung verfolgt?
 
 Scrum
 
-## 2. Anforderungsdokumentation
+## Analysephase
+### Ist-Analyse
+
+### Wirtschaftlichkeitsanalyse
+#### Kosten:
+**Personalkosten:** Die Hauptinvestition entfällt auf die Arbeitszeit der Teammitglieder (Backend-Entwicklung, Frontend-Entwicklung, Dokumentation) entsprechend ihrer Ausbildungszeit und Vergütung.
+
+**Werkzeuge und Technologien:** Kosten für die Nutzung von Entwicklungswerkzeugen, Datenbank-Management-Systemen und anderen erforderlichen Software-Ressourcen.
+
+**Schulressourcen:** Einbeziehung von Schulinfrastruktur wie Computerlabors und Netzwerkinfrastruktur für die Entwicklung und Umsetzung des Projekts.
+
+#### Nutzen:
+**Ausbildungsfortschritt:** Das Projekt bietet den Teammitgliedern, insbesondere im Kontext ihrer Fachinformatiker-Ausbildung, die Möglichkeit, praxisnahe Erfahrungen in der Softwareentwicklung zu sammeln.
+
+**Projektergebnis:** Die entwickelte Software ermöglicht eine automatisierte Extraktion und Speicherung von Energiedaten, was nicht nur für schulische Projekte, sondern auch als Grundlage für zukünftige Anwendungen von Wert sein kann.
+
+**Kompetenzerweiterung:** Die Teammitglieder erweitern ihre technischen Kompetenzen in den Bereichen Backend-Entwicklung, Frontend-Entwicklung und Dokumentation.
+
+#### Return on Investment (ROI):
+Die Investition in das Projekt zielt primär darauf ab, den Ausbildungsfortschritt und die Kompetenzerweiterung der Teammitglieder zu fördern. Der erwartete Return on Investment liegt vor allem in der verbesserten Qualifikation und den erworbenen praktischen Fähigkeiten.
+
+#### Schlussfolgerung:
+Die Wirtschaftlichkeitsanalyse zeigt, dass die Investitionen in erster Linie auf die Ausbildung der Teammitglieder abzielen. Die erwarteten Nutzen liegen in der Entwicklung von Fähigkeiten, dem pädagogischen Wert des Projekts und der potenziellen Anwendbarkeit der entwickelten Lösung für zukünftige Szenarien.
+
+## Anforderungsdokumentation
 ### Funktions- und technische Spezifikationen 
 > Detaillierte Beschreibung der Anforderungen und Funktionalitäten des Systems.
 
-## 3. Designdokumente
+## Designdokumente
 ### Technologiestack
 > Dokumentation die für die Durchführung des Projekts benutzt worden sind.
 
