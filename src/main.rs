@@ -79,7 +79,8 @@ static AGORA_API_URL: &str = "https://api.agora-energy.org/api/raw-data";
 static AGORA_API_KEY_HEADER_NAME: &str = "api-key";
 static AGORA_API_KEY_HEADER_VALUE: &str = "agora_live_62ce76dd202927.67115829";
 
-static AGORA_API_FIRST_DATE: time::Date = date!(2012 - 01 - 01);
+static AGORA_API_FROM_DATE: time::Date = date!(2012 - 01 - 01);
+static AGORA_API_TO_DATE: time::Date = time::Date::MAX;
 
 async fn refresh_data_handler() -> impl IntoResponse {
     let reqwest_client = reqwest::Client::new();
@@ -90,24 +91,24 @@ async fn refresh_data_handler() -> impl IntoResponse {
         .body(
             json! {{
                 "filters": {
-                    "from": AGORA_API_FIRST_DATE,
-                    "to": "2024-01-10",
+                    "from": AGORA_API_FROM_DATE,
+                    "to": AGORA_API_TO_DATE,
                     "generation": [
-                        "Biomass",
-                        "Grid emission factor",
-                        "Hard Coal",
-                        "Hydro",
-                        "Lignite",
-                        "Natural Gas",
-                        "Nuclear",
-                        "Other",
-                        "Pumped storage generation",
-                        "Solar",
-                        "Total conventional power plant",
-                        "Total electricity demand",
-                        "Total grid emissions",
-                        "Wind offshore",
-                        "Wind onshore"
+                        GenerationKind::Biomass,
+                        GenerationKind::GridEmissionFactor,
+                        GenerationKind::HardCoal,
+                        GenerationKind::Hydro,
+                        GenerationKind::Lignite,
+                        GenerationKind::NaturalGas,
+                        GenerationKind::Nuclear,
+                        GenerationKind::Other,
+                        GenerationKind::PumpedStorageGeneration,
+                        GenerationKind::Solar,
+                        GenerationKind::TotalConventionalPowerPlant,
+                        GenerationKind::TotalElectricityDemand,
+                        GenerationKind::TotalGridEmissions,
+                        GenerationKind::WindOffshore,
+                        GenerationKind::WindOnshore,
                     ]
                 },
                 "x_coordinate": "date_id",
