@@ -1,6 +1,8 @@
 use askama::Template;
 use axum::{http::StatusCode, response::IntoResponse, routing::get, Json, Router};
 use serde::{Deserialize, Serialize};
+use serde_json::json;
+use time::macros::date;
 
 #[derive(Template)]
 #[template(path = "hello_agora.html")]
@@ -77,6 +79,8 @@ static AGORA_API_URL: &str = "https://api.agora-energy.org/api/raw-data";
 static AGORA_API_KEY_HEADER_NAME: &str = "api-key";
 static AGORA_API_KEY_HEADER_VALUE: &str = "agora_live_62ce76dd202927.67115829";
 
+static AGORA_API_FIRST_DATE: time::Date = date!(2012 - 01 - 01);
+
 async fn refresh_data_handler() -> impl IntoResponse {
     let reqwest_client = reqwest::Client::new();
 
@@ -84,36 +88,35 @@ async fn refresh_data_handler() -> impl IntoResponse {
         .post(AGORA_API_URL)
         .header(AGORA_API_KEY_HEADER_NAME, AGORA_API_KEY_HEADER_VALUE)
         .body(
-            r#"
-                {
-                    "filters": {
-                        "from": "2012-01-01",
-                        "to": "2024-01-10",
-                        "generation": [
-                            "Biomass",
-                            "Grid emission factor",
-                            "Hard Coal",
-                            "Hydro",
-                            "Lignite",
-                            "Natural Gas",
-                            "Nuclear",
-                            "Other",
-                            "Pumped storage generation",
-                            "Solar",
-                            "Total conventional power plant",
-                            "Total electricity demand",
-                            "Total grid emissions",
-                            "Wind offshore",
-                            "Wind onshore"
-                        ]
-                    },
-                    "x_coordinate": "date_id",
-                    "y_coordinate": "value",
-                    "view_name": "live_gen_plus_emi_de_hourly",
-                    "kpi_name": "power_generation",
-                    "z_coordinate": "generation"
-                }
-            "#,
+            json! {{
+                "filters": {
+                    "from": AGORA_API_FIRST_DATE,
+                    "to": "2024-01-10",
+                    "generation": [
+                        "Biomass",
+                        "Grid emission factor",
+                        "Hard Coal",
+                        "Hydro",
+                        "Lignite",
+                        "Natural Gas",
+                        "Nuclear",
+                        "Other",
+                        "Pumped storage generation",
+                        "Solar",
+                        "Total conventional power plant",
+                        "Total electricity demand",
+                        "Total grid emissions",
+                        "Wind offshore",
+                        "Wind onshore"
+                    ]
+                },
+                "x_coordinate": "date_id",
+                "y_coordinate": "value",
+                "view_name": "live_gen_plus_emi_de_hourly",
+                "kpi_name": "power_generation",
+                "z_coordinate": "generation"
+            }}
+            .to_string(),
         )
         .send()
         .await;

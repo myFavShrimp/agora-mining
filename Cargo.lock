@@ -27,6 +27,7 @@ dependencies = [
  "eyre",
  "reqwest",
  "serde",
+ "serde_json",
  "time",
  "tokio",
  "tower",
