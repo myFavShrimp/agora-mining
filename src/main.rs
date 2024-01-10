@@ -1,13 +1,13 @@
 use askama::Template;
 use axum::{http::StatusCode, response::IntoResponse, routing::get, Router};
 
+mod agora;
+
 #[derive(Template)]
 #[template(path = "hello_agora.html")]
 struct HelloAgoraTemplate<'a> {
     text: &'a str,
 }
-
-mod agora;
 
 #[tokio::main]
 async fn main() -> eyre::Result<()> {
