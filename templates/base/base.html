@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% let (normalize_sheet, normalize_class_name) = turf::inline_style_sheet!("templates/base/normalize.css") %}
+{% let (style_sheet, class_name) = turf::inline_style_sheet!("templates/base/base.scss") %}
+
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/htmx.org@1.9.6"
+            integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni"
+            crossorigin="anonymous"></script>
+    <title>agora-mining base.html</title>
+</head>
+<!-- @formatter:off -->
+<style>
+    {{ normalize_sheet }}
+    {{ style_sheet }}
+</style>
+<!-- @formatter:on -->
+<body>
+<div id="content">
+    <div class="{{class_name.nav_bar}}">
+        <ul>
+            <li><a href="/">Daten</a></li>
+            <li><a href="/about">About</a></li>
+            <li>
+                <a class="{{class_name.refresh}}" hx-get="/hanna"><span class="{{class_name.link_text}}">Refresh</span>
+                    <span class="{{class_name.spinner}}"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="{{class_name.base_content}}">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+</body>
+</html>

@@ -1,7 +1,7 @@
-{% extends "base.html" %}
+{% extends "base/base.html" %}
 
 {% block content %}
-{% let (style_sheet, class_name) = turf::inline_style_sheet!("templates/hello_agora.scss") %}
+{% let (style_sheet, class_name) = turf::inline_style_sheet!("templates/landingpage/landingpage.scss") %}
 
 <style>
   {{ style_sheet }}

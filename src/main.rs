@@ -7,10 +7,14 @@ mod config;
 mod database;
 
 #[derive(Template)]
-#[template(path = "hello_agora.html")]
+#[template(path = "landingpage/landingpage.html")]
 struct HelloAgoraTemplate<'a> {
     text: &'a str,
 }
+
+#[derive(Template)]
+#[template(path = "about/about.html")]
+struct AboutTemplate;
 
 #[tokio::main]
 async fn main() -> eyre::Result<()> {
@@ -21,6 +25,7 @@ async fn main() -> eyre::Result<()> {
 
     let app = Router::new()
         .route("/", get(landing_page_handler))
+        .route("/about", get(about_page_handler))
         .route("/hanna", get(refresh_data_handler));
 
     let listener = tokio::net::TcpListener::bind(address).await?;
@@ -33,6 +38,10 @@ async fn landing_page_handler() -> impl IntoResponse {
     HelloAgoraTemplate {
         text: "by Denis, Hanna & Lucas",
     }
+}
+
+async fn about_page_handler() -> impl IntoResponse {
+    AboutTemplate
 }
 
 async fn refresh_data_handler() -> impl IntoResponse {
