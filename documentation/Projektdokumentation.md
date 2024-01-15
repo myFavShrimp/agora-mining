@@ -109,7 +109,7 @@ Die Wirtschaftlichkeitsanalyse zeigt, dass die Investitionen in erster Linie auf
 > Ggfs. Erläuterung von angewendeten Richtlinien zur Usability und Verweis auf Corporate Design
 
 ### Datenmodell
-> ntwurf/Beschreibung der Datenstrukturen (z.B. ERM und/oder Tabellenmodell, XMLSchemas) mit kurzer Beschreibung der wichtigsten (!) verwendeten Entitäten.
+> Entwurf/Beschreibung der Datenstrukturen (z.B. ERM und/oder Tabellenmodell, XML-Schemas) mit kurzer Beschreibung der wichtigsten (!) verwendeten Entitäten.
 ### Maßnahmen zur Qualitätssicherung
 >  Welche Maßnahmen werden ergriffen, um die Qualität des Projektergebnisses (siehe Kapitel 3.5) zu sichern (z.B. automatische Tests, Anwendertests)?
 

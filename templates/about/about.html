@@ -1,0 +1,20 @@
+{% extends "base/base.html" %}
+
+{% block content %}{% let (style_sheet, class_name) = turf::inline_style_sheet!("templates/about/about.scss") %}
+
+<!-- @formatter:off -->
+<style>
+  {{ style_sheet }}
+</style>
+<!-- @formatter:on -->
+
+<h1>
+    Über dieses Projekt
+</h1>
+<span>
+    Im Rahmen der Ausbildung am OSZ IMT Berlin hat unsere Gruppe, bestehend aus Denis Wollgramm, Hanna Krusch und Lucas Brie, die Aufgabe bekommen,
+    die Energiedaten der Website https://www.agora-energiewende.de/service/agorameter/ für vom Nutzer angegebene Zeiträume abzugreifen,
+    in eine Datenbank zu überführen und darzustellen.
+</span>
+
+{% endblock %}

@@ -8,6 +8,8 @@ html {
   .navBar {
     background-color: $agora-container-primary;
     height: 75px;
+    display: flex;
+    justify-content: end;
 
     ul {
       padding: 10px;
@@ -18,17 +20,17 @@ html {
         margin: 5px;
         padding: 10px;
         vertical-align: top;
+        min-width: 75px;
 
         a {
+          display: inline;
+          position: relative;
           color: $agora-container-primary-text;
-
-          .linkText {
-            position: absolute
-          }
+          width: fit-content;
 
           .spinner {
-            position: absolute;
             display: none;
+            margin-left: 25%;
             width: 1.15rem;
             height: 1.15rem;
             border: 5px solid $agora-container-primary-text;
@@ -44,7 +46,7 @@ html {
             }
 
             .linkText {
-              opacity: 25%;
+              display: none
             }
           }
 
@@ -60,5 +62,16 @@ html {
       }
     }
 
+    .refresh {
+      // border: 1px solid $agora-container-primary-text;
+      // min-width: 75px;
+      border-radius: 10px;
+      padding: 3px;
+      cursor: pointer;
+    }
+  }
+
+  .baseContent {
+    margin: 0 5%;
   }
 }

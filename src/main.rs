@@ -11,7 +11,7 @@ mod config;
 mod database;
 
 #[derive(Template)]
-#[template(path = "hello_agora.html")]
+#[template(path = "landingpage/landingpage.html")]
 struct HelloAgoraTemplate<'a> {
     text: &'a str,
 }
@@ -20,6 +20,10 @@ pub struct AppState {
     pub config: Config,
     pub postgres_pool: PgPool,
 }
+
+#[derive(Template)]
+#[template(path = "about/about.html")]
+struct AboutTemplate;
 
 #[tokio::main]
 async fn main() -> eyre::Result<()> {
@@ -33,6 +37,7 @@ async fn main() -> eyre::Result<()> {
 
     let app = Router::new()
         .route("/", get(landing_page_handler))
+        .route("/about", get(about_page_handler))
         .route("/hanna", get(refresh_data_handler))
         .with_state(state);
 
@@ -53,6 +58,9 @@ async fn refresh_data_handler(State(state): State<Arc<AppState>>) -> impl IntoRe
     let agora_data = agora_data.unwrap().try_into().unwrap();
 
     PowerGenerationAndConsumption::create_many(&state.postgres_pool, agora_data).await;
-
     (StatusCode::OK, "Updated")
+}
+
+async fn about_page_handler() -> impl IntoResponse {
+    AboutTemplate
 }

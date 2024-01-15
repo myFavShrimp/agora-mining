@@ -1,0 +1,18 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+{% let (style_sheet, class_name) = turf::inline_style_sheet!("templates/landingpage/landingpage.scss") %}
+
+<!-- @formatter:off -->
+<style>
+  {{ style_sheet }}
+</style>
+<!-- @formatter:on -->
+
+<div class={{class_name.hello_agora}}>
+    <!-- todo: plotters-rs for the graph? -->
+    <h1>Hello, Agora!</h1>
+    <h2>{{ text }}</h2>
+</div>
+
+{% endblock %}
