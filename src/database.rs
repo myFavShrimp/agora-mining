@@ -1,5 +1,7 @@
 use sqlx::{migrate::MigrateDatabase, PgPool};
 
+pub mod power_generation_and_consumption;
+
 #[derive(Debug, thiserror::Error)]
 pub enum DatabaseInitializationError {
     #[error("Could not connect to the database.")]
