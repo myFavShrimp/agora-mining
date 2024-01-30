@@ -9,6 +9,7 @@ mod agora;
 mod config;
 mod database;
 mod templates;
+mod plotting;
 
 pub struct AppState {
     pub config: Config,
@@ -44,40 +45,9 @@ async fn landing_page_handler() -> impl IntoResponse {
     }
 }
 
-async fn graph_handler() -> impl IntoResponse {
-    use plotters::prelude::*;
-    let mut svg_path = String::new();
-
-    {
-        let root = SVGBackend::with_string(&mut svg_path, (640, 480)).into_drawing_area();
-        root.fill(&WHITE).unwrap();
-        let mut chart = ChartBuilder::on(&root)
-            .caption("y=x^2", ("sans-serif", 50).into_font())
-            .margin(5)
-            .x_label_area_size(30)
-            .y_label_area_size(30)
-            .build_cartesian_2d(-1f32..1f32, -0.1f32..1f32).unwrap();
-
-        chart.configure_mesh().draw().unwrap();
-
-        chart
-            .draw_series(LineSeries::new(
-                (-50..=50).map(|x| x as f32 / 50.0).map(|x| (x, x * x)),
-                &RED,
-            )).unwrap()
-            .label("y = x^2")
-            .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], &RED));
-
-        chart
-            .configure_series_labels()
-            .background_style(&WHITE.mix(0.8))
-            .border_style(&BLACK)
-            .draw().unwrap();
-
-        root.present().unwrap();
-
-    };
-    svg_path
+async fn graph_handler(State(state): State<Arc<AppState>>) -> impl IntoResponse {
+    let result = PowerGenerationAndConsumption::find_all(&state.postgres_pool).await;
+    plotting::create_plot(result.unwrap())
 }
 
 async fn refresh_data_handler(State(state): State<Arc<AppState>>) -> impl IntoResponse {
