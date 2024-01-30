@@ -90,8 +90,11 @@ Die Investition in das Projekt zielt primär darauf ab, den Ausbildungsfortschri
 
 #### Schlussfolgerung:
 Die Wirtschaftlichkeitsanalyse zeigt, dass die Investitionen in erster Linie auf die Ausbildung der Teammitglieder abzielen. Die erwarteten Nutzen liegen in der Entwicklung von Fähigkeiten, dem pädagogischen Wert des Projekts und der potenziellen Anwendbarkeit der entwickelten Lösung für zukünftige Szenarien.
+
 ### Qualitätsanforderungen
 >  Welche Qualitätsanforderungen werden an die Anwendung gestellt, z.B. hinsichtlich Performance, Usability, Effizienz etc. (siehe (ISO/IEC 9126-1, 2001))?
+
+Unsere Software strebt hohe Qualitätsstandards an, insbesondere in den Bereichen Performance, Usability, Effizienz und Sicherheit. Die Anwendung soll reaktionsschnell sein, eine benutzerfreundliche Oberfläche bieten und effizient mit der Datenbank interagieren. Stabilität und Sicherheit haben höchste Priorität, einschließlich der sicheren Verwahrung sensibler Daten. Die technische Umsetzung folgt Best Practices, um konsistente Datenhaltung zu gewährleisten. Klare Dokumentation unterstützt die Wartbarkeit und Weiterentwicklung der Software. Insgesamt streben wir nach einer qualitativ hochwertigen Lösung, die den Anforderungen unserer Ausbildung und darüber hinaus gerecht wird.
 
 ### Anforderungen
 | Nr  | Kriterium | Beschreibung | Punkte
