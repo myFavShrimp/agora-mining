@@ -41,6 +41,8 @@ Die analytische Funktionen zur Interpretation der Energiedaten, wie Trendanalyse
 | 2  | Agora-API sichten und den Key abgleichen  |
 | 3  | Frontend-Navigationsleiste fertigstellen  |
 | 3  | Backend-Datenbank fertigstellen und Abfragen ermöglichen  |
+| 4  | Plotting Libary auswählen und erste Daten darstellen lassen  |
+| 4  | Implementierung des Front-Ends  |
 
 ### Abweichungen von der Projektaufgabenstellung
 
