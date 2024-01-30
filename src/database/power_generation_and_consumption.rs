@@ -100,20 +100,86 @@ impl PowerGenerationAndConsumption {
                 RETURNING *
             ",
         )
-        .fetch_all(connection)
-        .await
+            .fetch_all(connection)
+            .await
     }
 
-    pub async fn find_all(
+    pub async fn find_all_ordered_by_date(
         connection: &PgPool,
     ) -> Result<Vec<PowerGenerationAndConsumption>, sqlx::Error> {
         sqlx::query_as!(
             PowerGenerationAndConsumption,
             "
-                SELECT * FROM power_generation_and_consumption 
+                SELECT * FROM power_generation_and_consumption ORDER BY date_id ASC
             ",
         )
-        .fetch_all(connection)
-        .await
+            .fetch_all(connection)
+            .await
+    }
+
+    pub async fn find_lowest_output(
+        connection: &PgPool,
+    ) -> Result<Option<f64>, sqlx::Error> {
+        sqlx::query_scalar!(
+            "
+                SELECT
+                    MIN(query_data.least_value)
+                FROM(
+                    SELECT DISTINCT LEAST(
+                        pgac.biomass,
+                        pgac.grid_emission_factor,
+                        pgac.hard_coal,
+                        pgac.hydro,
+                        pgac.lignite,
+                        pgac.natural_gas,
+                        pgac.nuclear,
+                        pgac.other,
+                        pgac.pumped_storage_generation,
+                        pgac.solar,
+                        pgac.total_conventional_power_plant,
+                        pgac.total_electricity_demand,
+                        pgac.total_grid_emissions,
+                        pgac.wind_offshore,
+                        pgac.wind_onshore
+                    ) as least_value
+                    FROM(
+                        SELECT * FROM power_generation_and_consumption
+                    ) as pgac
+                ) as query_data
+            ",
+        ).fetch_one(connection).await
+    }
+
+    pub async fn find_highest_output(
+        connection: &PgPool,
+    ) -> Result<Option<f64>, sqlx::Error> {
+        sqlx::query_scalar!(
+            "
+                SELECT
+                    MAX(query_data.least_value)
+                FROM(
+                    SELECT DISTINCT GREATEST(
+                        pgac.biomass,
+                        pgac.grid_emission_factor,
+                        pgac.hard_coal,
+                        pgac.hydro,
+                        pgac.lignite,
+                        pgac.natural_gas,
+                        pgac.nuclear,
+                        pgac.other,
+                        pgac.pumped_storage_generation,
+                        pgac.solar,
+                        pgac.total_conventional_power_plant,
+                        pgac.total_electricity_demand,
+                        pgac.total_grid_emissions,
+                        pgac.wind_offshore,
+                        pgac.wind_onshore
+                    ) as least_value
+                    FROM(
+                        SELECT * FROM power_generation_and_consumption
+                    ) as pgac
+                ) as query_data
+            ",
+        ).fetch_one(connection).await
     }
 }

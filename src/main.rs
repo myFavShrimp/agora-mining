@@ -46,8 +46,10 @@ async fn landing_page_handler() -> impl IntoResponse {
 }
 
 async fn graph_handler(State(state): State<Arc<AppState>>) -> impl IntoResponse {
-    let result = PowerGenerationAndConsumption::find_all(&state.postgres_pool).await;
-    plotting::create_plot(result.unwrap())
+    let result = PowerGenerationAndConsumption::find_all_ordered_by_date(&state.postgres_pool).await;
+    let lowest = PowerGenerationAndConsumption::find_lowest_output(&state.postgres_pool).await;
+    let highest = PowerGenerationAndConsumption::find_highest_output(&state.postgres_pool).await;
+    plotting::create_plot(result.unwrap(), lowest.unwrap().unwrap(), highest.unwrap().unwrap())
 }
 
 async fn refresh_data_handler(State(state): State<Arc<AppState>>) -> impl IntoResponse {
