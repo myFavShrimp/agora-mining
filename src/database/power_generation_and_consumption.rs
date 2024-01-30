@@ -84,9 +84,7 @@ impl PowerGenerationAndConsumption {
         let mut result = Vec::new();
 
         for item in values {
-            result.push(dbg!(
-                PowerGenerationAndConsumption::create(connection, &item).await
-            )?);
+            result.push(PowerGenerationAndConsumption::create(connection, &item).await?);
         }
 
         Ok(result)
