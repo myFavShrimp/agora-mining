@@ -22,7 +22,8 @@
             <li><a href="/">Daten</a></li>
             <li><a href="/about">About</a></li>
             <li>
-                <a class="{{class_name.refresh}}" hx-get="/hanna"><span class="{{class_name.link_text}}">Refresh</span>
+                <a class="{{class_name.refresh}}" hx-get="/hanna"><span class="{{class_name.link_text}}"
+                                                                        id="{{crate::templates::REFRESH_BUTTON_ID}}">Refresh</span>
                     <span class="{{class_name.spinner}}"></span>
                 </a>
             </li>
