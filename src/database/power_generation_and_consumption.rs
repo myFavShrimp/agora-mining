@@ -103,4 +103,17 @@ impl PowerGenerationAndConsumption {
         .fetch_all(connection)
         .await
     }
+
+    pub async fn find_all(
+        connection: &PgPool,
+    ) -> Result<Vec<PowerGenerationAndConsumption>, sqlx::Error> {
+        sqlx::query_as!(
+            PowerGenerationAndConsumption,
+            "
+                SELECT * FROM power_generation_and_consumption 
+            ",
+        )
+        .fetch_all(connection)
+        .await
+    }
 }
