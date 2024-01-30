@@ -98,6 +98,7 @@ impl TryInto<Vec<PowerGenerationAndConsumption>> for AgoraApiResponse {
                 existing_data.set_by_kind(kind, value);
             } else {
                 let mut new_data = PowerGenerationAndConsumption::default();
+                new_data.date_id = parsed_date;
                 new_data.set_by_kind(kind, value);
                 result_map.insert(parsed_date, new_data);
             }
