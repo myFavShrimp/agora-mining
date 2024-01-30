@@ -1,6 +1,6 @@
 use askama::Template;
 
-static REFRESH_BUTTON_ID: &str = "refreshButton";
+pub static REFRESH_BUTTON_ID: &str = "refreshButton";
 
 #[derive(Template)]
 #[template(path = "landingpage/landingpage.html")]

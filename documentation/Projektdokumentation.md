@@ -41,18 +41,31 @@ Die analytische Funktionen zur Interpretation der Energiedaten, wie Trendanalyse
 | 2  | Agora-API sichten und den Key abgleichen  |
 | 3  | Frontend-Navigationsleiste fertigstellen  |
 | 3  | Backend-Datenbank fertigstellen und Abfragen ermöglichen  |
-| 4  | Plotting Libary auswählen und erste Daten darstellen lassen  |
+| 4  | Plotting Library auswählen und erste Daten darstellen  |
 | 4  | Implementierung des Front-Ends  |
 
 ### Abweichungen von der Projektaufgabenstellung
+Da wir seit vier Wochen immernoch keine angepasste Aufgabenstellung erhalten haben, können wir daher keine Abweichungen feststellen und dokumentieren.
 
 ### Ressourcenplan
 > Planung der benötigten Ressourcen (Hard-/Software, Räumlichkeiten, ...)
 
+Für die erfolgreiche Umsetzung unseres Projekts stehen verschiedene Personalressourcen zur Verfügung. Denis Wollgramm übernimmt die Rolle des Backend-Entwicklers und wird sich vollzeitlich auf die Implementierung der Datenbankanbindung und die Extraktion von Agora-Daten konzentrieren. Lucas Brie agiert als Frontend-Entwickler, ebenfalls in Vollzeit, und ist verantwortlich für das Design und die Umsetzung der Benutzeroberfläche. Hanna Krusch übernimmt die Position der Dokumentationsverantwortlichen und sorgt für die Erstellung von Entwicklerdokumentation und Benutzerdokumentation.
+
+Die Anlagenressourcen für unser Projekt umfassen primär die persönlichen Laptops der Teammitglieder, die für die individuelle Entwicklung genutzt werden. Diese Laptops bieten die notwendige Flexibilität und Unabhängigkeit für die Entwicklung von Backend und Frontend. Die Schulklassenräume dienen als Ort für gemeinsame Besprechungen und Präsentationen. Wir haben uns für die Nutzung der PostgreSQL-Datenbank entschieden, wobei unsere Daten in diesem System gespeichert werden. Des Weiteren erfolgt die Sicherung und Versionierung unseres Projektfortschritts über die Plattform GitHub.
+
+Für die Umsetzung des Projekts stehen keine externen Finanzressourcen zur Verfügung. Die Finanzierung erfolgt ausschließlich durch schuleigene Mittel. Die Kosten für die Nutzung der Schulcomputerlabore, den Stromverbrauch und das WLAN sind bereits durch diese Mittel abgedeckt.
+
+Die zeitlichen Ressourcen werden entsprechend der Arbeitszeiten der Teammitglieder verteilt. Vollzeitliche Engagement während der 5-wöchigen Projektlaufzeit ist für Backend- und Frontend-Entwickler vorgesehen, während die Dokumentationsverantwortliche ihre Aufgaben in Teilzeit über die gesamte Projektlaufzeit hinweg durchführt. Die Projektlaufzeit von 5 Wochen ist durch klare Meilensteine strukturiert, um den Fortschritt zu überwachen.
+
 ### Entwicklungsprozess
 > Welches Modell wurde bei der Bearbeitung verfolgt?
 
-Scrum
+Unser Entwicklungsprozess basiert auf dem Scrum-Framework, einem agilen Ansatz, der sich besonders gut für die Zusammenarbeit in kleinen, flexiblen Teams eignet. Als Product Owner und Scrum Master fungiert Hanna Krusch, die maßgeblich für die erfolgreiche Umsetzung des Projekts verantwortlich ist. In ihrer Rolle als Product Owner definiert sie die Anforderungen und Prioritäten, während sie als Scrum Master sicherstellt, dass der Entwicklungsprozess reibungslos verläuft und Hindernisse beseitigt werden.
+
+Die Entwicklungsaufgaben sind klar auf die Teammitglieder verteilt. Denis Wollgramm konzentriert sich als Backend-Entwickler darauf, die technische Grundlage zu schaffen, insbesondere die Anbindung an die Datenbank und die Extraktion von Agora-Daten. Lucas Brie übernimmt die Frontend-Entwicklung, wobei er für das Design und die Benutzeroberfläche verantwortlich ist. Durch diese klare Aufgabenverteilung wird eine effiziente Zusammenarbeit und Spezialisierung ermöglicht.
+
+Die regelmäßigen Sprint-Meetings dienen dazu, den Fortschritt zu überprüfen, Herausforderungen zu besprechen und Anpassungen vorzunehmen. Diese iterative Vorgehensweise ermöglicht es uns, flexibel auf Veränderungen oder Anpassungen der Anforderungen zu reagieren. Die Kommunikation im Team wird durch die klaren Zuständigkeiten und die regelmäßigen Meetings erleichtert.
 
 ## Analysephase
 ### Ist-Analyse
@@ -77,8 +90,11 @@ Die Investition in das Projekt zielt primär darauf ab, den Ausbildungsfortschri
 
 #### Schlussfolgerung:
 Die Wirtschaftlichkeitsanalyse zeigt, dass die Investitionen in erster Linie auf die Ausbildung der Teammitglieder abzielen. Die erwarteten Nutzen liegen in der Entwicklung von Fähigkeiten, dem pädagogischen Wert des Projekts und der potenziellen Anwendbarkeit der entwickelten Lösung für zukünftige Szenarien.
+
 ### Qualitätsanforderungen
 >  Welche Qualitätsanforderungen werden an die Anwendung gestellt, z.B. hinsichtlich Performance, Usability, Effizienz etc. (siehe (ISO/IEC 9126-1, 2001))?
+
+Unsere Software strebt hohe Qualitätsstandards an, insbesondere in den Bereichen Performance, Usability, Effizienz und Sicherheit. Die Anwendung soll reaktionsschnell sein, eine benutzerfreundliche Oberfläche bieten und effizient mit der Datenbank interagieren. Stabilität und Sicherheit haben höchste Priorität, einschließlich der sicheren Verwahrung sensibler Daten. Die technische Umsetzung folgt Best Practices, um konsistente Datenhaltung zu gewährleisten. Klare Dokumentation unterstützt die Wartbarkeit und Weiterentwicklung der Software. Insgesamt streben wir nach einer qualitativ hochwertigen Lösung, die den Anforderungen unserer Ausbildung und darüber hinaus gerecht wird.
 
 ### Anforderungen
 | Nr  | Kriterium | Beschreibung | Punkte

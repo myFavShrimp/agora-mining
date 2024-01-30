@@ -1,6 +1,5 @@
 use std::sync::Arc;
 
-use askama::Template;
 use axum::{extract::State, http::StatusCode, response::IntoResponse, routing::get, Router};
 use config::Config;
 use database::power_generation_and_consumption::PowerGenerationAndConsumption;
@@ -85,8 +84,20 @@ async fn refresh_data_handler(State(state): State<Arc<AppState>>) -> impl IntoRe
     let agora_data = agora::get_agora_api_data().await;
     let agora_data = agora_data.unwrap().try_into().unwrap();
 
-    PowerGenerationAndConsumption::create_many(&state.postgres_pool, agora_data).await;
-    (StatusCode::OK, "Updated")
+    _ = PowerGenerationAndConsumption::delete_all(&state.postgres_pool).await;
+
+    match PowerGenerationAndConsumption::create_many(&state.postgres_pool, agora_data).await {
+        Ok(_) => (
+            StatusCode::OK,
+            [("HX-Retarget", format!("#{}", templates::REFRESH_BUTTON_ID))],
+            "Updated",
+        ),
+        Err(_) => (
+            StatusCode::OK,
+            [("HX-Retarget", format!("#{}", templates::REFRESH_BUTTON_ID))],
+            "Failed!",
+        ),
+    }
 }
 
 async fn about_page_handler() -> impl IntoResponse {
