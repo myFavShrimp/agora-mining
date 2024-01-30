@@ -41,13 +41,22 @@ Die analytische Funktionen zur Interpretation der Energiedaten, wie Trendanalyse
 | 2  | Agora-API sichten und den Key abgleichen  |
 | 3  | Frontend-Navigationsleiste fertigstellen  |
 | 3  | Backend-Datenbank fertigstellen und Abfragen ermöglichen  |
-| 4  | Plotting Libary auswählen und erste Daten darstellen lassen  |
+| 4  | Plotting Library auswählen und erste Daten darstellen  |
 | 4  | Implementierung des Front-Ends  |
 
 ### Abweichungen von der Projektaufgabenstellung
+Da wir seit vier Wochen immernoch keine angepasste Aufgabenstellung erhalten haben, können wir daher keine Abweichungen feststellen und dokumentieren.
 
 ### Ressourcenplan
 > Planung der benötigten Ressourcen (Hard-/Software, Räumlichkeiten, ...)
+
+Für die erfolgreiche Umsetzung unseres Projekts stehen verschiedene Personalressourcen zur Verfügung. Denis Wollgramm übernimmt die Rolle des Backend-Entwicklers und wird sich vollzeitlich auf die Implementierung der Datenbankanbindung und die Extraktion von Agora-Daten konzentrieren. Lucas Brie agiert als Frontend-Entwickler, ebenfalls in Vollzeit, und ist verantwortlich für das Design und die Umsetzung der Benutzeroberfläche. Hanna Krusch übernimmt die Position der Dokumentationsverantwortlichen und sorgt für die Erstellung von Entwicklerdokumentation und Benutzerdokumentation.
+
+Die Anlagenressourcen für unser Projekt umfassen primär die persönlichen Laptops der Teammitglieder, die für die individuelle Entwicklung genutzt werden. Diese Laptops bieten die notwendige Flexibilität und Unabhängigkeit für die Entwicklung von Backend und Frontend. Die Schulklassenräume dienen als Ort für gemeinsame Besprechungen und Präsentationen. Wir haben uns für die Nutzung der PostgreSQL-Datenbank entschieden, wobei unsere Daten in diesem System gespeichert werden. Des Weiteren erfolgt die Sicherung und Versionierung unseres Projektfortschritts über die Plattform GitHub.
+
+Für die Umsetzung des Projekts stehen keine externen Finanzressourcen zur Verfügung. Die Finanzierung erfolgt ausschließlich durch schuleigene Mittel. Die Kosten für die Nutzung der Schulcomputerlabore, den Stromverbrauch und das WLAN sind bereits durch diese Mittel abgedeckt.
+
+Die zeitlichen Ressourcen werden entsprechend der Arbeitszeiten der Teammitglieder verteilt. Vollzeitliche Engagement während der 5-wöchigen Projektlaufzeit ist für Backend- und Frontend-Entwickler vorgesehen, während die Dokumentationsverantwortliche ihre Aufgaben in Teilzeit über die gesamte Projektlaufzeit hinweg durchführt. Die Projektlaufzeit von 5 Wochen ist durch klare Meilensteine strukturiert, um den Fortschritt zu überwachen.
 
 ### Entwicklungsprozess
 > Welches Modell wurde bei der Bearbeitung verfolgt?
