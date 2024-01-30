@@ -1,5 +1,6 @@
 use plotters::backend::SVGBackend;
 use plotters::chart::ChartBuilder;
+use plotters::drawing::IntoDrawingArea;
 use plotters::element::PathElement;
 use plotters::prelude::{BLACK, Color, IntoFont, LineSeries, RED, WHITE};
 use crate::database::power_generation_and_consumption::PowerGenerationAndConsumption;
