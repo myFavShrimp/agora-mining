@@ -61,7 +61,11 @@ Die zeitlichen Ressourcen werden entsprechend der Arbeitszeiten der Teammitglied
 ### Entwicklungsprozess
 > Welches Modell wurde bei der Bearbeitung verfolgt?
 
-Scrum
+Unser Entwicklungsprozess basiert auf dem Scrum-Framework, einem agilen Ansatz, der sich besonders gut für die Zusammenarbeit in kleinen, flexiblen Teams eignet. Als Product Owner und Scrum Master fungiert Hanna Krusch, die maßgeblich für die erfolgreiche Umsetzung des Projekts verantwortlich ist. In ihrer Rolle als Product Owner definiert sie die Anforderungen und Prioritäten, während sie als Scrum Master sicherstellt, dass der Entwicklungsprozess reibungslos verläuft und Hindernisse beseitigt werden.
+
+Die Entwicklungsaufgaben sind klar auf die Teammitglieder verteilt. Denis Wollgramm konzentriert sich als Backend-Entwickler darauf, die technische Grundlage zu schaffen, insbesondere die Anbindung an die Datenbank und die Extraktion von Agora-Daten. Lucas Brie übernimmt die Frontend-Entwicklung, wobei er für das Design und die Benutzeroberfläche verantwortlich ist. Durch diese klare Aufgabenverteilung wird eine effiziente Zusammenarbeit und Spezialisierung ermöglicht.
+
+Die regelmäßigen Sprint-Meetings dienen dazu, den Fortschritt zu überprüfen, Herausforderungen zu besprechen und Anpassungen vorzunehmen. Diese iterative Vorgehensweise ermöglicht es uns, flexibel auf Veränderungen oder Anpassungen der Anforderungen zu reagieren. Die Kommunikation im Team wird durch die klaren Zuständigkeiten und die regelmäßigen Meetings erleichtert.
 
 ## Analysephase
 ### Ist-Analyse
