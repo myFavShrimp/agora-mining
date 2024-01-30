@@ -9,21 +9,12 @@ use sqlx::PgPool;
 mod agora;
 mod config;
 mod database;
-
-#[derive(Template)]
-#[template(path = "landingpage/landingpage.html")]
-struct HelloAgoraTemplate<'a> {
-    text: &'a str,
-}
+mod templates;
 
 pub struct AppState {
     pub config: Config,
     pub postgres_pool: PgPool,
 }
-
-#[derive(Template)]
-#[template(path = "about/about.html")]
-struct AboutTemplate;
 
 #[tokio::main]
 async fn main() -> eyre::Result<()> {
@@ -48,7 +39,7 @@ async fn main() -> eyre::Result<()> {
 }
 
 async fn landing_page_handler() -> impl IntoResponse {
-    HelloAgoraTemplate {
+    templates::HelloAgoraTemplate {
         text: "by Denis, Hanna & Lucas",
     }
 }
@@ -62,5 +53,5 @@ async fn refresh_data_handler(State(state): State<Arc<AppState>>) -> impl IntoRe
 }
 
 async fn about_page_handler() -> impl IntoResponse {
-    AboutTemplate
+    templates::AboutTemplate
 }
