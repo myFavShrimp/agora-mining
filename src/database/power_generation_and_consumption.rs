@@ -89,4 +89,18 @@ impl PowerGenerationAndConsumption {
 
         Ok(result)
     }
+
+    pub async fn delete_all(
+        connection: &PgPool,
+    ) -> Result<Vec<PowerGenerationAndConsumption>, sqlx::Error> {
+        sqlx::query_as!(
+            PowerGenerationAndConsumption,
+            "
+                DELETE FROM power_generation_and_consumption 
+                RETURNING *
+            ",
+        )
+        .fetch_all(connection)
+        .await
+    }
 }
