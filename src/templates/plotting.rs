@@ -17,7 +17,7 @@ pub struct PlottingTemplateDataSet {
 #[derive(Serialize)]
 pub struct PlottingTemplateDataSetData {
     pub x: PrimitiveDateTime,
-    pub y: f64,
+    pub y: Option<f64>,
 }
 
 pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTemplateDataSet> {
@@ -29,7 +29,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                 GenerationKind::Biomass => {
                     let new_data = PlottingTemplateDataSetData {
                         x: item.date_id,
-                        y: item.biomass.unwrap_or(0.),
+                        y: item.biomass,
                     };
 
                     if let Some(existing_data) = result_map.get_mut(&kind) {
@@ -45,7 +45,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                 GenerationKind::GridEmissionFactor => {
                     let new_data = PlottingTemplateDataSetData {
                         x: item.date_id,
-                        y: item.grid_emission_factor.unwrap_or(0.),
+                        y: item.grid_emission_factor,
                     };
 
                     if let Some(existing_data) = result_map.get_mut(&kind) {
@@ -61,7 +61,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                 GenerationKind::HardCoal => {
                     let new_data = PlottingTemplateDataSetData {
                         x: item.date_id,
-                        y: item.hard_coal.unwrap_or(0.),
+                        y: item.hard_coal,
                     };
 
                     if let Some(existing_data) = result_map.get_mut(&kind) {
@@ -77,7 +77,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                 GenerationKind::Hydro => {
                     let new_data = PlottingTemplateDataSetData {
                         x: item.date_id,
-                        y: item.hydro.unwrap_or(0.),
+                        y: item.hydro,
                     };
 
                     if let Some(existing_data) = result_map.get_mut(&kind) {
@@ -93,7 +93,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                 GenerationKind::Lignite => {
                     let new_data = PlottingTemplateDataSetData {
                         x: item.date_id,
-                        y: item.lignite.unwrap_or(0.),
+                        y: item.lignite,
                     };
 
                     if let Some(existing_data) = result_map.get_mut(&kind) {
@@ -109,7 +109,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                 GenerationKind::NaturalGas => {
                     let new_data = PlottingTemplateDataSetData {
                         x: item.date_id,
-                        y: item.natural_gas.unwrap_or(0.),
+                        y: item.natural_gas,
                     };
 
                     if let Some(existing_data) = result_map.get_mut(&kind) {
@@ -125,7 +125,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                 GenerationKind::Nuclear => {
                     let new_data = PlottingTemplateDataSetData {
                         x: item.date_id,
-                        y: item.nuclear.unwrap_or(0.),
+                        y: item.nuclear,
                     };
 
                     if let Some(existing_data) = result_map.get_mut(&kind) {
@@ -141,7 +141,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                 GenerationKind::Other => {
                     let new_data = PlottingTemplateDataSetData {
                         x: item.date_id,
-                        y: item.other.unwrap_or(0.),
+                        y: item.other,
                     };
 
                     if let Some(existing_data) = result_map.get_mut(&kind) {
@@ -157,7 +157,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                 GenerationKind::PumpedStorageGeneration => {
                     let new_data = PlottingTemplateDataSetData {
                         x: item.date_id,
-                        y: item.pumped_storage_generation.unwrap_or(0.),
+                        y: item.pumped_storage_generation,
                     };
 
                     if let Some(existing_data) = result_map.get_mut(&kind) {
@@ -173,7 +173,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                 GenerationKind::Solar => {
                     let new_data = PlottingTemplateDataSetData {
                         x: item.date_id,
-                        y: item.solar.unwrap_or(0.),
+                        y: item.solar,
                     };
 
                     if let Some(existing_data) = result_map.get_mut(&kind) {
@@ -189,7 +189,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                 GenerationKind::TotalConventionalPowerPlant => {
                     let new_data = PlottingTemplateDataSetData {
                         x: item.date_id,
-                        y: item.total_conventional_power_plant.unwrap_or(0.),
+                        y: item.total_conventional_power_plant,
                     };
 
                     if let Some(existing_data) = result_map.get_mut(&kind) {
@@ -205,7 +205,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                 GenerationKind::TotalElectricityDemand => {
                     let new_data = PlottingTemplateDataSetData {
                         x: item.date_id,
-                        y: item.total_electricity_demand.unwrap_or(0.),
+                        y: item.total_electricity_demand,
                     };
 
                     if let Some(existing_data) = result_map.get_mut(&kind) {
@@ -221,7 +221,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                 GenerationKind::TotalGridEmissions => {
                     let new_data = PlottingTemplateDataSetData {
                         x: item.date_id,
-                        y: item.total_grid_emissions.unwrap_or(0.),
+                        y: item.total_grid_emissions,
                     };
 
                     if let Some(existing_data) = result_map.get_mut(&kind) {
@@ -237,7 +237,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                 GenerationKind::WindOffshore => {
                     let new_data = PlottingTemplateDataSetData {
                         x: item.date_id,
-                        y: item.wind_offshore.unwrap_or(0.),
+                        y: item.wind_offshore,
                     };
 
                     if let Some(existing_data) = result_map.get_mut(&kind) {
@@ -253,7 +253,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                 GenerationKind::WindOnshore => {
                     let new_data = PlottingTemplateDataSetData {
                         x: item.date_id,
-                        y: item.wind_onshore.unwrap_or(0.),
+                        y: item.wind_onshore,
                     };
 
                     if let Some(existing_data) = result_map.get_mut(&kind) {
