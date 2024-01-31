@@ -28,6 +28,8 @@ Die technische Schnittstelle zur Agora-Website ist von zentraler Bedeutung für 
 
 Die analytische Funktionen zur Interpretation der Energiedaten, wie Trendanalysen oder Vorhersagen, sind nicht Teil dieses Projekts. Die Software konzentriert sich auf die Datenerfassung und -speicherung. Außerdem ist es nur für schulische Zwecke konzipiert und wird nicht für kommerzielle Zwecke oder breite öffentliche Nutzung entwickelt. Abschließend ist nicht vorgesehen, dass die Anwendung eine Schnittstelle mit anderen externen Systemen herstellt. Die Schnittstellen beschränken sich lediglich auf die Agora-Website und das DBMS.
 
+---
+
 ## Projektplanung
 ### Meilensteine
 > Detaillierte Zeitpläne, um den Fortschritt zu verfolgen.
@@ -43,6 +45,8 @@ Die analytische Funktionen zur Interpretation der Energiedaten, wie Trendanalyse
 | 3  | Backend-Datenbank fertigstellen und Abfragen ermöglichen  |
 | 4  | Plotting Library auswählen und erste Daten darstellen  |
 | 4  | Implementierung des Front-Ends  |
+| 5  | Entwicklerdokumentation schreiben  |
+| 5  | Installationsdokumentation schreiben  |
 
 ### Abweichungen von der Projektaufgabenstellung
 Da wir seit vier Wochen immernoch keine angepasste Aufgabenstellung erhalten haben, können wir daher keine Abweichungen feststellen und dokumentieren.
@@ -50,7 +54,7 @@ Da wir seit vier Wochen immernoch keine angepasste Aufgabenstellung erhalten hab
 ### Ressourcenplan
 > Planung der benötigten Ressourcen (Hard-/Software, Räumlichkeiten, ...)
 
-Für die erfolgreiche Umsetzung unseres Projekts stehen verschiedene Personalressourcen zur Verfügung. Denis Wollgramm übernimmt die Rolle des Backend-Entwicklers und wird sich vollzeitlich auf die Implementierung der Datenbankanbindung und die Extraktion von Agora-Daten konzentrieren. Lucas Brie agiert als Frontend-Entwickler, ebenfalls in Vollzeit, und ist verantwortlich für das Design und die Umsetzung der Benutzeroberfläche. Hanna Krusch übernimmt die Position der Dokumentationsverantwortlichen und sorgt für die Erstellung von Entwicklerdokumentation und Benutzerdokumentation.
+Für die erfolgreiche Umsetzung unseres Projekts stehen verschiedene Personalressourcen zur Verfügung. Denis Wollgramm übernimmt die Rolle des Backend-Entwicklers und wird sich vollzeitlich auf die Implementierung der Datenbankanbindung und die Extraktion von Agora-Daten konzentrieren. Lucas Brie agiert als Frontend-Entwickler, ebenfalls in Vollzeit, und ist verantwortlich für das Design und die Umsetzung der Benutzeroberfläche. Hanna Krusch übernimmt die Position der Dokumentationsverantwortlichen und sorgt für die Erstellung von der Projektdokumentation.
 
 Die Anlagenressourcen für unser Projekt umfassen primär die persönlichen Laptops der Teammitglieder, die für die individuelle Entwicklung genutzt werden. Diese Laptops bieten die notwendige Flexibilität und Unabhängigkeit für die Entwicklung von Backend und Frontend. Die Schulklassenräume dienen als Ort für gemeinsame Besprechungen und Präsentationen. Wir haben uns für die Nutzung der PostgreSQL-Datenbank entschieden, wobei unsere Daten in diesem System gespeichert werden. Des Weiteren erfolgt die Sicherung und Versionierung unseres Projektfortschritts über die Plattform GitHub.
 
@@ -67,6 +71,8 @@ Die Entwicklungsaufgaben sind klar auf die Teammitglieder verteilt. Denis Wollgr
 
 Die regelmäßigen Sprint-Meetings dienen dazu, den Fortschritt zu überprüfen, Herausforderungen zu besprechen und Anpassungen vorzunehmen. Diese iterative Vorgehensweise ermöglicht es uns, flexibel auf Veränderungen oder Anpassungen der Anforderungen zu reagieren. Die Kommunikation im Team wird durch die klaren Zuständigkeiten und die regelmäßigen Meetings erleichtert.
 
+---
+
 ## Analysephase
 ### Ist-Analyse
 
@@ -76,7 +82,7 @@ Die regelmäßigen Sprint-Meetings dienen dazu, den Fortschritt zu überprüfen,
 
 **Werkzeuge und Technologien:** Kosten für die Nutzung von Entwicklungswerkzeugen, Datenbank-Management-Systemen und anderen erforderlichen Software-Ressourcen.
 
-**Schulressourcen:** Einbeziehung von Schulinfrastruktur wie Computerlabors und Netzwerkinfrastruktur für die Entwicklung und Umsetzung des Projekts.
+**Schulressourcen:** Einbeziehung von Schulinfrastruktur wie Schulräume und W-LAN für die Entwicklung und Umsetzung des Projekts.
 
 #### Nutzen:
 **Ausbildungsfortschritt:** Das Projekt bietet den Teammitgliedern, insbesondere im Kontext ihrer Fachinformatiker-Ausbildung, die Möglichkeit, praxisnahe Erfahrungen in der Softwareentwicklung zu sammeln.
@@ -115,6 +121,8 @@ Unsere Software strebt hohe Qualitätsstandards an, insbesondere in den Bereiche
 | K1  | Entwicklerdokumentation  | Sie beschreiben Ihr Vorgehen, Techniken, Bibliotheken, so dass jemand anderes ihre Software warten kann.  | 10  |
 | K2  | _Content Cell_  | _Content Cell_  | _Content Cell_  |
 
+---
+
 ## Entwurfsphase
 ### Zielplattform 
 > Beschreibung der Kriterien zur Auswahl der Zielplattform (u.a. Programmiersprache, Datenbank, Client/Server, Hardware).
@@ -133,6 +141,8 @@ Unsere Software strebt hohe Qualitätsstandards an, insbesondere in den Bereiche
 
 > Ggfs. Definition von Testfällen und deren Durchführung (durch Programme/Benutzer).
 
+---
+
 ## Implementierungsphase
 ### Datenstruktur
 > eschreibung der angelegten Datenbank (z.B. Generierung von SQL aus Modellierungswerkzeug oder händisches Anlegen), XML-Schemas usw.
@@ -144,6 +154,8 @@ Unsere Software strebt hohe Qualitätsstandards an, insbesondere in den Bereiche
 
 Wir verwenden Normalize.css, um browserübergreifende Konsistenz in der Darstellung von HTML-Elementen zu gewährleisten. Es bietet den Vorteil, standardisierte und vorhersagbare Stilgrundlagen zu schaffen, ohne dabei unnötige oder problematische Zurücksetzungen vorzunehmen. Durch die gezielte Normalisierung werden konsistente Designs über verschiedene Browser hinweg ermöglicht, wodurch Entwickler weniger Zeit mit der Bewältigung von Browserinkonsistenzen verbringen und sich stattdessen auf die Gestaltung benutzerfreundlicher Benutzeroberflächen konzentrieren können.
 
+---
+
 ## Testdokumentation
 ### Testplan
 > Übersicht über den Testprozess, Testarten und Testumfang.
@@ -154,7 +166,10 @@ Wir verwenden Normalize.css, um browserübergreifende Konsistenz in der Darstell
 ### Testergebnisse 
 > Dokumentation der Ergebnisse, einschließlich Fehlerberichte und behobener Fehler.
 
+---
+
 ## Fazit
+- Fehlerhafte Library für das Graphendarstellen benutzt (Woche 4)
 ### Soll-/Ist-Vergleich
 ### Lessons Learned
 ### Ausblick
