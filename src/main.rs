@@ -5,7 +5,7 @@ use config::Config;
 use database::power_generation_and_consumption::PowerGenerationAndConsumption;
 use sqlx::PgPool;
 use time::PrimitiveDateTime;
-use crate::templates::{PlottingTemplateDataSet, PlottingTemplateDataSetData};
+use crate::templates::{PlottingTemplateRawData};
 
 mod agora;
 mod config;
@@ -52,15 +52,7 @@ async fn graph_handler(State(state): State<Arc<AppState>>) -> impl IntoResponse 
     let highest = PowerGenerationAndConsumption::find_highest_output(&state.postgres_pool).await;
 
     templates::PlottingTemplate {
-        data_sets: vec![PlottingTemplateDataSet {
-            data: vec![PlottingTemplateDataSetData {
-                x: PrimitiveDateTime::MIN,
-                y: 0f64,
-            },PlottingTemplateDataSetData {
-                x: PrimitiveDateTime::MAX,
-                y: 1f64,
-            },]
-        }]
+        data_sets: vec![PlottingTemplateRawData { label: String::from("bla"), data: vec![] }, PlottingTemplateRawData { label: String::from("keks"), data: vec![] }]
     }
 }
 

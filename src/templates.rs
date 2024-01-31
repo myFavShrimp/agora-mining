@@ -1,6 +1,9 @@
 use askama::Template;
 use serde::Serialize;
 use time::PrimitiveDateTime;
+use crate::templates::plotting::PlottingTemplateDataSet;
+
+mod plotting;
 
 pub static REFRESH_BUTTON_ID: &str = "refreshButton";
 
@@ -17,18 +20,12 @@ pub struct AboutTemplate;
 #[derive(Template)]
 #[template(path = "plotting/plotting.html")]
 pub struct PlottingTemplate {
-    pub data_sets: Vec<PlottingTemplateDataSet>,
+    pub data_sets: Vec<PlottingTemplateRawData>,
     //pub labels: Vec<>,
 }
 
 #[derive(Serialize)]
-pub struct PlottingTemplateDataSet {
-    pub data: Vec<PlottingTemplateDataSetData>,
+pub struct PlottingTemplateRawData {
+    pub label: String,
+    pub data: Vec<(PrimitiveDateTime, f64)>
 }
-#[derive(Serialize)]
-pub struct PlottingTemplateDataSetData {
-    pub x: PrimitiveDateTime,
-    pub y: f64,
-}
-
-

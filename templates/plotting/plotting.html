@@ -8,8 +8,8 @@
     new Chart(ctx, {
         type: 'line',
         data: {
-            // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: {{serde_json::to_string(data_sets).unwrap()|safe}}
+            labels:{{self.labels()|safe}},
+            //datasets: {{serde_json::to_string(data_sets).unwrap()|safe}}
         },
         options: {
             scales: {
