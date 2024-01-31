@@ -4,8 +4,7 @@ use axum::{extract::State, http::StatusCode, response::IntoResponse, routing::ge
 use config::Config;
 use database::power_generation_and_consumption::PowerGenerationAndConsumption;
 use sqlx::PgPool;
-use time::PrimitiveDateTime;
-use crate::templates::{PlottingTemplateRawData};
+use templates::plotting::{to_data_sets, PlottingTemplateDataSet};
 
 mod agora;
 mod config;
@@ -47,12 +46,13 @@ async fn landing_page_handler() -> impl IntoResponse {
 }
 
 async fn graph_handler(State(state): State<Arc<AppState>>) -> impl IntoResponse {
-    let result = PowerGenerationAndConsumption::find_all_ordered_by_date(&state.postgres_pool).await;
+    let result =
+        PowerGenerationAndConsumption::find_all_ordered_by_date(&state.postgres_pool).await;
     let lowest = PowerGenerationAndConsumption::find_lowest_output(&state.postgres_pool).await;
     let highest = PowerGenerationAndConsumption::find_highest_output(&state.postgres_pool).await;
 
     templates::PlottingTemplate {
-        data_sets: vec![PlottingTemplateRawData { label: String::from("bla"), data: vec![] }, PlottingTemplateRawData { label: String::from("keks"), data: vec![] }]
+        data_sets: to_data_sets(result.unwrap()),
     }
 }
 

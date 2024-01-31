@@ -8,7 +8,7 @@ use time::{
 
 use crate::database::power_generation_and_consumption::PowerGenerationAndConsumption;
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Hash)]
 pub enum GenerationKind {
     #[serde(rename = "Biomass")]
     Biomass,
@@ -40,6 +40,28 @@ pub enum GenerationKind {
     WindOffshore,
     #[serde(rename = "Wind onshore")]
     WindOnshore,
+}
+
+impl GenerationKind {
+    pub fn all() -> Vec<GenerationKind> {
+        vec![
+            Self::Biomass,
+            Self::GridEmissionFactor,
+            Self::HardCoal,
+            Self::Hydro,
+            Self::Lignite,
+            Self::NaturalGas,
+            Self::Nuclear,
+            Self::Other,
+            Self::PumpedStorageGeneration,
+            Self::Solar,
+            Self::TotalConventionalPowerPlant,
+            Self::TotalElectricityDemand,
+            Self::TotalGridEmissions,
+            Self::WindOffshore,
+            Self::WindOnshore,
+        ]
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug)]
