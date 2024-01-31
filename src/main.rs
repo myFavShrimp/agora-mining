@@ -4,12 +4,13 @@ use axum::{extract::State, http::StatusCode, response::IntoResponse, routing::ge
 use config::Config;
 use database::power_generation_and_consumption::PowerGenerationAndConsumption;
 use sqlx::PgPool;
+use time::PrimitiveDateTime;
+use crate::templates::{PlottingTemplateDataSet, PlottingTemplateDataSetData};
 
 mod agora;
 mod config;
 mod database;
 mod templates;
-mod plotting;
 
 pub struct AppState {
     pub config: Config,
@@ -49,7 +50,18 @@ async fn graph_handler(State(state): State<Arc<AppState>>) -> impl IntoResponse 
     let result = PowerGenerationAndConsumption::find_all_ordered_by_date(&state.postgres_pool).await;
     let lowest = PowerGenerationAndConsumption::find_lowest_output(&state.postgres_pool).await;
     let highest = PowerGenerationAndConsumption::find_highest_output(&state.postgres_pool).await;
-    plotting::create_plot(result.unwrap(), lowest.unwrap().unwrap(), highest.unwrap().unwrap())
+
+    templates::PlottingTemplate {
+        data_sets: vec![PlottingTemplateDataSet {
+            data: vec![PlottingTemplateDataSetData {
+                x: PrimitiveDateTime::MIN,
+                y: 0f64,
+            },PlottingTemplateDataSetData {
+                x: PrimitiveDateTime::MAX,
+                y: 1f64,
+            },]
+        }]
+    }
 }
 
 async fn refresh_data_handler(State(state): State<Arc<AppState>>) -> impl IntoResponse {
