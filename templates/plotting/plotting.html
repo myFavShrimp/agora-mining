@@ -11,12 +11,12 @@
             datasets: {{ serde_json::to_string(data_sets).unwrap()|safe }}
         },
         options: {
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Chart.js Line Chart - Logarithmic'
-                }
-            },
+            // plugins: {
+            //     title: {
+            //         display: true,
+            //         text: 'Chart.js Line Chart - Logarithmic'
+            //     }
+            // },
             scales: {
                 y: {
                     type: 'logarithmic'
