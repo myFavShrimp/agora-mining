@@ -19,6 +19,7 @@
 <body>
 <div id="content">
     <div class="{{class_name.nav_bar}}">
+        <!-- TODO: Icon + Name -->
         <ul>
             <li><a href="/">Daten</a></li>
             <li><a href="/about">About</a></li>
@@ -33,7 +34,7 @@
     </div>
     <div class="{{class_name.base_content}}">
         {% block content %}{% endblock %}
-        <a hx-get="/graph-dracula">Stradh</a>
+        <div hx-get="/graph-dracula" hx-trigger="load"></div>
     </div>
 </div>
 </body>
