@@ -10,7 +10,7 @@ use crate::{
 
 #[derive(Serialize)]
 pub struct PlottingTemplateDataSet {
-    pub label: String,
+    pub label: &'static str,
     pub data: Vec<PlottingTemplateDataSetData>,
 }
 
@@ -18,6 +18,28 @@ pub struct PlottingTemplateDataSet {
 pub struct PlottingTemplateDataSetData {
     pub x: PrimitiveDateTime,
     pub y: Option<f64>,
+}
+
+impl GenerationKind {
+    fn chart_display_name(&self) -> &'static str {
+        match self {
+            GenerationKind::Biomass => "Biomass",
+            GenerationKind::GridEmissionFactor => "Grid Emission Factor",
+            GenerationKind::HardCoal => "Hard Coal",
+            GenerationKind::Hydro => "Hydro",
+            GenerationKind::Lignite => "Lignite",
+            GenerationKind::NaturalGas => "Natural Gas",
+            GenerationKind::Nuclear => "Nuclear",
+            GenerationKind::Other => "Other",
+            GenerationKind::PumpedStorageGeneration => "Pumped Storage Generation",
+            GenerationKind::Solar => "Solar",
+            GenerationKind::TotalConventionalPowerPlant => "Total Conventional Power Plant",
+            GenerationKind::TotalElectricityDemand => "Total Electricity Demand",
+            GenerationKind::TotalGridEmissions => "Total Grid Emissions",
+            GenerationKind::WindOffshore => "Wind Offshore",
+            GenerationKind::WindOnshore => "Wind Onshore",
+        }
+    }
 }
 
 pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTemplateDataSet> {
@@ -36,7 +58,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                         existing_data.data.push(new_data)
                     } else {
                         let new_data_set = PlottingTemplateDataSet {
-                            label: "Biomass".to_owned(),
+                            label: kind.chart_display_name(),
                             data: vec![new_data],
                         };
                         result_map.insert(kind, new_data_set);
@@ -52,7 +74,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                         existing_data.data.push(new_data)
                     } else {
                         let new_data_set = PlottingTemplateDataSet {
-                            label: "Grid Emission Factor".to_owned(),
+                            label: kind.chart_display_name(),
                             data: vec![new_data],
                         };
                         result_map.insert(kind, new_data_set);
@@ -68,7 +90,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                         existing_data.data.push(new_data)
                     } else {
                         let new_data_set = PlottingTemplateDataSet {
-                            label: "Hard Coal".to_owned(),
+                            label: kind.chart_display_name(),
                             data: vec![new_data],
                         };
                         result_map.insert(kind, new_data_set);
@@ -84,7 +106,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                         existing_data.data.push(new_data)
                     } else {
                         let new_data_set = PlottingTemplateDataSet {
-                            label: "Hydro".to_owned(),
+                            label: kind.chart_display_name(),
                             data: vec![new_data],
                         };
                         result_map.insert(kind, new_data_set);
@@ -100,7 +122,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                         existing_data.data.push(new_data)
                     } else {
                         let new_data_set = PlottingTemplateDataSet {
-                            label: "Lignite".to_owned(),
+                            label: kind.chart_display_name(),
                             data: vec![new_data],
                         };
                         result_map.insert(kind, new_data_set);
@@ -116,7 +138,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                         existing_data.data.push(new_data)
                     } else {
                         let new_data_set = PlottingTemplateDataSet {
-                            label: "Natural Gas".to_owned(),
+                            label: kind.chart_display_name(),
                             data: vec![new_data],
                         };
                         result_map.insert(kind, new_data_set);
@@ -132,7 +154,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                         existing_data.data.push(new_data)
                     } else {
                         let new_data_set = PlottingTemplateDataSet {
-                            label: "Nuclear".to_owned(),
+                            label: kind.chart_display_name(),
                             data: vec![new_data],
                         };
                         result_map.insert(kind, new_data_set);
@@ -148,7 +170,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                         existing_data.data.push(new_data)
                     } else {
                         let new_data_set = PlottingTemplateDataSet {
-                            label: "Other".to_owned(),
+                            label: kind.chart_display_name(),
                             data: vec![new_data],
                         };
                         result_map.insert(kind, new_data_set);
@@ -164,7 +186,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                         existing_data.data.push(new_data)
                     } else {
                         let new_data_set = PlottingTemplateDataSet {
-                            label: "Pumped Storage Generation".to_owned(),
+                            label: kind.chart_display_name(),
                             data: vec![new_data],
                         };
                         result_map.insert(kind, new_data_set);
@@ -180,7 +202,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                         existing_data.data.push(new_data)
                     } else {
                         let new_data_set = PlottingTemplateDataSet {
-                            label: "Solar".to_owned(),
+                            label: kind.chart_display_name(),
                             data: vec![new_data],
                         };
                         result_map.insert(kind, new_data_set);
@@ -196,7 +218,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                         existing_data.data.push(new_data)
                     } else {
                         let new_data_set = PlottingTemplateDataSet {
-                            label: "Total Conventional Power Plant".to_owned(),
+                            label: kind.chart_display_name(),
                             data: vec![new_data],
                         };
                         result_map.insert(kind, new_data_set);
@@ -212,7 +234,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                         existing_data.data.push(new_data)
                     } else {
                         let new_data_set = PlottingTemplateDataSet {
-                            label: "Total Electricity Demand".to_owned(),
+                            label: kind.chart_display_name(),
                             data: vec![new_data],
                         };
                         result_map.insert(kind, new_data_set);
@@ -228,7 +250,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                         existing_data.data.push(new_data)
                     } else {
                         let new_data_set = PlottingTemplateDataSet {
-                            label: "Total Grid Emissions".to_owned(),
+                            label: kind.chart_display_name(),
                             data: vec![new_data],
                         };
                         result_map.insert(kind, new_data_set);
@@ -244,7 +266,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                         existing_data.data.push(new_data)
                     } else {
                         let new_data_set = PlottingTemplateDataSet {
-                            label: "Wind Offshore".to_owned(),
+                            label: kind.chart_display_name(),
                             data: vec![new_data],
                         };
                         result_map.insert(kind, new_data_set);
@@ -260,7 +282,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
                         existing_data.data.push(new_data)
                     } else {
                         let new_data_set = PlottingTemplateDataSet {
-                            label: "Wind Onshore".to_owned(),
+                            label: kind.chart_display_name(),
                             data: vec![new_data],
                         };
                         result_map.insert(kind, new_data_set);
