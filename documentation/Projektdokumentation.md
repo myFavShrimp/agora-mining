@@ -43,6 +43,8 @@ Die analytische Funktionen zur Interpretation der Energiedaten, wie Trendanalyse
 | 3  | Backend-Datenbank fertigstellen und Abfragen ermöglichen  |
 | 4  | Plotting Library auswählen und erste Daten darstellen  |
 | 4  | Implementierung des Front-Ends  |
+| 5  | Entwicklerdokumentation schreiben  |
+| 5  | Installationsdokumentation schreiben  |
 
 ### Abweichungen von der Projektaufgabenstellung
 Da wir seit vier Wochen immernoch keine angepasste Aufgabenstellung erhalten haben, können wir daher keine Abweichungen feststellen und dokumentieren.
@@ -50,7 +52,7 @@ Da wir seit vier Wochen immernoch keine angepasste Aufgabenstellung erhalten hab
 ### Ressourcenplan
 > Planung der benötigten Ressourcen (Hard-/Software, Räumlichkeiten, ...)
 
-Für die erfolgreiche Umsetzung unseres Projekts stehen verschiedene Personalressourcen zur Verfügung. Denis Wollgramm übernimmt die Rolle des Backend-Entwicklers und wird sich vollzeitlich auf die Implementierung der Datenbankanbindung und die Extraktion von Agora-Daten konzentrieren. Lucas Brie agiert als Frontend-Entwickler, ebenfalls in Vollzeit, und ist verantwortlich für das Design und die Umsetzung der Benutzeroberfläche. Hanna Krusch übernimmt die Position der Dokumentationsverantwortlichen und sorgt für die Erstellung von Entwicklerdokumentation und Benutzerdokumentation.
+Für die erfolgreiche Umsetzung unseres Projekts stehen verschiedene Personalressourcen zur Verfügung. Denis Wollgramm übernimmt die Rolle des Backend-Entwicklers und wird sich vollzeitlich auf die Implementierung der Datenbankanbindung und die Extraktion von Agora-Daten konzentrieren. Lucas Brie agiert als Frontend-Entwickler, ebenfalls in Vollzeit, und ist verantwortlich für das Design und die Umsetzung der Benutzeroberfläche. Hanna Krusch übernimmt die Position der Dokumentationsverantwortlichen und sorgt für die Erstellung von der Projektdokumentation.
 
 Die Anlagenressourcen für unser Projekt umfassen primär die persönlichen Laptops der Teammitglieder, die für die individuelle Entwicklung genutzt werden. Diese Laptops bieten die notwendige Flexibilität und Unabhängigkeit für die Entwicklung von Backend und Frontend. Die Schulklassenräume dienen als Ort für gemeinsame Besprechungen und Präsentationen. Wir haben uns für die Nutzung der PostgreSQL-Datenbank entschieden, wobei unsere Daten in diesem System gespeichert werden. Des Weiteren erfolgt die Sicherung und Versionierung unseres Projektfortschritts über die Plattform GitHub.
 
@@ -76,7 +78,7 @@ Die regelmäßigen Sprint-Meetings dienen dazu, den Fortschritt zu überprüfen,
 
 **Werkzeuge und Technologien:** Kosten für die Nutzung von Entwicklungswerkzeugen, Datenbank-Management-Systemen und anderen erforderlichen Software-Ressourcen.
 
-**Schulressourcen:** Einbeziehung von Schulinfrastruktur wie Computerlabors und Netzwerkinfrastruktur für die Entwicklung und Umsetzung des Projekts.
+**Schulressourcen:** Einbeziehung von Schulinfrastruktur wie Schulräume und W-LAN für die Entwicklung und Umsetzung des Projekts.
 
 #### Nutzen:
 **Ausbildungsfortschritt:** Das Projekt bietet den Teammitgliedern, insbesondere im Kontext ihrer Fachinformatiker-Ausbildung, die Möglichkeit, praxisnahe Erfahrungen in der Softwareentwicklung zu sammeln.
@@ -155,6 +157,7 @@ Wir verwenden Normalize.css, um browserübergreifende Konsistenz in der Darstell
 > Dokumentation der Ergebnisse, einschließlich Fehlerberichte und behobener Fehler.
 
 ## Fazit
+- Fehlerhafte Library für das Graphendarstellen benutzt (Woche 4)
 ### Soll-/Ist-Vergleich
 ### Lessons Learned
 ### Ausblick
