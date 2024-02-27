@@ -1,5 +1,65 @@
 @import "color";
 
-.hello_agora {
-  margin: 0;
+.landing_page_content {
+  padding: 1em 0em;
+
+  .graph_toolbar {
+    background-color: $agora-container-on-background;
+    border-radius: 1em;
+    margin-bottom: 1em;
+    height: 3em;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+    .graph_toolbar_item {
+      min-width: 4em;
+      cursor: pointer;
+      padding-right: 1em;
+      width: fit-content;
+
+      .graph_toolbar_datepicker {
+        background: transparent;
+        border-radius: 1em;
+        color: $agora-container-on-background-text;
+        border-color: $agora-container-on-background-text;
+      }
+
+      .refresh {
+        border-radius: 10px;
+        display: flex;
+
+        .spinner {
+          display: none;
+          margin: auto;
+          width: 1.15rem;
+          height: 1.15rem;
+          border: 5px solid $agora-container-primary-text;
+          border-bottom-color: #55006b;
+          border-radius: 50%;
+          box-sizing: border-box;
+          animation: rotation 1s linear infinite;
+        }
+
+        &.htmx-request {
+          .spinner {
+            display: inline-block;
+          }
+
+          .linkText {
+            display: none
+          }
+        }
+
+        @keyframes rotation {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      }
+    }
+  }
 }

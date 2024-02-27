@@ -29,8 +29,8 @@ async fn main() -> eyre::Result<()> {
     let app = Router::new()
         .route("/", get(landing_page_handler))
         .route("/about", get(about_page_handler))
-        .route("/hanna", get(refresh_data_handler))
-        .route("/graph-dracula", get(graph_handler))
+        .route("/refresh", get(refresh_data_handler))
+        .route("/graph", get(graph_handler))
         .with_state(state);
 
     let listener = tokio::net::TcpListener::bind(address).await?;
@@ -40,9 +40,7 @@ async fn main() -> eyre::Result<()> {
 }
 
 async fn landing_page_handler() -> impl IntoResponse {
-    templates::HelloAgoraTemplate {
-        text: "by Denis, Hanna & Lucas",
-    }
+    templates::LandingPageTemplate
 }
 
 async fn graph_handler(State(state): State<Arc<AppState>>) -> impl IntoResponse {

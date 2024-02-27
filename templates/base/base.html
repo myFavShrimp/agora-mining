@@ -8,7 +8,7 @@
             integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni"
             crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>agora-mining base.html</title>
+    <title>Agora-Mining</title>
 </head>
 <!-- @formatter:off -->
 <style>
@@ -19,22 +19,14 @@
 <body>
 <div id="content">
     <div class="{{class_name.nav_bar}}">
-        <!-- TODO: Icon + Name -->
+        <div class="{{class_name.title}}">Agora-Mining</div>
         <ul>
             <li><a href="/">Daten</a></li>
             <li><a href="/about">About</a></li>
-            <li>
-                <a class="{{class_name.refresh}}" hx-get="/hanna">
-                    <span class="{{class_name.link_text}}"
-                          id="{{crate::templates::REFRESH_BUTTON_ID}}">Refresh</span>
-                    <span class="{{class_name.spinner}}"></span>
-                </a>
-            </li>
         </ul>
     </div>
     <div class="{{class_name.base_content}}">
         {% block content %}{% endblock %}
-        <div hx-get="/graph-dracula" hx-trigger="load"></div>
     </div>
 </div>
 </body>
