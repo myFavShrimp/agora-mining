@@ -48,8 +48,6 @@ async fn landing_page_handler() -> impl IntoResponse {
 async fn graph_handler(State(state): State<Arc<AppState>>) -> impl IntoResponse {
     let result =
         PowerGenerationAndConsumption::find_all_ordered_by_date(&state.postgres_pool).await;
-    let lowest = PowerGenerationAndConsumption::find_lowest_output(&state.postgres_pool).await;
-    let highest = PowerGenerationAndConsumption::find_highest_output(&state.postgres_pool).await;
 
     templates::PlottingTemplate {
         data_sets: to_data_sets(result.unwrap()),
