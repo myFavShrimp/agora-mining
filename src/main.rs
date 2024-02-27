@@ -2,9 +2,9 @@ use std::sync::Arc;
 
 use axum::{extract::State, http::StatusCode, response::IntoResponse, routing::get, Router};
 use config::Config;
-use database::power_generation_and_consumption::PowerGenerationAndConsumption;
+use database::power_generation;
 use sqlx::PgPool;
-use templates::plotting::{to_data_sets};
+use templates::plotting::to_data_sets;
 
 mod agora;
 mod config;
@@ -48,7 +48,7 @@ async fn landing_page_handler() -> impl IntoResponse {
 
 async fn graph_handler(State(state): State<Arc<AppState>>) -> impl IntoResponse {
     let result =
-        PowerGenerationAndConsumption::find_all_ordered_by_date(&state.postgres_pool).await;
+        power_generation::PowerGeneration::find_all_ordered_by_date(&state.postgres_pool).await;
 
     templates::PlottingTemplate {
         data_sets: to_data_sets(result.unwrap()),
@@ -56,12 +56,14 @@ async fn graph_handler(State(state): State<Arc<AppState>>) -> impl IntoResponse 
 }
 
 async fn refresh_data_handler(State(state): State<Arc<AppState>>) -> impl IntoResponse {
-    let agora_data = agora::get_agora_api_data().await;
+    let agora_data =
+        agora::get_agora_api_data::<power_generation::PowerGeneration, power_generation::Fields>()
+            .await;
     let agora_data = agora_data.unwrap().try_into().unwrap();
 
-    _ = PowerGenerationAndConsumption::delete_all(&state.postgres_pool).await;
+    _ = power_generation::PowerGeneration::delete_all(&state.postgres_pool).await;
 
-    match PowerGenerationAndConsumption::create_many(&state.postgres_pool, agora_data).await {
+    match power_generation::PowerGeneration::create_many(&state.postgres_pool, agora_data).await {
         Ok(_) => (
             StatusCode::OK,
             [("HX-Retarget", format!("#{}", templates::REFRESH_BUTTON_ID))],
