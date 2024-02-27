@@ -3,9 +3,9 @@ use std::collections::HashMap;
 use serde::Serialize;
 use time::PrimitiveDateTime;
 
-use crate::{
-    agora::GenerationKind,
-    database::power_generation_and_consumption::PowerGenerationAndConsumption,
+use crate::database::{
+    power_generation::{Fields, PowerGeneration},
+    Entity,
 };
 
 #[derive(Serialize)]
@@ -20,55 +20,49 @@ pub struct PlottingTemplateDataSetData {
     pub y: Option<f64>,
 }
 
-impl GenerationKind {
+impl Fields {
     fn chart_display_name(&self) -> &'static str {
         match self {
-            GenerationKind::Biomass => "Biomass",
-            GenerationKind::GridEmissionFactor => "Grid Emission Factor",
-            GenerationKind::HardCoal => "Hard Coal",
-            GenerationKind::Hydro => "Hydro",
-            GenerationKind::Lignite => "Lignite",
-            GenerationKind::NaturalGas => "Natural Gas",
-            GenerationKind::Nuclear => "Nuclear",
-            GenerationKind::Other => "Other",
-            GenerationKind::PumpedStorageGeneration => "Pumped Storage Generation",
-            GenerationKind::Solar => "Solar",
-            GenerationKind::TotalConventionalPowerPlant => "Total Conventional Power Plant",
-            GenerationKind::TotalElectricityDemand => "Total Electricity Demand",
-            GenerationKind::TotalGridEmissions => "Total Grid Emissions",
-            GenerationKind::WindOffshore => "Wind Offshore",
-            GenerationKind::WindOnshore => "Wind Onshore",
+            Fields::Biomass => "Biomass",
+            Fields::HardCoal => "Hard Coal",
+            Fields::Hydro => "Hydro",
+            Fields::Lignite => "Lignite",
+            Fields::NaturalGas => "Natural Gas",
+            Fields::Nuclear => "Nuclear",
+            Fields::Other => "Other",
+            Fields::PumpedStorageGeneration => "Pumped Storage Generation",
+            Fields::Solar => "Solar",
+            Fields::TotalConventionalPowerPlant => "Total Conventional Power Plant",
+            Fields::WindOffshore => "Wind Offshore",
+            Fields::WindOnshore => "Wind Onshore",
         }
     }
 }
 
-impl PowerGenerationAndConsumption {
-    fn get_by_kind(&self, kind: &GenerationKind) -> Option<f64> {
+impl PowerGeneration {
+    fn get_by_kind(&self, kind: &Fields) -> Option<f64> {
         match kind {
-            GenerationKind::Biomass => self.biomass,
-            GenerationKind::GridEmissionFactor => self.grid_emission_factor,
-            GenerationKind::HardCoal => self.hard_coal,
-            GenerationKind::Hydro => self.hydro,
-            GenerationKind::Lignite => self.lignite,
-            GenerationKind::NaturalGas => self.natural_gas,
-            GenerationKind::Nuclear => self.nuclear,
-            GenerationKind::Other => self.other,
-            GenerationKind::PumpedStorageGeneration => self.pumped_storage_generation,
-            GenerationKind::Solar => self.solar,
-            GenerationKind::TotalConventionalPowerPlant => self.total_conventional_power_plant,
-            GenerationKind::TotalElectricityDemand => self.total_electricity_demand,
-            GenerationKind::TotalGridEmissions => self.total_grid_emissions,
-            GenerationKind::WindOffshore => self.wind_offshore,
-            GenerationKind::WindOnshore => self.wind_onshore,
+            Fields::Biomass => self.biomass,
+            Fields::HardCoal => self.hard_coal,
+            Fields::Hydro => self.hydro,
+            Fields::Lignite => self.lignite,
+            Fields::NaturalGas => self.natural_gas,
+            Fields::Nuclear => self.nuclear,
+            Fields::Other => self.other,
+            Fields::PumpedStorageGeneration => self.pumped_storage_generation,
+            Fields::Solar => self.solar,
+            Fields::TotalConventionalPowerPlant => self.total_conventional_power_plant,
+            Fields::WindOffshore => self.wind_offshore,
+            Fields::WindOnshore => self.wind_onshore,
         }
     }
 }
 
-pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTemplateDataSet> {
-    let mut result_map: HashMap<GenerationKind, PlottingTemplateDataSet> = HashMap::new();
+pub fn to_data_sets(data: Vec<PowerGeneration>) -> Vec<PlottingTemplateDataSet> {
+    let mut result_map: HashMap<Fields, PlottingTemplateDataSet> = HashMap::new();
 
     for item in data {
-        for kind in GenerationKind::all() {
+        for kind in PowerGeneration::all_fields() {
             let new_data = PlottingTemplateDataSetData {
                 x: item.date_id,
                 y: item.get_by_kind(&kind),

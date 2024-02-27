@@ -1,6 +1,4 @@
 use askama::Template;
-use serde::Serialize;
-use time::PrimitiveDateTime;
 
 pub mod plotting;
 

@@ -6,108 +6,31 @@ use time::{
     PrimitiveDateTime,
 };
 
-use crate::database::power_generation_and_consumption::PowerGenerationAndConsumption;
-
-#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Hash)]
-pub enum GenerationKind {
-    #[serde(rename = "Biomass")]
-    Biomass,
-    #[serde(rename = "Grid emission factor")]
-    GridEmissionFactor,
-    #[serde(rename = "Hard Coal")]
-    HardCoal,
-    #[serde(rename = "Hydro")]
-    Hydro,
-    #[serde(rename = "Lignite")]
-    Lignite,
-    #[serde(rename = "Natural Gas")]
-    NaturalGas,
-    #[serde(rename = "Nuclear")]
-    Nuclear,
-    #[serde(rename = "Other")]
-    Other,
-    #[serde(rename = "Pumped storage generation")]
-    PumpedStorageGeneration,
-    #[serde(rename = "Solar")]
-    Solar,
-    #[serde(rename = "Total conventional power plant")]
-    TotalConventionalPowerPlant,
-    #[serde(rename = "Total electricity demand")]
-    TotalElectricityDemand,
-    #[serde(rename = "Total grid emissions")]
-    TotalGridEmissions,
-    #[serde(rename = "Wind offshore")]
-    WindOffshore,
-    #[serde(rename = "Wind onshore")]
-    WindOnshore,
-}
-
-impl GenerationKind {
-    pub fn all() -> Vec<GenerationKind> {
-        vec![
-            Self::Biomass,
-            Self::GridEmissionFactor,
-            Self::HardCoal,
-            Self::Hydro,
-            Self::Lignite,
-            Self::NaturalGas,
-            Self::Nuclear,
-            Self::Other,
-            Self::PumpedStorageGeneration,
-            Self::Solar,
-            Self::TotalConventionalPowerPlant,
-            Self::TotalElectricityDemand,
-            Self::TotalGridEmissions,
-            Self::WindOffshore,
-            Self::WindOnshore,
-        ]
-    }
-}
+use crate::database::Entity;
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct AgoraApiResponseData {
-    pub data: Vec<(String, f64, GenerationKind)>,
+pub struct AgoraApiResponseData<F> {
+    pub data: Vec<(String, f64, F)>,
     pub columns: Vec<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct AgoraApiResponse {
+pub struct AgoraApiResponse<F> {
     pub status: bool,
-    pub data: AgoraApiResponseData,
+    pub data: AgoraApiResponseData<F>,
 }
 
-impl PowerGenerationAndConsumption {
-    pub fn set_by_kind(&mut self, kind: GenerationKind, value: f64) {
-        match kind {
-            GenerationKind::Biomass => self.biomass = Some(value),
-            GenerationKind::GridEmissionFactor => self.grid_emission_factor = Some(value),
-            GenerationKind::HardCoal => self.hard_coal = Some(value),
-            GenerationKind::Hydro => self.hydro = Some(value),
-            GenerationKind::Lignite => self.lignite = Some(value),
-            GenerationKind::NaturalGas => self.natural_gas = Some(value),
-            GenerationKind::Nuclear => self.nuclear = Some(value),
-            GenerationKind::Other => self.other = Some(value),
-            GenerationKind::PumpedStorageGeneration => self.pumped_storage_generation = Some(value),
-            GenerationKind::Solar => self.solar = Some(value),
-            GenerationKind::TotalConventionalPowerPlant => {
-                self.total_conventional_power_plant = Some(value)
-            }
-            GenerationKind::TotalElectricityDemand => self.total_electricity_demand = Some(value),
-            GenerationKind::TotalGridEmissions => self.total_grid_emissions = Some(value),
-            GenerationKind::WindOffshore => self.wind_offshore = Some(value),
-            GenerationKind::WindOnshore => self.wind_onshore = Some(value),
-        }
-    }
-}
-
-impl TryInto<Vec<PowerGenerationAndConsumption>> for AgoraApiResponse {
+impl<D, F> TryInto<Vec<D>> for AgoraApiResponse<F>
+where
+    D: Entity<F> + Default,
+    F: Serialize,
+{
     type Error = time::Error;
 
-    fn try_into(self) -> Result<Vec<PowerGenerationAndConsumption>, Self::Error> {
+    fn try_into(self) -> Result<Vec<D>, Self::Error> {
         let data = self.data.data;
 
-        let mut result_map: HashMap<PrimitiveDateTime, PowerGenerationAndConsumption> =
-            HashMap::new();
+        let mut result_map: HashMap<PrimitiveDateTime, D> = HashMap::new();
 
         let format_description =
             format_description!("[year]-[month]-[day]T[hour]:[minute]:[second]");
@@ -117,11 +40,11 @@ impl TryInto<Vec<PowerGenerationAndConsumption>> for AgoraApiResponse {
             let parsed_date = PrimitiveDateTime::parse(&date, format_description)?;
 
             if let Some(existing_data) = result_map.get_mut(&parsed_date) {
-                existing_data.set_by_kind(kind, value);
+                existing_data.set_by_field(kind, value);
             } else {
-                let mut new_data = PowerGenerationAndConsumption::default();
-                new_data.date_id = parsed_date;
-                new_data.set_by_kind(kind, value);
+                let mut new_data = D::default();
+                new_data.set_id(parsed_date);
+                new_data.set_by_field(kind, value);
                 result_map.insert(parsed_date, new_data);
             }
         }
@@ -145,7 +68,11 @@ static AGORA_API_TO_DATE: time::Date = date!(2012 - 01 - 07);
 #[error("An error occurred while trying to get the agora api data")]
 pub struct AgoraError(#[from] reqwest::Error);
 
-pub async fn get_agora_api_data() -> Result<AgoraApiResponse, AgoraError> {
+pub async fn get_agora_api_data<D, F>() -> Result<AgoraApiResponse<F>, AgoraError>
+where
+    D: Entity<F>,
+    F: Serialize + for<'de> Deserialize<'de>,
+{
     let reqwest_client = reqwest::Client::new();
 
     let agora_response = reqwest_client
@@ -156,23 +83,7 @@ pub async fn get_agora_api_data() -> Result<AgoraApiResponse, AgoraError> {
                 "filters": {
                     "from": AGORA_API_FROM_DATE,
                     "to": AGORA_API_TO_DATE,
-                    "generation": [
-                        GenerationKind::Biomass,
-                        GenerationKind::GridEmissionFactor,
-                        GenerationKind::HardCoal,
-                        GenerationKind::Hydro,
-                        GenerationKind::Lignite,
-                        GenerationKind::NaturalGas,
-                        GenerationKind::Nuclear,
-                        GenerationKind::Other,
-                        GenerationKind::PumpedStorageGeneration,
-                        GenerationKind::Solar,
-                        GenerationKind::TotalConventionalPowerPlant,
-                        GenerationKind::TotalElectricityDemand,
-                        GenerationKind::TotalGridEmissions,
-                        GenerationKind::WindOffshore,
-                        GenerationKind::WindOnshore,
-                    ]
+                    "generation": D::all_fields()
                 },
                 "x_coordinate": "date_id",
                 "y_coordinate": "value",
@@ -185,5 +96,5 @@ pub async fn get_agora_api_data() -> Result<AgoraApiResponse, AgoraError> {
         .send()
         .await;
 
-    Ok(agora_response?.json::<AgoraApiResponse>().await?)
+    Ok(agora_response?.json::<AgoraApiResponse<F>>().await?)
 }
