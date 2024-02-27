@@ -1,4 +1,3 @@
-
 {% let (style_sheet, class_name) = turf::inline_style_sheet!("templates/plotting/plotting.scss") %}
 <!-- @formatter:off -->
 <style>
@@ -12,23 +11,42 @@
 
 <script>
     var ctx = document.getElementById('myChart');
+    const lineColor = '#7e767e';
+    const textColor = '#cfc3cd';
+    const data = {{ serde_json::to_string(data_sets).unwrap()|safe }};
 
     new Chart(ctx, {
         type: 'line',
         data: {
-            datasets: {{ serde_json::to_string(data_sets).unwrap()|safe }}
+             datasets: data,
         },
         options: {
             // TODO: Units
-            // plugins: {
-            //     title: {
-            //         display: true,
-            //         text: 'Chart.js Line Chart - Logarithmic'
-            //     }
-            // },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: textColor,
+                    },
+                },
+            },
             scales: {
                 y: {
-                    type: 'logarithmic'
+                    type: 'logarithmic',
+                    // colors: '#cfc3cd',
+                    ticks: {
+                        color: textColor,
+                    },
+                    grid: {
+                        color: lineColor,
+                    },
+                },
+                x: {
+                    ticks: {
+                        color: textColor,
+                    },
+                    grid: {
+                        color: lineColor,
+                    },
                 }
             }
         }

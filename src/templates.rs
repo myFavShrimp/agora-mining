@@ -1,5 +1,4 @@
 use askama::Template;
-use serde::Serialize;
 
 pub mod plotting;
 

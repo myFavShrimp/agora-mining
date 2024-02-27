@@ -31,6 +31,7 @@ async fn main() -> eyre::Result<()> {
         .route("/about", get(about_page_handler))
         .route("/refresh", get(refresh_data_handler))
         .route("/graph", get(graph_handler))
+        //.route("favicon")
         .with_state(state);
 
     let listener = tokio::net::TcpListener::bind(address).await?;
@@ -38,6 +39,8 @@ async fn main() -> eyre::Result<()> {
 
     Ok(())
 }
+
+//async fn fav_icon_handler() -> impl IntoResponse {}
 
 async fn landing_page_handler() -> impl IntoResponse {
     templates::LandingPageTemplate

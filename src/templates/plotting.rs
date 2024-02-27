@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
 use serde::Serialize;
-use time::PrimitiveDateTime;
+use time::macros::format_description;
 
 use crate::{
     agora::GenerationKind,
@@ -16,7 +16,7 @@ pub struct PlottingTemplateDataSet {
 
 #[derive(Serialize)]
 pub struct PlottingTemplateDataSetData {
-    pub x: PrimitiveDateTime,
+    pub x: String,
     pub y: Option<f64>,
 }
 
@@ -70,7 +70,7 @@ pub fn to_data_sets(data: Vec<PowerGenerationAndConsumption>) -> Vec<PlottingTem
     for item in data {
         for kind in GenerationKind::all() {
             let new_data = PlottingTemplateDataSetData {
-                x: item.date_id,
+                x: item.date_id.format(format_description!("[day].[month].[year] [hour]:[minute]")).unwrap(),
                 y: item.get_by_kind(&kind),
             };
 
