@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use sqlx::{Executor, PgPool};
+use sqlx::PgPool;
 use time::PrimitiveDateTime;
 
 use super::Entity;
@@ -32,7 +32,7 @@ impl Entity<Fields> for PowerEmission {
     fn unit() -> String {
         "tCO₂/h".to_string()
     }
-    
+
     fn all_fields() -> Vec<Fields> {
         vec![
             Fields::HardCoal,

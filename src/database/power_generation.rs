@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use sqlx::{Executor, PgPool};
+use sqlx::PgPool;
 use time::PrimitiveDateTime;
 
 use super::Entity;
