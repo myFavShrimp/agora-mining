@@ -5,6 +5,7 @@ pub mod power_emission;
 pub mod power_generation;
 
 pub trait Entity<F> {
+    fn unit() -> String;
     fn set_id(&mut self, date: PrimitiveDateTime);
     fn all_fields() -> Vec<F>;
     fn set_by_field(&mut self, field: F, value: f64);

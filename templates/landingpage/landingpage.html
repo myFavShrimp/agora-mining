@@ -10,26 +10,6 @@
 <!-- @formatter:on -->
 
 <div class={{class_name.landing_page_content}}>
-    <form>
-        <div class="{{class_name.graph_toolbar}}">
-            <div class="{{class_name.graph_toolbar_item}}">
-                <label for="from">Von</label>
-                <input class="{{class_name.graph_toolbar_datepicker}}" id="from" name="from_date" type="date">
-            </div>
-            <div class="{{class_name.graph_toolbar_item}}">
-                <label for="to">Bis</label>
-                <input class="{{class_name.graph_toolbar_datepicker}}" id="to" name="to_date" type="date">
-            </div>
-            <div class="{{class_name.graph_toolbar_item}}">
-                <a class="{{class_name.refresh}}" hx-get="/refresh">
-                    <span class="{{class_name.link_text}}"
-                          id="{{crate::templates::REFRESH_BUTTON_ID}}">Refresh</span>
-                    <span class="{{class_name.spinner}}"></span>
-                </a>
-            </div>
-        </div>
-    </form>
-    <!-- TODO: Icon + Name -->
     <div hx-get="/graph" hx-trigger="load"></div>
 </div>
 

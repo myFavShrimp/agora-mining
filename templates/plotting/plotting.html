@@ -5,24 +5,59 @@
 </style>
 <!-- @formatter:on -->
 
-<div class={{class_name.chart_container}}>
-    <canvas id="myChart"></canvas>
-</div>
+<form>
+    <div class="{{class_name.graph_toolbar}}">
+        <div class="{{class_name.graph_toolbar_item}}">
+            <label for="from">Von</label>
+            <input class="{{class_name.graph_toolbar_datepicker}}" id="from" name="from_date" type="date">
+        </div>
+        <div class="{{class_name.graph_toolbar_item}}">
+            <label for="to">Bis</label>
+            <input class="{{class_name.graph_toolbar_datepicker}}" id="to" name="to_date" type="date">
+        </div>
+        <div class="{{class_name.graph_toolbar_item}}">
+            <a class="{{class_name.refresh}}" hx-get="/refresh">
+                    <span class="{{class_name.link_text}}"
+                          id="{{crate::templates::REFRESH_BUTTON_ID}}">Refresh</span>
+                <span class="{{class_name.spinner}}"></span>
+            </a>
+        </div>
+    </div>
+    <div class={{class_name.chart_container}}>
+        <canvas id="myChart"></canvas>
+    </div>
+</form>
 
 <script>
     var ctx = document.getElementById('myChart');
     const lineColor = '#7e767e';
     const textColor = '#cfc3cd';
-    const data = {{ serde_json::to_string(data_sets).unwrap()|safe }};
+    <!-- @formatter:off -->
+    const chartData = {{ serde_json::to_string(data_sets).unwrap()|safe }};
+    <!-- @formatter:on -->
 
     new Chart(ctx, {
         type: 'line',
         data: {
-             datasets: data,
+            datasets: chartData,
         },
         options: {
-            // TODO: Units
+            elements: {
+                point: {
+                    radius: 3,
+                    hoverRadius: 4,
+                    hitRadius: 0,
+                },
+            },
             plugins: {
+                tooltip: {
+                    mode: 'x',
+                    callbacks: {
+                        label: function (context) {
+                            return `${context.dataset.label}: ${context.formattedValue} ${context.dataset.unit}`;
+                        }
+                    }
+                },
                 legend: {
                     labels: {
                         color: textColor,
@@ -32,7 +67,6 @@
             scales: {
                 y: {
                     type: 'logarithmic',
-                    // colors: '#cfc3cd',
                     ticks: {
                         color: textColor,
                     },

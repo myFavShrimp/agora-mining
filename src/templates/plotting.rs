@@ -12,6 +12,7 @@ use crate::database::{
 pub struct PlottingTemplateDataSet {
     pub label: &'static str,
     pub data: Vec<PlottingTemplateDataSetData>,
+    pub unit: String,
 }
 
 #[derive(Serialize)]
@@ -74,6 +75,7 @@ pub fn to_data_sets(data: Vec<PowerGeneration>) -> Vec<PlottingTemplateDataSet> 
                 let new_data_set = PlottingTemplateDataSet {
                     label: kind.chart_display_name(),
                     data: vec![new_data],
+                    unit: PowerGeneration::unit(),
                 };
                 result_map.insert(kind, new_data_set);
             }

@@ -99,6 +99,10 @@ pub enum Fields {
 // }
 
 impl Entity<Fields> for PowerGeneration {
+    fn unit() -> String {
+        return "mW/h".to_string()
+    }
+
     fn all_fields() -> Vec<Fields> {
         vec![
             Fields::Biomass,
