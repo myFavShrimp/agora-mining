@@ -29,6 +29,10 @@ pub enum Fields {
 }
 
 impl Entity<Fields> for PowerEmission {
+    fn unit() -> String {
+        return "tCO₂/h".to_string()
+    }
+    
     fn all_fields() -> Vec<Fields> {
         vec![
             Fields::HardCoal,
