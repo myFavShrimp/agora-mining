@@ -56,27 +56,18 @@ async fn graph_handler(State(state): State<Arc<AppState>>) -> impl IntoResponse 
 }
 
 async fn refresh_data_handler(State(state): State<Arc<AppState>>) -> impl IntoResponse {
-    {
-        _ = agora::sync_entity_with_agora_api::<
-            power_generation::PowerGeneration,
-            power_generation::Fields,
-        >(&state.postgres_pool)
-        .await;
-    };
-
-    {
-        _ = agora::sync_entity_with_agora_api::<
-            power_emission::PowerEmission,
-            power_emission::Fields,
-        >(&state.postgres_pool)
-        .await;
-    };
-
-    (
-        StatusCode::OK,
-        [("HX-Retarget", format!("#{}", templates::REFRESH_BUTTON_ID))],
-        "Updated",
-    )
+    match agora::sync_all_entities_with_agora_api(&state.postgres_pool).await {
+        Ok(_) => (
+            StatusCode::OK,
+            [("HX-Retarget", format!("#{}", templates::REFRESH_BUTTON_ID))],
+            "Updated",
+        ),
+        Err(_) => (
+            StatusCode::OK,
+            [("HX-Retarget", format!("#{}", templates::REFRESH_BUTTON_ID))],
+            "Update Failed",
+        ),
+    }
 }
 
 async fn about_page_handler() -> impl IntoResponse {

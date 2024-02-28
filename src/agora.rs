@@ -1,13 +1,13 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, os::unix::ffi::OsStrExt};
 
 use serde::{Deserialize, Serialize};
-use sqlx::PgPool;
+use sqlx::{Acquire, PgPool};
 use time::{
     macros::{date, format_description},
     PrimitiveDateTime,
 };
 
-use crate::database::Entity;
+use crate::database::{power_emission, power_generation, Entity};
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct AgoraApiResponseData<F> {
@@ -116,7 +116,9 @@ pub enum AgoraSyncError {
     Database(#[from] sqlx::Error),
 }
 
-pub async fn sync_entity_with_agora_api<D, F>(connection: &PgPool) -> Result<(), AgoraSyncError>
+async fn sync_entity_with_agora_api<D, F>(
+    connection: &mut sqlx::Transaction<'_, sqlx::Postgres>,
+) -> Result<(), AgoraSyncError>
 where
     D: Entity<F>,
     F: Serialize + for<'de> Deserialize<'de>,
@@ -128,7 +130,37 @@ where
 
     D::delete_all(connection).await?;
 
-    D::create_many(&connection, agora_data).await?;
+    D::create_many(connection, agora_data).await?;
 
     Ok(())
+}
+
+pub async fn sync_all_entities_with_agora_api(connection: &PgPool) -> Result<(), AgoraSyncError> {
+    async fn perform_sync(
+        connection: &mut sqlx::Transaction<'_, sqlx::Postgres>,
+    ) -> Result<(), AgoraSyncError> {
+        sync_entity_with_agora_api::<power_generation::PowerGeneration, power_generation::Fields>(
+            connection,
+        )
+        .await?;
+        sync_entity_with_agora_api::<power_emission::PowerEmission, power_emission::Fields>(
+            connection,
+        )
+        .await?;
+
+        Ok(())
+    }
+
+    let mut transaction = connection.begin().await?;
+
+    match perform_sync(&mut transaction).await {
+        Ok(value) => {
+            transaction.commit().await?;
+            Ok(value)
+        }
+        Err(error) => {
+            transaction.rollback().await?;
+            Err(error)
+        }
+    }
 }

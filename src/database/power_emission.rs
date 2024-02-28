@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use sqlx::PgPool;
+use sqlx::{database::HasArguments, Executor, IntoArguments, PgConnection, PgPool, Postgres};
 use time::PrimitiveDateTime;
 
 use super::Entity;
@@ -62,7 +62,7 @@ impl Entity<Fields> for PowerEmission {
     }
 
     async fn create(
-        connection: &PgPool,
+        connection: &mut sqlx::Transaction<'_, sqlx::Postgres>,
         value: &PowerEmission,
     ) -> Result<PowerEmission, sqlx::Error> {
         sqlx::query_as!(
@@ -80,12 +80,12 @@ impl Entity<Fields> for PowerEmission {
             value.other,
             value.total_grid_emissions,
         )
-        .fetch_one(connection)
+        .fetch_one(&mut **connection)
         .await
     }
 
     async fn create_many(
-        connection: &PgPool,
+        connection: &mut sqlx::Transaction<'_, sqlx::Postgres>,
         values: Vec<PowerEmission>,
     ) -> Result<Vec<PowerEmission>, sqlx::Error> {
         let mut result = Vec::new();
@@ -97,7 +97,9 @@ impl Entity<Fields> for PowerEmission {
         Ok(result)
     }
 
-    async fn delete_all(connection: &PgPool) -> Result<Vec<PowerEmission>, sqlx::Error> {
+    async fn delete_all(
+        connection: &mut sqlx::Transaction<'_, sqlx::Postgres>,
+    ) -> Result<Vec<PowerEmission>, sqlx::Error> {
         sqlx::query_as!(
             PowerEmission,
             "
@@ -105,7 +107,7 @@ impl Entity<Fields> for PowerEmission {
                 RETURNING *
             ",
         )
-        .fetch_all(connection)
+        .fetch_all(&mut **connection)
         .await
     }
 

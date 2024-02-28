@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use sqlx::PgPool;
+use sqlx::{database::HasArguments, Executor, IntoArguments, PgConnection, PgPool, Postgres};
 use time::PrimitiveDateTime;
 
 use super::Entity;
@@ -148,7 +148,7 @@ impl Entity<Fields> for PowerGeneration {
     }
 
     async fn create(
-        connection: &PgPool,
+        connection: &mut sqlx::Transaction<'_, sqlx::Postgres>,
         value: &PowerGeneration,
     ) -> Result<PowerGeneration, sqlx::Error> {
         sqlx::query_as!(
@@ -172,11 +172,11 @@ impl Entity<Fields> for PowerGeneration {
             value.total_conventional_power_plant,
             value.wind_offshore,
             value.wind_onshore,
-        ).fetch_one(connection).await
+        ).fetch_one(&mut **connection).await
     }
 
     async fn create_many(
-        connection: &PgPool,
+        connection: &mut sqlx::Transaction<'_, sqlx::Postgres>,
         values: Vec<PowerGeneration>,
     ) -> Result<Vec<PowerGeneration>, sqlx::Error> {
         let mut result = Vec::new();
@@ -188,7 +188,9 @@ impl Entity<Fields> for PowerGeneration {
         Ok(result)
     }
 
-    async fn delete_all(connection: &PgPool) -> Result<Vec<PowerGeneration>, sqlx::Error> {
+    async fn delete_all(
+        connection: &mut sqlx::Transaction<'_, sqlx::Postgres>,
+    ) -> Result<Vec<PowerGeneration>, sqlx::Error> {
         sqlx::query_as!(
             PowerGeneration,
             "
@@ -196,7 +198,7 @@ impl Entity<Fields> for PowerGeneration {
                 RETURNING *
             ",
         )
-        .fetch_all(connection)
+        .fetch_all(&mut **connection)
         .await
     }
 

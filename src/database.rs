@@ -1,4 +1,7 @@
-use sqlx::{migrate::MigrateDatabase, PgPool};
+use sqlx::{
+    database::HasArguments, migrate::MigrateDatabase, Executor, IntoArguments, PgConnection,
+    PgPool, Postgres,
+};
 use time::PrimitiveDateTime;
 
 pub mod power_emission;
@@ -11,9 +14,17 @@ pub trait Entity<F>: Sized {
     fn api_view_name() -> &'static str;
     fn api_kpi_name() -> &'static str;
 
-    async fn create(connection: &PgPool, value: &Self) -> Result<Self, sqlx::Error>;
-    async fn create_many(connection: &PgPool, values: Vec<Self>) -> Result<Vec<Self>, sqlx::Error>;
-    async fn delete_all(connection: &PgPool) -> Result<Vec<Self>, sqlx::Error>;
+    async fn create(
+        connection: &mut sqlx::Transaction<'_, sqlx::Postgres>,
+        value: &Self,
+    ) -> Result<Self, sqlx::Error>;
+    async fn create_many(
+        connection: &mut sqlx::Transaction<'_, sqlx::Postgres>,
+        values: Vec<Self>,
+    ) -> Result<Vec<Self>, sqlx::Error>;
+    async fn delete_all(
+        connection: &mut sqlx::Transaction<'_, sqlx::Postgres>,
+    ) -> Result<Vec<Self>, sqlx::Error>;
     async fn find_all_ordered_by_date(connection: &PgPool) -> Result<Vec<Self>, sqlx::Error>;
 }
 
