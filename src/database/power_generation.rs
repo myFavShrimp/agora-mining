@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use sqlx::{database::HasArguments, Executor, IntoArguments, PgConnection, PgPool, Postgres};
+use sqlx::{Executor, PgPool};
 use time::PrimitiveDateTime;
 
 use super::Entity;
@@ -100,7 +100,7 @@ pub enum Fields {
 
 impl Entity<Fields> for PowerGeneration {
     fn unit() -> String {
-        return "mW/h".to_string()
+        "mW/h".to_string()
     }
 
     fn all_fields() -> Vec<Fields> {

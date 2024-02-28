@@ -1,6 +1,6 @@
 use sqlx::{
-    database::HasArguments, migrate::MigrateDatabase, Executor, IntoArguments, PgConnection,
-    PgPool, Postgres,
+    migrate::MigrateDatabase,
+    PgPool,
 };
 use time::PrimitiveDateTime;
 

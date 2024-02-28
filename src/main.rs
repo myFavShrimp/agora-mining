@@ -2,7 +2,7 @@ use std::sync::Arc;
 
 use axum::{extract::State, http::StatusCode, response::IntoResponse, routing::get, Router};
 use config::Config;
-use database::{power_emission, power_generation, Entity};
+use database::{power_generation, Entity};
 use sqlx::PgPool;
 use templates::plotting::to_data_sets;
 
