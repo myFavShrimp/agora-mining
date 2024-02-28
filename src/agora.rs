@@ -87,8 +87,8 @@ where
                 },
                 "x_coordinate": "date_id",
                 "y_coordinate": "value",
-                "view_name": "live_gen_plus_emi_de_hourly",
-                "kpi_name": "power_generation",
+                "view_name": D::api_view_name(),
+                "kpi_name": D::api_kpi_name(),
                 "z_coordinate": "generation"
             }}
             .to_string(),

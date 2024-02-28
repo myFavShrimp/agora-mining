@@ -138,6 +138,14 @@ impl Entity<Fields> for PowerGeneration {
     fn set_id(&mut self, date: PrimitiveDateTime) {
         self.date_id = date
     }
+
+    fn api_view_name() -> &'static str {
+        "live_gen_plus_emi_de_hourly"
+    }
+
+    fn api_kpi_name() -> &'static str {
+        "power_generation"
+    }
 }
 
 impl Default for PowerGeneration {

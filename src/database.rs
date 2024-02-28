@@ -8,6 +8,8 @@ pub trait Entity<F> {
     fn set_id(&mut self, date: PrimitiveDateTime);
     fn all_fields() -> Vec<F>;
     fn set_by_field(&mut self, field: F, value: f64);
+    fn api_view_name() -> &'static str;
+    fn api_kpi_name() -> &'static str;
 }
 
 #[derive(Debug, thiserror::Error)]
