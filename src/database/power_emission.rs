@@ -64,23 +64,8 @@ impl Entity<Fields> for PowerEmission {
     fn api_kpi_name() -> &'static str {
         "power_emission"
     }
-}
 
-impl Default for PowerEmission {
-    fn default() -> Self {
-        Self {
-            date_id: PrimitiveDateTime::MIN,
-            hard_coal: Default::default(),
-            lignite: Default::default(),
-            natural_gas: Default::default(),
-            other: Default::default(),
-            total_grid_emissions: Default::default(),
-        }
-    }
-}
-
-impl PowerEmission {
-    pub async fn create(
+    async fn create(
         connection: &PgPool,
         value: &PowerEmission,
     ) -> Result<PowerEmission, sqlx::Error> {
@@ -103,7 +88,7 @@ impl PowerEmission {
         .await
     }
 
-    pub async fn create_many(
+    async fn create_many(
         connection: &PgPool,
         values: Vec<PowerEmission>,
     ) -> Result<Vec<PowerEmission>, sqlx::Error> {
@@ -116,7 +101,7 @@ impl PowerEmission {
         Ok(result)
     }
 
-    pub async fn delete_all(connection: &PgPool) -> Result<Vec<PowerEmission>, sqlx::Error> {
+    async fn delete_all(connection: &PgPool) -> Result<Vec<PowerEmission>, sqlx::Error> {
         sqlx::query_as!(
             PowerEmission,
             "
@@ -128,7 +113,7 @@ impl PowerEmission {
         .await
     }
 
-    pub async fn find_all_ordered_by_date(
+    async fn find_all_ordered_by_date(
         connection: &PgPool,
     ) -> Result<Vec<PowerEmission>, sqlx::Error> {
         sqlx::query_as!(
@@ -139,5 +124,18 @@ impl PowerEmission {
         )
         .fetch_all(connection)
         .await
+    }
+}
+
+impl Default for PowerEmission {
+    fn default() -> Self {
+        Self {
+            date_id: PrimitiveDateTime::MIN,
+            hard_coal: Default::default(),
+            lignite: Default::default(),
+            natural_gas: Default::default(),
+            other: Default::default(),
+            total_grid_emissions: Default::default(),
+        }
     }
 }

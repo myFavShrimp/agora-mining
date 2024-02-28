@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 
 use serde::{Deserialize, Serialize};
+use sqlx::PgPool;
 use time::{
     macros::{date, format_description},
     PrimitiveDateTime,
@@ -65,13 +66,19 @@ static AGORA_API_TO_DATE: time::Date = date!(2012 - 01 - 07);
 // static AGORA_API_TO_DATE: time::Date = time::Date::MAX;
 
 #[derive(thiserror::Error, Debug)]
-#[error("An error occurred while trying to get the agora api data")]
-pub struct AgoraError(#[from] reqwest::Error);
+#[error("An error occurred while reading the agora api data")]
+pub enum AgoraError {
+    Http(#[from] reqwest::Error),
+    TimeDeserialization(#[from] time::Error),
+}
 
-pub async fn get_agora_api_data<D, F>() -> Result<AgoraApiResponse<F>, AgoraError>
+async fn get_agora_api_data<D, F>() -> Result<Vec<D>, AgoraError>
 where
     D: Entity<F>,
     F: Serialize + for<'de> Deserialize<'de>,
+    AgoraApiResponse<F>: TryInto<Vec<D>>,
+    <AgoraApiResponse<F> as TryInto<Vec<D>>>::Error: std::fmt::Debug,
+    AgoraError: From<<AgoraApiResponse<F> as TryInto<Vec<D>>>::Error>,
 {
     let reqwest_client = reqwest::Client::new();
 
@@ -96,5 +103,32 @@ where
         .send()
         .await;
 
-    Ok(agora_response?.json::<AgoraApiResponse<F>>().await?)
+    Ok(agora_response?
+        .json::<AgoraApiResponse<F>>()
+        .await?
+        .try_into()?)
+}
+
+#[derive(thiserror::Error, Debug)]
+#[error("An error occurred while syncing with the agora api")]
+pub enum AgoraSyncError {
+    Api(#[from] AgoraError),
+    Database(#[from] sqlx::Error),
+}
+
+pub async fn sync_entity_with_agora_api<D, F>(connection: &PgPool) -> Result<(), AgoraSyncError>
+where
+    D: Entity<F>,
+    F: Serialize + for<'de> Deserialize<'de>,
+    AgoraApiResponse<F>: TryInto<Vec<D>>,
+    <AgoraApiResponse<F> as TryInto<Vec<D>>>::Error: std::fmt::Debug,
+    AgoraError: From<<AgoraApiResponse<F> as TryInto<Vec<D>>>::Error>,
+{
+    let agora_data = get_agora_api_data::<D, F>().await?;
+
+    D::delete_all(connection).await?;
+
+    D::create_many(&connection, agora_data).await?;
+
+    Ok(())
 }

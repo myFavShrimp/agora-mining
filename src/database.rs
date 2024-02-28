@@ -4,13 +4,18 @@ use time::PrimitiveDateTime;
 pub mod power_emission;
 pub mod power_generation;
 
-pub trait Entity<F> {
+pub trait Entity<F>: Sized {
     fn unit() -> String;
     fn set_id(&mut self, date: PrimitiveDateTime);
     fn all_fields() -> Vec<F>;
     fn set_by_field(&mut self, field: F, value: f64);
     fn api_view_name() -> &'static str;
     fn api_kpi_name() -> &'static str;
+
+    async fn create(connection: &PgPool, value: &Self) -> Result<Self, sqlx::Error>;
+    async fn create_many(connection: &PgPool, values: Vec<Self>) -> Result<Vec<Self>, sqlx::Error>;
+    async fn delete_all(connection: &PgPool) -> Result<Vec<Self>, sqlx::Error>;
+    async fn find_all_ordered_by_date(connection: &PgPool) -> Result<Vec<Self>, sqlx::Error>;
 }
 
 #[derive(Debug, thiserror::Error)]
