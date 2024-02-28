@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 
 use serde::{Deserialize, Serialize};
+use sqlx::PgPool;
 use time::{
     macros::{date, format_description},
     PrimitiveDateTime,
@@ -68,7 +69,7 @@ static AGORA_API_TO_DATE: time::Date = date!(2012 - 01 - 07);
 #[error("An error occurred while trying to get the agora api data")]
 pub struct AgoraError(#[from] reqwest::Error);
 
-pub async fn get_agora_api_data<D, F>() -> Result<AgoraApiResponse<F>, AgoraError>
+async fn get_agora_api_data<D, F>() -> Result<AgoraApiResponse<F>, AgoraError>
 where
     D: Entity<F>,
     F: Serialize + for<'de> Deserialize<'de>,
@@ -97,4 +98,24 @@ where
         .await;
 
     Ok(agora_response?.json::<AgoraApiResponse<F>>().await?)
+}
+
+pub async fn sync_entity_with_agora_api<D, F>(connection: &PgPool) -> Result<(), AgoraError>
+where
+    D: Entity<F>,
+    F: Serialize + for<'de> Deserialize<'de>,
+    AgoraApiResponse<F>: TryInto<Vec<D>>,
+    <AgoraApiResponse<F> as TryInto<Vec<D>>>::Error: std::fmt::Debug,
+{
+    let agora_data = get_agora_api_data::<D, F>().await;
+    let agora_data: Vec<D> = agora_data.unwrap().try_into().unwrap();
+
+    _ = D::delete_all(connection).await;
+
+    match D::create_many(&connection, agora_data).await {
+        Ok(_) => {}
+        Err(_) => {}
+    }
+
+    Ok(())
 }

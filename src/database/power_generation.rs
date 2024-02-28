@@ -146,30 +146,8 @@ impl Entity<Fields> for PowerGeneration {
     fn api_kpi_name() -> &'static str {
         "power_generation"
     }
-}
 
-impl Default for PowerGeneration {
-    fn default() -> Self {
-        Self {
-            date_id: PrimitiveDateTime::MIN,
-            biomass: Default::default(),
-            hard_coal: Default::default(),
-            hydro: Default::default(),
-            lignite: Default::default(),
-            natural_gas: Default::default(),
-            nuclear: Default::default(),
-            other: Default::default(),
-            pumped_storage_generation: Default::default(),
-            solar: Default::default(),
-            total_conventional_power_plant: Default::default(),
-            wind_offshore: Default::default(),
-            wind_onshore: Default::default(),
-        }
-    }
-}
-
-impl PowerGeneration {
-    pub async fn create(
+    async fn create(
         connection: &PgPool,
         value: &PowerGeneration,
     ) -> Result<PowerGeneration, sqlx::Error> {
@@ -197,7 +175,7 @@ impl PowerGeneration {
         ).fetch_one(connection).await
     }
 
-    pub async fn create_many(
+    async fn create_many(
         connection: &PgPool,
         values: Vec<PowerGeneration>,
     ) -> Result<Vec<PowerGeneration>, sqlx::Error> {
@@ -210,7 +188,7 @@ impl PowerGeneration {
         Ok(result)
     }
 
-    pub async fn delete_all(connection: &PgPool) -> Result<Vec<PowerGeneration>, sqlx::Error> {
+    async fn delete_all(connection: &PgPool) -> Result<Vec<PowerGeneration>, sqlx::Error> {
         sqlx::query_as!(
             PowerGeneration,
             "
@@ -222,7 +200,7 @@ impl PowerGeneration {
         .await
     }
 
-    pub async fn find_all_ordered_by_date(
+    async fn find_all_ordered_by_date(
         connection: &PgPool,
     ) -> Result<Vec<PowerGeneration>, sqlx::Error> {
         sqlx::query_as!(
@@ -233,5 +211,25 @@ impl PowerGeneration {
         )
         .fetch_all(connection)
         .await
+    }
+}
+
+impl Default for PowerGeneration {
+    fn default() -> Self {
+        Self {
+            date_id: PrimitiveDateTime::MIN,
+            biomass: Default::default(),
+            hard_coal: Default::default(),
+            hydro: Default::default(),
+            lignite: Default::default(),
+            natural_gas: Default::default(),
+            nuclear: Default::default(),
+            other: Default::default(),
+            pumped_storage_generation: Default::default(),
+            solar: Default::default(),
+            total_conventional_power_plant: Default::default(),
+            wind_offshore: Default::default(),
+            wind_onshore: Default::default(),
+        }
     }
 }
