@@ -2,7 +2,7 @@ use std::sync::Arc;
 
 use axum::{extract::State, http::StatusCode, response::IntoResponse, routing::get, Router};
 use config::Config;
-use database::power_generation;
+use database::{power_emission, power_generation};
 use sqlx::PgPool;
 use templates::plotting::to_data_sets;
 
@@ -56,24 +56,53 @@ async fn graph_handler(State(state): State<Arc<AppState>>) -> impl IntoResponse 
 }
 
 async fn refresh_data_handler(State(state): State<Arc<AppState>>) -> impl IntoResponse {
-    let agora_data =
-        agora::get_agora_api_data::<power_generation::PowerGeneration, power_generation::Fields>()
-            .await;
-    let agora_data = agora_data.unwrap().try_into().unwrap();
+    {
+        let agora_data = agora::get_agora_api_data::<
+            power_generation::PowerGeneration,
+            power_generation::Fields,
+        >()
+        .await;
+        let agora_data = agora_data.unwrap().try_into().unwrap();
 
-    _ = power_generation::PowerGeneration::delete_all(&state.postgres_pool).await;
+        _ = power_generation::PowerGeneration::delete_all(&state.postgres_pool).await;
 
-    match power_generation::PowerGeneration::create_many(&state.postgres_pool, agora_data).await {
-        Ok(_) => (
+        match power_generation::PowerGeneration::create_many(&state.postgres_pool, agora_data).await
+        {
+            Ok(_) => {}
+            Err(_) => {
+                return (
+                    StatusCode::OK,
+                    [("HX-Retarget", format!("#{}", templates::REFRESH_BUTTON_ID))],
+                    "Failed!",
+                )
+            }
+        }
+    };
+
+    {
+        let agora_data =
+            agora::get_agora_api_data::<power_emission::PowerEmission, power_emission::Fields>()
+                .await;
+        let agora_data = agora_data.unwrap().try_into().unwrap();
+
+        _ = power_emission::PowerEmission::delete_all(&state.postgres_pool).await;
+
+        match power_emission::PowerEmission::create_many(&state.postgres_pool, agora_data).await {
+            Ok(_) => {}
+            Err(_) => {
+                return (
+                    StatusCode::OK,
+                    [("HX-Retarget", format!("#{}", templates::REFRESH_BUTTON_ID))],
+                    "Failed!",
+                )
+            }
+        }
+
+        (
             StatusCode::OK,
             [("HX-Retarget", format!("#{}", templates::REFRESH_BUTTON_ID))],
             "Updated",
-        ),
-        Err(_) => (
-            StatusCode::OK,
-            [("HX-Retarget", format!("#{}", templates::REFRESH_BUTTON_ID))],
-            "Failed!",
-        ),
+        )
     }
 }
 

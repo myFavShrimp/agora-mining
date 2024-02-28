@@ -1,8 +1,8 @@
 use sqlx::{migrate::MigrateDatabase, PgPool};
 use time::PrimitiveDateTime;
 
+pub mod power_emission;
 pub mod power_generation;
-// pub mod power_generation_and_consumption;
 
 pub trait Entity<F> {
     fn set_id(&mut self, date: PrimitiveDateTime);
