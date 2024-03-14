@@ -151,6 +151,10 @@ impl Entity<Fields> for PowerGeneration {
         "power_generation"
     }
 
+    fn api_filter_values_key() -> &'static str {
+        "generation"
+    }
+
     async fn create(
         connection: &mut sqlx::Transaction<'_, sqlx::Postgres>,
         value: &PowerGeneration,

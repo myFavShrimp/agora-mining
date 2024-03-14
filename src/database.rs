@@ -1,11 +1,9 @@
-use sqlx::{
-    migrate::MigrateDatabase,
-    PgPool,
-};
+use sqlx::{migrate::MigrateDatabase, PgPool};
 use time::PrimitiveDateTime;
 
 pub mod power_emission;
 pub mod power_generation;
+pub mod power_import_export;
 
 pub trait Entity<F>: Sized {
     fn unit() -> String;
@@ -14,6 +12,7 @@ pub trait Entity<F>: Sized {
     fn set_by_field(&mut self, field: F, value: f64);
     fn api_view_name() -> &'static str;
     fn api_kpi_name() -> &'static str;
+    fn api_filter_values_key() -> &'static str;
 
     async fn create(
         connection: &mut sqlx::Transaction<'_, sqlx::Postgres>,
