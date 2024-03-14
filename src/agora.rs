@@ -7,7 +7,7 @@ use time::{
     PrimitiveDateTime,
 };
 
-use crate::database::Entity;
+use crate::database::{power_emission, power_generation, power_import_export, Entity};
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct AgoraApiResponseData<F> {
@@ -82,6 +82,8 @@ where
 {
     let reqwest_client = reqwest::Client::new();
 
+    let api_filter_values_key = D::api_filter_values_key();
+
     let agora_response = reqwest_client
         .post(AGORA_API_URL)
         .header(AGORA_API_KEY_HEADER_NAME, AGORA_API_KEY_HEADER_VALUE)
@@ -90,13 +92,13 @@ where
                 "filters": {
                     "from": AGORA_API_FROM_DATE,
                     "to": AGORA_API_TO_DATE,
-                    "generation": D::all_fields()
+                    api_filter_values_key: D::all_fields()
                 },
                 "x_coordinate": "date_id",
                 "y_coordinate": "value",
                 "view_name": D::api_view_name(),
                 "kpi_name": D::api_kpi_name(),
-                "z_coordinate": "generation"
+                "z_coordinate": api_filter_values_key
             }}
             .to_string(),
         )
@@ -116,9 +118,11 @@ pub enum AgoraSyncError {
     Database(#[from] sqlx::Error),
 }
 
-pub async fn sync_entity_with_agora_api<D, F>(connection: &PgPool) -> Result<(), AgoraSyncError>
+async fn sync_entity_with_agora_api<D, F>(
+    connection: &mut sqlx::Transaction<'_, sqlx::Postgres>,
+) -> Result<(), AgoraSyncError>
 where
-    D: Entity<F>,
+    D: Entity<F> + std::fmt::Debug,
     F: Serialize + for<'de> Deserialize<'de>,
     AgoraApiResponse<F>: TryInto<Vec<D>>,
     <AgoraApiResponse<F> as TryInto<Vec<D>>>::Error: std::fmt::Debug,
@@ -128,7 +132,42 @@ where
 
     D::delete_all(connection).await?;
 
-    D::create_many(&connection, agora_data).await?;
+    D::create_many(connection, agora_data).await?;
 
     Ok(())
+}
+
+pub async fn sync_all_entities_with_agora_api(connection: &PgPool) -> Result<(), AgoraSyncError> {
+    async fn perform_sync(
+        connection: &mut sqlx::Transaction<'_, sqlx::Postgres>,
+    ) -> Result<(), AgoraSyncError> {
+        sync_entity_with_agora_api::<power_generation::PowerGeneration, power_generation::Fields>(
+            connection,
+        )
+        .await?;
+        sync_entity_with_agora_api::<power_emission::PowerEmission, power_emission::Fields>(
+            connection,
+        )
+        .await?;
+        sync_entity_with_agora_api::<
+            power_import_export::PowerImportExport,
+            power_import_export::Fields,
+        >(connection)
+        .await?;
+
+        Ok(())
+    }
+
+    let mut transaction = connection.begin().await?;
+
+    match perform_sync(&mut transaction).await {
+        Ok(value) => {
+            transaction.commit().await?;
+            Ok(value)
+        }
+        Err(error) => {
+            transaction.rollback().await?;
+            Err(error)
+        }
+    }
 }

@@ -30,9 +30,9 @@ pub enum Fields {
 
 impl Entity<Fields> for PowerEmission {
     fn unit() -> String {
-        return "tCO₂/h".to_string()
+        "tCO₂/h".to_string()
     }
-    
+
     fn all_fields() -> Vec<Fields> {
         vec![
             Fields::HardCoal,
@@ -65,8 +65,12 @@ impl Entity<Fields> for PowerEmission {
         "power_emission"
     }
 
+    fn api_filter_values_key() -> &'static str {
+        "generation"
+    }
+
     async fn create(
-        connection: &PgPool,
+        connection: &mut sqlx::Transaction<'_, sqlx::Postgres>,
         value: &PowerEmission,
     ) -> Result<PowerEmission, sqlx::Error> {
         sqlx::query_as!(
@@ -84,12 +88,12 @@ impl Entity<Fields> for PowerEmission {
             value.other,
             value.total_grid_emissions,
         )
-        .fetch_one(connection)
+        .fetch_one(&mut **connection)
         .await
     }
 
     async fn create_many(
-        connection: &PgPool,
+        connection: &mut sqlx::Transaction<'_, sqlx::Postgres>,
         values: Vec<PowerEmission>,
     ) -> Result<Vec<PowerEmission>, sqlx::Error> {
         let mut result = Vec::new();
@@ -101,7 +105,9 @@ impl Entity<Fields> for PowerEmission {
         Ok(result)
     }
 
-    async fn delete_all(connection: &PgPool) -> Result<Vec<PowerEmission>, sqlx::Error> {
+    async fn delete_all(
+        connection: &mut sqlx::Transaction<'_, sqlx::Postgres>,
+    ) -> Result<Vec<PowerEmission>, sqlx::Error> {
         sqlx::query_as!(
             PowerEmission,
             "
@@ -109,7 +115,7 @@ impl Entity<Fields> for PowerEmission {
                 RETURNING *
             ",
         )
-        .fetch_all(connection)
+        .fetch_all(&mut **connection)
         .await
     }
 

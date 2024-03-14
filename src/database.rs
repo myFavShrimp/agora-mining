@@ -3,6 +3,7 @@ use time::PrimitiveDateTime;
 
 pub mod power_emission;
 pub mod power_generation;
+pub mod power_import_export;
 pub mod agora_entities;
 
 pub trait Entity<F>: Sized {
@@ -12,10 +13,19 @@ pub trait Entity<F>: Sized {
     fn set_by_field(&mut self, field: F, value: f64);
     fn api_view_name() -> &'static str;
     fn api_kpi_name() -> &'static str;
+    fn api_filter_values_key() -> &'static str;
 
-    async fn create(connection: &PgPool, value: &Self) -> Result<Self, sqlx::Error>;
-    async fn create_many(connection: &PgPool, values: Vec<Self>) -> Result<Vec<Self>, sqlx::Error>;
-    async fn delete_all(connection: &PgPool) -> Result<Vec<Self>, sqlx::Error>;
+    async fn create(
+        connection: &mut sqlx::Transaction<'_, sqlx::Postgres>,
+        value: &Self,
+    ) -> Result<Self, sqlx::Error>;
+    async fn create_many(
+        connection: &mut sqlx::Transaction<'_, sqlx::Postgres>,
+        values: Vec<Self>,
+    ) -> Result<Vec<Self>, sqlx::Error>;
+    async fn delete_all(
+        connection: &mut sqlx::Transaction<'_, sqlx::Postgres>,
+    ) -> Result<Vec<Self>, sqlx::Error>;
     async fn find_all_ordered_by_date(connection: &PgPool) -> Result<Vec<Self>, sqlx::Error>;
 }
 
