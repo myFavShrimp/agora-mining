@@ -10,58 +10,81 @@
   background-color: $agora-container-on-background;
   border-radius: 1em;
   margin-bottom: 1em;
-  height: 3em;
+  min-height: 3em;
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   align-items: center;
 
-  .graph_toolbar_item {
-    min-width: 4em;
-    cursor: pointer;
-    padding-right: 1em;
-    width: fit-content;
+  .graph_dataset_selection {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
 
-    .graph_toolbar_datepicker {
-      background: transparent;
-      border-radius: 1em;
-      color: $agora-container-on-background-text;
-      border-color: $agora-container-on-background-text;
+    label {
+      margin-left: 1em;
+
+      .graph_dataset_input {
+        accent-color: $agora-container-primary;
+      }
     }
+  }
 
-    .refresh {
-      border-radius: 10px;
-      display: flex;
+  .graph_toolbar_items {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    flex-wrap: wrap;
 
-      .spinner {
-        display: none;
-        margin: auto;
-        width: 1.15rem;
-        height: 1.15rem;
-        border: 5px solid $agora-container-primary-text;
-        border-bottom-color: #55006b;
-        border-radius: 50%;
-        box-sizing: border-box;
-        animation: rotation 1s linear infinite;
+    .graph_toolbar_item {
+      min-width: 4em;
+      cursor: pointer;
+      padding-right: 1em;
+      width: fit-content;
+
+      .graph_toolbar_datepicker {
+        background: transparent;
+        border-radius: 1em;
+        color: $agora-container-on-background-text;
+        border-color: $agora-container-on-background-text;
       }
 
-      &.htmx-request {
+      .refresh {
+        border-radius: 10px;
+        display: flex;
+
         .spinner {
-          display: inline-block;
+          display: none;
+          margin: auto;
+          width: 1.15rem;
+          height: 1.15rem;
+          border: 5px solid $agora-container-primary-text;
+          border-bottom-color: #55006b;
+          border-radius: 50%;
+          box-sizing: border-box;
+          animation: rotation 1s linear infinite;
         }
 
-        .linkText {
-          display: none
-        }
-      }
+        &.htmx-request {
+          .spinner {
+            display: inline-block;
+          }
 
-      @keyframes rotation {
-        0% {
-          transform: rotate(0deg);
+          .linkText {
+            display: none
+          }
         }
-        100% {
-          transform: rotate(360deg);
+
+        @keyframes rotation {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
         }
       }
     }
   }
+
 }

@@ -3,6 +3,7 @@ use time::PrimitiveDateTime;
 
 pub mod power_emission;
 pub mod power_generation;
+pub mod agora_entities;
 
 pub trait Entity<F>: Sized {
     fn unit() -> String;

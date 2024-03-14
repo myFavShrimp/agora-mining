@@ -1,5 +1,5 @@
 use askama::Template;
-
+use crate::database::agora_entities::AgoraEntities;
 pub mod plotting;
 
 pub static REFRESH_BUTTON_ID: &str = "refreshButton";
