@@ -49,7 +49,7 @@ Die analytische Funktionen zur Interpretation der Energiedaten, wie Trendanalyse
 | 5  | Installationsdokumentation schreiben  |
 
 ### Abweichungen von der Projektaufgabenstellung
-Da wir seit vier Wochen immernoch keine angepasste Aufgabenstellung erhalten haben, können wir daher keine Abweichungen feststellen und dokumentieren.
+Da wir während er Bearbeitungszeit dieses Projektes keine erweiterte Aufgabenstellung bekommen haben können wir keine Abweichungen feststellen und dokumentieren.
 
 ### Ressourcenplan
 > Planung der benötigten Ressourcen (Hard-/Software, Räumlichkeiten, ...)
@@ -126,13 +126,15 @@ Unsere Software strebt hohe Qualitätsstandards an, insbesondere in den Bereiche
 ## Entwurfsphase
 ### Zielplattform 
 > Beschreibung der Kriterien zur Auswahl der Zielplattform (u.a. Programmiersprache, Datenbank, Client/Server, Hardware).
+> Rust als Typensichere, kompilierte und sehr schnelle Sprachen, bietet von Haus aus viele Vorteile und war für uns spannend zur Verwendung in solch einem Projekt um Erfahrung zu sammeln
 
 ### Benutzeroberflächendesign 
-> Entscheidung für die gewählte Benutzeroberfläche (z.B. GUI, Webinterface).
+> Wir haben eine lokal gehostete Webanwendung(?) gewählt, in der Annahme dass dies die größte Menge an möglichen Usecases abdeckt ohne dass wir verschiedene Umgebungen, Betriebssysteme etc. selbst handhaben müssen.
 
-> Beschreibung des visuellen Entwurfs der konkreten Oberfläche (z.B. Mockups, Menüführung).
-
-> Ggfs. Erläuterung von angewendeten Richtlinien zur Usability und Verweis auf Corporate Design
+> Ein simples Webseitendesign mit einer Navigationsleiste oben und dem Inhalt der jeweiligen Seite darunter, aus Gewohnheitsgründen sollte dieser Aufbau für einen generischen Nutzer einfach verständlich und verwendbar sein.
+  > Die Farbwahl erfolgte anhand eigener Präferenzen und ist ganz modern in einem ewigen Dark Mode um weniger Anstrengend für die Augen des Nutzers zu sein 
+  > Die Farbwahl wurde unter Zuhilfenahme von Googles Material3 Farbpicker getroffen
+> Simplizität der Oberflächen mit runden Ecken sollte modernen Standards entsprechen
 
 ### Datenmodell
 > Entwurf/Beschreibung der Datenstrukturen (z.B. ERM und/oder Tabellenmodell, XML-Schemas) mit kurzer Beschreibung der wichtigsten (!) verwendeten Entitäten.
@@ -145,14 +147,23 @@ Unsere Software strebt hohe Qualitätsstandards an, insbesondere in den Bereiche
 
 ## Implementierungsphase
 ### Datenstruktur
-> eschreibung der angelegten Datenbank (z.B. Generierung von SQL aus Modellierungswerkzeug oder händisches Anlegen), XML-Schemas usw.
+> Beschreibung der angelegten Datenbank (z.B. Generierung von SQL aus Modellierungswerkzeug oder händisches Anlegen), XML-Schemas usw.
 
 ### Benutzeroberfläche
 > Beschreibung der Implementierung der Benutzeroberfläche, falls dies separat zur Implementierung der Geschäftslogik erfolgt (z.B. bei HTML-Oberflächen und Stylesheets).
 > Ggfs. Beschreibung des Corporate Designs und dessen Umsetzung in der Anwendung.
-> Screenshots der Anwendung
+> Screenshots der Anwendung (TODO: Montag)
+
+Allgemein haben wir versucht uns bei dem Design an der aktuellen Version Material3 von Googles Material Design zu orientieren. Dementsprechend verwenden wir viele Rundungen und flach wirkende Oberflächen. Auch unsere Farbpalette wurde mit Hilfe des m3 Material Theme Builders aufgebaut, als Grundlage wurde Aufgrund persönlicher Präferenz ein Lilaton gewählt.
 
 Wir verwenden Normalize.css, um browserübergreifende Konsistenz in der Darstellung von HTML-Elementen zu gewährleisten. Es bietet den Vorteil, standardisierte und vorhersagbare Stilgrundlagen zu schaffen, ohne dabei unnötige oder problematische Zurücksetzungen vorzunehmen. Durch die gezielte Normalisierung werden konsistente Designs über verschiedene Browser hinweg ermöglicht, wodurch Entwickler weniger Zeit mit der Bewältigung von Browserinkonsistenzen verbringen und sich stattdessen auf die Gestaltung benutzerfreundlicher Benutzeroberflächen konzentrieren können.
+
+Architektonisch gibt es einen Router welcher anhand der angefragten Routen verschiedene HTML-Templates rendert. An die HTML-Templates können Datensätze übergeben werden, welche dann inline mit Rustcode verarbeitet werden können, dabei bietet die Bibliothek askama auch die Möglichkeit dynamisch aus Daten HTML generieren zu lassen. 
+Herz dieses Projektes ist der Graph auf welchem die vom Backend zur Verfügung gestellten Daten dargestellt werden. 
+Da Rust, als relativ junge Programmiersprache, aktuell noch keine Bibliotheken hat welche es an Umfang und Funktionalität mit chart.js aufnehmen können, haben wir uns dafür entschieden chart.js per Script in unser Template für die Darstellung des Graphen einzubinden.
+Dabei werden unsere Daten über die serde-Bibliothek zu JSON serialisiert, welches dann an das Script weitergereicht wird. 
+Der Graph selbst wird auch über JSON gesteuert, es wurde beispielsweise konfiguriert dass die y-Achse logarithmisch dargestellt werden soll da durch große Diskrepanzen in den Werten der verschiedenen Daten sonst ein extrem unleserlicher Graph entstehen würde.
+Mit etwas JavaScript-Stringformatierung können auch eigene Labels für die Datensätze generiert werden. Dies ist notwendig da wir beispielsweise zeitgleich die Menge der ausgestoßenen Emissionen in Tonnen CO2 und die produzierte Strommenge in MW/h auf dem selben Graphen darstellen können und bei einer einfachen Achsenbeschriftung dementsprechend Verwirrung aufkommen könnte.
 
 ---
 
