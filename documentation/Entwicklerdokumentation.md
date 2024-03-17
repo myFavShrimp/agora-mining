@@ -51,6 +51,7 @@
       - **chart.js**, eine Bibliothek zur Darstellung von Graphen mit JavaScript
       - **dotenv**, zur Verwendung von Umgebungsvariablen
       - **eyre**, für individuelle Fehlermeldungen
+      - **Normalize.css**, um Abhängigkeiten vn Browserstylings so weit wie möglich aufzuheben
       - **reqwest**, als HTTP-Client
       - **serde**, zu serialiseren und deserialisieren von Daten
          - **serde-env**, um Umgebungsvariablen zu serialiseren und deserialisieren
