@@ -45,15 +45,31 @@
     - Informationen zur Verwendung von Versionskontrollsystemen (z. B. Git).
 
 12. **Externe Ressourcen und Bibliotheken:**
-    - Liste und Dokumentation von Drittanbieter-Bibliotheken oder Frameworks, die im Projekt verwendet werden.
+      - **askama**, um HTML-Templates mit Rust zu generieren
+         - **askama_axum**, zur Integration von askama mit dem axum Framework
+      - **axum**, als Framework für Webrequests
+      - **chart.js**, eine Bibliothek zur Darstellung von Graphen mit JavaScript
+      - **dotenv**, zur Verwendung von Umgebungsvariablen
+      - **eyre**, für individuelle Fehlermeldungen
+      - **reqwest**, als HTTP-Client
+      - **serde**, zu serialiseren und deserialisieren von Daten
+         - **serde-env**, um Umgebungsvariablen zu serialiseren und deserialisieren
+         - **serde_json**, um Daten im JSON-Format zu serialiseren und deserialisieren
+       - **sqlx**, zur Anbindung und Verwendung der PostgreSQL-Datenbank
+       - **thiserror**, um eigene Fehlermeldungen zu bauen, welche dem Rust-Fehler-Datentypen entsprechen 
+       - **time**, als Zeitenbibliothek
+       - **tokio**, für eine Event-getriebene Laufzeit
+       - **tower**, für Komponenten zum Aufbau eines Servers, wie timeouts, ratelimiting und loadbalancing
+       -  **turf**, eine Bibliothek die es ermöglicht CSS und SCSS während der Compilezeit zu erzeugen und in die entstehende Binary einzupflegen
 
-13. **Sicherheitsrichtlinien:**
+
+15. **Sicherheitsrichtlinien:**
     - Sicherheitsüberlegungen und bewährte Verfahren im Code.
     - Verwendung von Verschlüsselung, Validierung und Schutz vor bekannten Sicherheitslücken.
 
-14. **Leistungs- und Skalierbarkeitsaspekte:**
+16. **Leistungs- und Skalierbarkeitsaspekte:**
     - Anleitung zur Leistungsüberwachung und Optimierung.
     - Skalierbarkeitsrichtlinien und bewährte Verfahren.
 
-15. **Lizenzinformationen:**
+17. **Lizenzinformationen:**
     - Klare Angaben zur Lizenzierung des Codes und der verwendeten Bibliotheken.
