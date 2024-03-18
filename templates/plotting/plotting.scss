@@ -15,7 +15,8 @@
     background-color: $agora-container-on-background;
     border-radius: 1em;
     margin-bottom: 1em;
-    min-height: 3em;
+    padding: 1em;
+    height: fit-content;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -29,6 +30,7 @@
       justify-content: start;
       align-items: center;
       flex-wrap: wrap;
+      width: inherit;
 
       label {
         margin-left: 1em;
@@ -44,13 +46,14 @@
       justify-content: end;
       align-items: center;
       flex-wrap: wrap;
-      gap: 1em;
+      width: inherit;
 
       .graph_toolbar_item {
         min-width: 4em;
+        min-height: 1.5em;
         cursor: pointer;
         width: fit-content;
-        margin: 1em;
+        padding-right: 1em;
 
         .graph_toolbar_datepicker {
           background: transparent;
@@ -58,45 +61,84 @@
           color: $agora-container-on-background-text;
           border-color: $agora-container-on-background-text;
         }
+      }
+    }
+  }
+}
 
-        .refresh {
-          border-radius: 10px;
-          display: flex;
-          justify-content: center;
 
+.graph_buttons_wrapper {
+  display: grid;
+  font-size: 12px;
+  height: fit-content;
+
+  .graph_buttons {
+    display: flex;
+    gap: 0.2em;
+
+    .graph_button {
+      background: $agora-button;
+      cursor: pointer;
+      width: fit-content;
+      padding: 1em;
+      height: max-content;
+      border-radius: 1em;
+      border: none;
+      color: $agora-container-on-background-text;
+      font-weight: bold;
+
+      transition: .4s;
+      box-shadow: 0 1px 2px 0 $agora-button-shadow;
+
+      &:hover {
+        transition: .4s;
+        box-shadow: 0 4px 12px 0 $agora-button-shadow;
+      }
+
+      &:active {
+        transition: .2s;
+        box-shadow: 0 2px 5px 0 $agora-button-shadow;
+      }
+
+      .refresh {
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        width: max-content;
+        min-width: 4em;
+
+        .spinner {
+          display: none;
+          margin: auto;
+          width: 1.15rem;
+          height: 1.15rem;
+          border: 5px solid $agora-container-primary-text;
+          border-bottom-color: #55006b;
+          border-radius: 50%;
+          box-sizing: border-box;
+          animation: rotation 1s linear infinite;
+        }
+
+        &.htmx-request {
           .spinner {
-            display: none;
-            margin: auto;
-            width: 1.15rem;
-            height: 1.15rem;
-            border: 5px solid $agora-container-primary-text;
-            border-bottom-color: #55006b;
-            border-radius: 50%;
-            box-sizing: border-box;
-            animation: rotation 1s linear infinite;
+            display: inline-block;
           }
 
-          &.htmx-request {
-            .spinner {
-              display: inline-block;
-            }
-
-            .linkText {
-              display: none
-            }
+          .linkText {
+            display: none
           }
+        }
 
-          @keyframes rotation {
-            0% {
-              transform: rotate(0deg);
-            }
-            100% {
-              transform: rotate(360deg);
-            }
+        @keyframes rotation {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
           }
         }
       }
-    }
 
+    }
   }
 }
