@@ -1,7 +1,7 @@
 {% let (style_sheet, class_name) = turf::inline_style_sheet!("templates/plotting/plotting.scss") %}
 {% let checkboxes = AgoraEntities::all() %}
 
-<form hx-get="/graph">
+<form hx-get="/graph" hx-swap="outerHTML">
     <!-- @formatter:off -->
     <style>
         {{ style_sheet }}
@@ -30,6 +30,7 @@
                            value="{{ self.formatted_to().unwrap() }}">
                 </div>
             </div>
+            <button>Submit</button>
         </div>
         <div class="{{class_name.graph_buttons_wrapper}}">
             <div>Aktualisieren:</div>
@@ -52,10 +53,10 @@
 
     <script>
         var ctx = document.getElementById('myChart');
-        const lineColor = '#7e767e';
-        const textColor = '#cfc3cd';
+        var lineColor = '#7e767e';
+        var textColor = '#cfc3cd';
         <!-- @formatter:off -->
-        const chartData = {{ serde_json::to_string(data_sets).unwrap()|safe }};
+        var chartData = {{ serde_json::to_string(data_sets).unwrap()|safe }};
         <!-- @formatter:on -->
 
         new Chart(ctx, {

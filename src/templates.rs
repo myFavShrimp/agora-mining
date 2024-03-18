@@ -19,6 +19,7 @@ pub struct PlottingTemplate {
     pub data_sets: Vec<plotting::PlottingTemplateDataSet>,
     pub from: Date,
     pub to: Date,
+    pub used_data_sets: Vec<AgoraEntities>,
 }
 
 fn format_date(date: &Date) -> Result<String, time::error::Format> {

@@ -1,10 +1,12 @@
 use std::sync::Arc;
 
-use axum::{extract::State, http::StatusCode, response::IntoResponse, routing::get, Router};
+use axum::{extract::State, http::StatusCode, response::IntoResponse, routing::get, Form, Router};
 use config::Config;
-use database::{power_generation, Entity};
+use database::{agora_entities::AgoraEntities, power_generation, Entity};
+use serde::Deserialize;
 use sqlx::PgPool;
 use templates::plotting::to_data_sets;
+use time::{Date, Duration};
 
 mod agora;
 mod config;
@@ -46,21 +48,48 @@ async fn landing_page_handler() -> impl IntoResponse {
     templates::LandingPageTemplate
 }
 
-async fn graph_handler(State(state): State<Arc<AppState>>) -> impl IntoResponse {
-    let to_date =
-        agora::AGORA_API_FROM_DATE.replace_month(agora::AGORA_API_FROM_DATE.month().nth_next(1));
+fn default_data_sets() -> Vec<AgoraEntities> {
+    vec![AgoraEntities::PowerGeneration]
+}
+
+fn default_to() -> Date {
+    time::OffsetDateTime::now_utc().date()
+}
+
+fn default_from() -> Date {
+    let from_date = time::OffsetDateTime::now_utc().date();
+
+    from_date.checked_sub(Duration::days(30)).unwrap()
+}
+
+#[derive(Deserialize, Debug, Clone)]
+struct GraphFormData {
+    #[serde(default = "default_data_sets")]
+    used_data_sets: Vec<AgoraEntities>,
+    #[serde(default = "default_from")]
+    from: Date,
+    #[serde(default = "default_to")]
+    to: Date,
+}
+
+async fn graph_handler(
+    State(state): State<Arc<AppState>>,
+    Form(form_data): Form<GraphFormData>,
+) -> impl IntoResponse {
+    dbg!(&form_data);
 
     let result = power_generation::PowerGeneration::find_all_ordered_by_date(
         &state.postgres_pool,
-        &agora::AGORA_API_FROM_DATE,
-        &to_date.unwrap(),
+        &form_data.from,
+        &form_data.to,
     )
     .await;
 
     templates::PlottingTemplate {
         data_sets: to_data_sets(result.unwrap()),
-        from: agora::AGORA_API_FROM_DATE,
-        to: to_date.unwrap(),
+        from: form_data.from,
+        to: form_data.to,
+        used_data_sets: form_data.used_data_sets,
     }
 }
 
