@@ -160,7 +160,7 @@ Mit etwas JavaScript-Stringformatierung können auch eigene Labels für die Date
 ---
 
 ## Testdokumentation
-SQLx ist eine Rust-Bibliothek, die das Ausführen von SQL-Abfragen erleichtert und dabei Compile-Zeit-Typensicherheit bietet. Durch die Integration von SQL-Abfragen in den Rust-Code ermöglicht SQLx eine nahtlose Interaktion mit der Datenbank, wodurch viele Fehler, die in anderen Umgebungen auftreten könnten, vermieden werden.
+SQLx ist eine Rust-Bibliothek, die das Ausführen von SQL-Abfragen erleichtert und dabei Compile-Zeit-Typensicherheit bietet. Durch die Integration von SQL-Abfragen in den Rust-Code ermöglicht SQLx eine nahtlose Interaktion mit der Datenbank, wodurch viele Fehler, die in anderen Umgebungen auftreten könnten, vermieden werden. SQLx überprüft zur Compile-Zeit, ob die Daten in der Datenbank stehen können. Falls das nicht der Fall ist, wird ein Compile-Fehler geworfen.
 
 Aufgrund dieser Eigenschaften von Rust und SQLx können Entwickler:innen in einigen Fällen davon ausgehen, dass ihr Code bereits eine gewisse Robustheit aufweist, ohne dass umfangreiche Testfälle geschrieben werden müssen. Insbesondere bei einfachen Anwendungen oder in Situationen, in denen die Funktionalität sehr klar und begrenzt ist, kann die Verwendung von Rust und SQLx dazu beitragen, den Testaufwand zu reduzieren.
 
