@@ -1,4 +1,4 @@
-use crate::database::agora_entities::AgoraEntities;
+use crate::database::{agora_entities::AgoraEntities, Average};
 use askama::Template;
 use time::{macros::format_description, Date};
 pub mod plotting;

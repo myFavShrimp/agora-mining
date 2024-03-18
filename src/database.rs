@@ -1,3 +1,4 @@
+use serde::{Deserialize, Serialize};
 use sqlx::{migrate::MigrateDatabase, PgPool};
 use time::{Date, PrimitiveDateTime};
 
@@ -5,6 +6,30 @@ pub mod agora_entities;
 pub mod power_emission;
 pub mod power_generation;
 pub mod power_import_export;
+
+#[derive(Deserialize, Serialize, Debug, Clone, Default)]
+pub enum Average {
+    #[default]
+    None,
+    Daily,
+    Monthly,
+    Yearly,
+}
+
+impl Average {
+    pub fn all() -> Vec<Self> {
+        vec![Average::None, Average::Daily]
+    }
+
+    pub fn display_name(&self) -> &'static str {
+        match self {
+            Average::None => "Nein",
+            Average::Daily => "täglich",
+            Average::Monthly => todo!(),
+            Average::Yearly => todo!(),
+        }
+    }
+}
 
 pub trait Entity<F>: Sized {
     fn chart_display_name(field: &F) -> &'static str;

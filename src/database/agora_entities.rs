@@ -1,10 +1,10 @@
 use serde::{Deserialize, Serialize};
 use sqlx::PgPool;
-use time::{Date, Duration};
+use time::Date;
 
 use crate::templates::plotting::{to_data_sets, PlottingTemplateDataSet};
 
-use super::{power_emission, power_generation, power_import_export, Entity};
+use super::{power_emission, power_generation, power_import_export, Average, Entity};
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
 pub enum AgoraEntities {
@@ -35,58 +35,62 @@ impl AgoraEntities {
         entities: &[AgoraEntities],
         from: &Date,
         to: &Date,
+        use_average: &Average,
     ) -> Vec<PlottingTemplateDataSet> {
         let mut data_set = Vec::new();
-
-        let from_plus_90_days = from
-            .checked_add(Duration::days(90))
-            .expect("We have not yet reached end of time");
-
-        let use_daily_average = &from_plus_90_days < to;
 
         for entity in entities {
             match entity {
                 AgoraEntities::PowerGeneration => {
-                    let result = if use_daily_average {
-                        power_generation::PowerGeneration::find_all_ordered_by_date_average_daily(
+                    let result = match use_average {
+                        Average::None => {
+                            power_generation::PowerGeneration::find_all_ordered_by_date(
+                                connection, &from, &to,
+                            )
+                            .await
+                        }
+                        Average::Daily => power_generation::PowerGeneration::find_all_ordered_by_date_average_daily(
                             connection, &from, &to,
                         )
-                        .await
-                    } else {
-                        power_generation::PowerGeneration::find_all_ordered_by_date(
-                            connection, &from, &to,
-                        )
-                        .await
+                        .await,
+                        Average::Monthly => todo!(),
+                        Average::Yearly => todo!(),
                     };
 
                     data_set.extend(to_data_sets(result.unwrap()));
                 }
                 AgoraEntities::PowerEmission => {
-                    let result = if use_daily_average {
-                        power_emission::PowerEmission::find_all_ordered_by_date_average_daily(
-                            connection, &from, &to,
-                        )
-                        .await
-                    } else {
-                        power_emission::PowerEmission::find_all_ordered_by_date(
-                            connection, &from, &to,
-                        )
-                        .await
+                    let result = match use_average {
+                        Average::None => {
+                            power_emission::PowerEmission::find_all_ordered_by_date(
+                                connection, &from, &to,
+                            )
+                            .await
+                        }
+                        Average::Daily => {
+                            power_emission::PowerEmission::find_all_ordered_by_date_average_daily(
+                                connection, &from, &to,
+                            )
+                            .await
+                        }
+                        Average::Monthly => todo!(),
+                        Average::Yearly => todo!(),
                     };
 
                     data_set.extend(to_data_sets(result.unwrap()));
                 }
                 AgoraEntities::PowerImportExport => {
-                    let result = if use_daily_average {
-                        power_import_export::PowerImportExport::find_all_ordered_by_date_average_daily(
+                    let result = match use_average {
+                        Average::None => power_import_export::PowerImportExport::find_all_ordered_by_date(
                             connection, &from, &to,
                         )
-                        .await
-                    } else {
-                        power_import_export::PowerImportExport::find_all_ordered_by_date(
+                        .await,
+                        Average::Daily => power_import_export::PowerImportExport::find_all_ordered_by_date_average_daily(
                             connection, &from, &to,
                         )
-                        .await
+                        .await,
+                        Average::Monthly => todo!(),
+                        Average::Yearly => todo!(),
                     };
 
                     data_set.extend(to_data_sets(result.unwrap()));

@@ -3,7 +3,7 @@ use std::sync::Arc;
 use axum::{extract::State, http::StatusCode, response::IntoResponse, routing::get, Router};
 use axum_extra::extract::Query;
 use config::Config;
-use database::agora_entities::AgoraEntities;
+use database::{agora_entities::AgoraEntities, Average};
 use serde::Deserialize;
 use sqlx::PgPool;
 use time::{Date, Duration};
@@ -70,6 +70,8 @@ struct GraphFormData {
     from: Date,
     #[serde(default = "default_to")]
     to: Date,
+    #[serde(default)]
+    use_average: Average,
 }
 
 async fn graph_handler(
@@ -81,6 +83,7 @@ async fn graph_handler(
         &form_data.used_data_sets,
         &form_data.from,
         &form_data.to,
+        &form_data.use_average,
     )
     .await;
 
@@ -93,7 +96,7 @@ async fn graph_handler(
 }
 
 async fn refresh_data_handler(State(state): State<Arc<AppState>>) -> impl IntoResponse {
-    match dbg!(agora::sync_all_entities_with_agora_api(&state.postgres_pool).await) {
+    match agora::sync_all_entities_with_agora_api(&state.postgres_pool).await {
         Ok(_) => (
             StatusCode::OK,
             [("HX-Retarget", format!("#{}", templates::REFRESH_BUTTON_ID))],
