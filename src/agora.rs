@@ -11,7 +11,7 @@ use crate::database::{power_emission, power_generation, power_import_export, Ent
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct AgoraApiResponseData<F> {
-    pub data: Vec<(String, f64, F)>,
+    pub data: Vec<(String, Option<f64>, F)>,
     pub columns: Vec<String>,
 }
 
@@ -60,10 +60,10 @@ static AGORA_API_KEY_HEADER_VALUE: &str = "agora_live_62ce76dd202927.67115829";
 
 pub static AGORA_API_FROM_DATE: time::Date = date!(2012 - 01 - 01);
 
-// #[cfg(debug_assertions)]
+#[cfg(debug_assertions)]
 static AGORA_API_TO_DATE: time::Date = date!(2012 - 01 - 07);
-// #[cfg(not(debug_assertions))]
-// static AGORA_API_TO_DATE: time::Date = time::Date::MAX;
+#[cfg(not(debug_assertions))]
+static AGORA_API_TO_DATE: time::Date = time::Date::MAX;
 
 #[derive(thiserror::Error, Debug)]
 #[error("An error occurred while reading the agora api data")]

@@ -43,13 +43,13 @@ impl Entity<Fields> for PowerEmission {
         ]
     }
 
-    fn set_by_field(&mut self, field: Fields, value: f64) {
+    fn set_by_field(&mut self, field: Fields, value: Option<f64>) {
         match field {
-            Fields::HardCoal => self.hard_coal = Some(value),
-            Fields::Lignite => self.lignite = Some(value),
-            Fields::NaturalGas => self.natural_gas = Some(value),
-            Fields::Other => self.other = Some(value),
-            Fields::TotalGridEmissions => self.total_grid_emissions = Some(value),
+            Fields::HardCoal => self.hard_coal = value,
+            Fields::Lignite => self.lignite = value,
+            Fields::NaturalGas => self.natural_gas = value,
+            Fields::Other => self.other = value,
+            Fields::TotalGridEmissions => self.total_grid_emissions = value,
         }
     }
 

@@ -75,21 +75,21 @@ impl Entity<Fields> for PowerImportExport {
         ]
     }
 
-    fn set_by_field(&mut self, field: Fields, value: f64) {
+    fn set_by_field(&mut self, field: Fields, value: Option<f64>) {
         match field {
-            Fields::Poland => self.poland = Some(value),
-            Fields::France => self.france = Some(value),
-            Fields::Norway => self.norway = Some(value),
-            Fields::Denmark => self.denmark = Some(value),
-            Fields::Sweden => self.sweden = Some(value),
-            Fields::Austria => self.austria = Some(value),
-            Fields::Belgium => self.belgium = Some(value),
-            Fields::Netherlands => self.netherlands = Some(value),
-            Fields::Czech => self.czech = Some(value),
-            Fields::Luxembourg => self.luxembourg = Some(value),
-            Fields::Switzerland => self.switzerland = Some(value),
-            Fields::NetTotal => self.net_total = Some(value),
-            Fields::PowerPrice => self.power_price = Some(value),
+            Fields::Poland => self.poland = value,
+            Fields::France => self.france = value,
+            Fields::Norway => self.norway = value,
+            Fields::Denmark => self.denmark = value,
+            Fields::Sweden => self.sweden = value,
+            Fields::Austria => self.austria = value,
+            Fields::Belgium => self.belgium = value,
+            Fields::Netherlands => self.netherlands = value,
+            Fields::Czech => self.czech = value,
+            Fields::Luxembourg => self.luxembourg = value,
+            Fields::Switzerland => self.switzerland = value,
+            Fields::NetTotal => self.net_total = value,
+            Fields::PowerPrice => self.power_price = value,
         }
     }
 

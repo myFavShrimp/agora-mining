@@ -1,16 +1,16 @@
 use sqlx::{migrate::MigrateDatabase, PgPool};
 use time::PrimitiveDateTime;
 
+pub mod agora_entities;
 pub mod power_emission;
 pub mod power_generation;
 pub mod power_import_export;
-pub mod agora_entities;
 
 pub trait Entity<F>: Sized {
     fn unit() -> String;
     fn set_id(&mut self, date: PrimitiveDateTime);
     fn all_fields() -> Vec<F>;
-    fn set_by_field(&mut self, field: F, value: f64);
+    fn set_by_field(&mut self, field: F, value: Option<f64>);
     fn api_view_name() -> &'static str;
     fn api_kpi_name() -> &'static str;
     fn api_filter_values_key() -> &'static str;

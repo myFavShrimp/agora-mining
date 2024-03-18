@@ -120,22 +120,20 @@ impl Entity<Fields> for PowerGeneration {
         ]
     }
 
-    fn set_by_field(&mut self, field: Fields, value: f64) {
+    fn set_by_field(&mut self, field: Fields, value: Option<f64>) {
         match field {
-            Fields::Biomass => self.biomass = Some(value),
-            Fields::HardCoal => self.hard_coal = Some(value),
-            Fields::Hydro => self.hydro = Some(value),
-            Fields::Lignite => self.lignite = Some(value),
-            Fields::NaturalGas => self.natural_gas = Some(value),
-            Fields::Nuclear => self.nuclear = Some(value),
-            Fields::Other => self.other = Some(value),
-            Fields::PumpedStorageGeneration => self.pumped_storage_generation = Some(value),
-            Fields::Solar => self.solar = Some(value),
-            Fields::TotalConventionalPowerPlant => {
-                self.total_conventional_power_plant = Some(value)
-            }
-            Fields::WindOffshore => self.wind_offshore = Some(value),
-            Fields::WindOnshore => self.wind_onshore = Some(value),
+            Fields::Biomass => self.biomass = value,
+            Fields::HardCoal => self.hard_coal = value,
+            Fields::Hydro => self.hydro = value,
+            Fields::Lignite => self.lignite = value,
+            Fields::NaturalGas => self.natural_gas = value,
+            Fields::Nuclear => self.nuclear = value,
+            Fields::Other => self.other = value,
+            Fields::PumpedStorageGeneration => self.pumped_storage_generation = value,
+            Fields::Solar => self.solar = value,
+            Fields::TotalConventionalPowerPlant => self.total_conventional_power_plant = value,
+            Fields::WindOffshore => self.wind_offshore = value,
+            Fields::WindOnshore => self.wind_onshore = value,
         }
     }
 
