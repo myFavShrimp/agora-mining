@@ -336,6 +336,43 @@ impl Entity<Fields> for PowerGeneration {
         .fetch_all(connection)
         .await
     }
+
+    async fn find_all_ordered_by_date_average_yearly(
+        connection: &PgPool,
+        from: &Date,
+        to: &Date,
+    ) -> Result<Vec<Self>, sqlx::Error> {
+        sqlx::query_as!(
+            PowerGeneration,
+            r#"
+                SELECT *
+                FROM (
+                    SELECT
+                        date_trunc('year', date_id) as "date_id!",
+                        AVG(biomass) as biomass,
+                        AVG(hard_coal) as hard_coal,
+                        AVG(hydro) as hydro,
+                        AVG(lignite) as lignite,
+                        AVG(natural_gas) as natural_gas,
+                        AVG(nuclear) as nuclear,
+                        AVG(other) as other,
+                        AVG(pumped_storage_generation) as pumped_storage_generation,
+                        AVG(solar) as solar,
+                        AVG(total_conventional_power_plant) as total_conventional_power_plant,
+                        AVG(wind_offshore) as wind_offshore,
+                        AVG(wind_onshore) as wind_onshore
+                    FROM power_generation
+                    WHERE date_id >= $1 AND date_id <= $2
+                    GROUP BY "date_id!"
+                ) as data
+                ORDER BY data."date_id!" ASC
+            "#,
+            from.midnight(),
+            to.midnight(), // TODO: last minute of day
+        )
+        .fetch_all(connection)
+        .await
+    }
 }
 
 impl Default for PowerGeneration {

@@ -18,7 +18,12 @@ pub enum Average {
 
 impl Average {
     pub fn all() -> Vec<Self> {
-        vec![Average::None, Average::Daily, Average::Monthly]
+        vec![
+            Average::None,
+            Average::Daily,
+            Average::Monthly,
+            Average::Yearly,
+        ]
     }
 
     pub fn display_name(&self) -> &'static str {
@@ -26,7 +31,7 @@ impl Average {
             Average::None => "Nein",
             Average::Daily => "täglich",
             Average::Monthly => "monatlich",
-            Average::Yearly => todo!(),
+            Average::Yearly => "jährlich",
         }
     }
 }
@@ -65,6 +70,11 @@ pub trait Entity<F>: Sized {
         to: &Date,
     ) -> Result<Vec<Self>, sqlx::Error>;
     async fn find_all_ordered_by_date_average_monthly(
+        connection: &PgPool,
+        from: &Date,
+        to: &Date,
+    ) -> Result<Vec<Self>, sqlx::Error>;
+    async fn find_all_ordered_by_date_average_yearly(
         connection: &PgPool,
         from: &Date,
         to: &Date,
