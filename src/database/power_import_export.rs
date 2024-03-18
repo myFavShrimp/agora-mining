@@ -53,8 +53,22 @@ pub enum Fields {
 }
 
 impl Entity<Fields> for PowerImportExport {
-    fn unit(_field: &Fields) -> String {
-        "mW/h".to_string()
+    fn unit(field: &Fields) -> String {
+        match field {
+            Fields::Poland
+            | Fields::France
+            | Fields::Norway
+            | Fields::Denmark
+            | Fields::Sweden
+            | Fields::Austria
+            | Fields::Belgium
+            | Fields::Netherlands
+            | Fields::Czech
+            | Fields::Luxembourg
+            | Fields::Switzerland
+            | Fields::NetTotal => "Gwh/hour".to_owned(),
+            Fields::PowerPrice => "EUR/MWh".to_owned(),
+        }
     }
 
     fn all_fields() -> Vec<Fields> {
