@@ -46,7 +46,7 @@ pub enum Fields {
     Luxembourg,
     #[serde(rename = "CH")]
     Switzerland,
-    #[serde(rename = "Net total")]
+    #[serde(rename = "Net Total")]
     NetTotal,
     #[serde(rename = "Power price")]
     PowerPrice,
