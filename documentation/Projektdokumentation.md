@@ -171,7 +171,8 @@ Wir haben uns entschieden, auf umfangreiche Tests zu verzichten, da wir direkt i
 ---
 
 ## Fazit
-- Fehlerhafte Library für das Graphendarstellen benutzt (Woche 4)
+- Fehlerhafte Library (Compilierungsfehler) für das Graphendarstellen benutzt (Woche 4)
+- Graphen nicht mehr über Server rendern lassen - dadurch sind wir viel dynamischer und schneller
 ### Soll-/Ist-Vergleich
 ### Lessons Learned
 ### Ausblick
