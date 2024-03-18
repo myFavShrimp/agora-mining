@@ -42,6 +42,8 @@ Die analytische Funktionen zur Interpretation der Energiedaten, wie Trendanalyse
 | 4  | Implementierung des Front-Ends  |
 | 5  | Entwicklerdokumentation schreiben  |
 | 5  | Installationsdokumentation schreiben  |
+| 5  | Plot umstylen, auslagern und erweitern  |
+| 5  | Favicon einbinden  |
 
 ### Abweichungen von der Projektaufgabenstellung
 Da wir während er Bearbeitungszeit dieses Projektes keine erweiterte Aufgabenstellung bekommen haben können wir keine Abweichungen feststellen und dokumentieren.
