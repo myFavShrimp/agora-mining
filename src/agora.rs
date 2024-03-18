@@ -58,7 +58,7 @@ static AGORA_API_URL: &str = "https://api.agora-energy.org/api/raw-data";
 static AGORA_API_KEY_HEADER_NAME: &str = "api-key";
 static AGORA_API_KEY_HEADER_VALUE: &str = "agora_live_62ce76dd202927.67115829";
 
-static AGORA_API_FROM_DATE: time::Date = date!(2012 - 01 - 01);
+pub static AGORA_API_FROM_DATE: time::Date = date!(2012 - 01 - 01);
 
 // #[cfg(debug_assertions)]
 static AGORA_API_TO_DATE: time::Date = date!(2012 - 01 - 07);

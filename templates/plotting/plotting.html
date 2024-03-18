@@ -1,13 +1,13 @@
 {% let (style_sheet, class_name) = turf::inline_style_sheet!("templates/plotting/plotting.scss") %}
-<!-- @formatter:off -->
-<style>
-    {{ style_sheet }}
-</style>
-<!-- @formatter:on -->
-
 {% let checkboxes = AgoraEntities::all() %}
 
-<form>
+<form hx-get="/graph">
+    <!-- @formatter:off -->
+    <style>
+        {{ style_sheet }}
+    </style>
+    <!-- @formatter:on -->
+
     <div class="{{class_name.graph_toolbar}}">
         <div class="{{class_name.graph_dataset_selection}}">
             {% for checkbox in checkboxes %}
@@ -20,11 +20,11 @@
         <div class="{{class_name.graph_toolbar_items}}">
             <div class="{{class_name.graph_toolbar_item}}">
                 <label for="from">Von</label>
-                <input class="{{class_name.graph_toolbar_datepicker}}" id="from" name="from_date" type="date">
+                <input class="{{class_name.graph_toolbar_datepicker}}" name="from_date" type="date" value="{{ self.formatted_from().unwrap() }}">
             </div>
             <div class="{{class_name.graph_toolbar_item}}">
                 <label for="to">Bis</label>
-                <input class="{{class_name.graph_toolbar_datepicker}}" id="to" name="to_date" type="date">
+                <input class="{{class_name.graph_toolbar_datepicker}}" name="to_date" type="date" value="{{ self.formatted_to().unwrap() }}">
             </div>
             <div class="{{class_name.graph_toolbar_item}}">
                 <a class="{{class_name.refresh}}" hx-get="/refresh">
@@ -38,63 +38,63 @@
     <div class={{class_name.chart_container}}>
         <canvas id="myChart"></canvas>
     </div>
-</form>
 
-<script>
-    var ctx = document.getElementById('myChart');
-    const lineColor = '#7e767e';
-    const textColor = '#cfc3cd';
-    <!-- @formatter:off -->
-    const chartData = {{ serde_json::to_string(data_sets).unwrap()|safe }};
-    <!-- @formatter:on -->
+    <script>
+        var ctx = document.getElementById('myChart');
+        const lineColor = '#7e767e';
+        const textColor = '#cfc3cd';
+        <!-- @formatter:off -->
+        const chartData = {{ serde_json::to_string(data_sets).unwrap()|safe }};
+        <!-- @formatter:on -->
 
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            datasets: chartData,
-        },
-        options: {
-            elements: {
-                point: {
-                    radius: 3,
-                    hoverRadius: 4,
-                    hitRadius: 0,
-                },
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                datasets: chartData,
             },
-            plugins: {
-                tooltip: {
-                    mode: 'x',
-                    callbacks: {
-                        label: function (context) {
-                            return `${context.dataset.label}: ${context.formattedValue} ${context.dataset.unit}`;
+            options: {
+                elements: {
+                    point: {
+                        radius: 3,
+                        hoverRadius: 4,
+                        hitRadius: 0,
+                    },
+                },
+                plugins: {
+                    tooltip: {
+                        mode: 'x',
+                        callbacks: {
+                            label: function (context) {
+                                return `${context.dataset.label}: ${context.formattedValue} ${context.dataset.unit}`;
+                            }
                         }
+                    },
+                    legend: {
+                        labels: {
+                            color: textColor,
+                        },
+                    },
+                },
+                scales: {
+                    y: {
+                        type: 'logarithmic',
+                        ticks: {
+                            color: textColor,
+                        },
+                        grid: {
+                            color: lineColor,
+                        },
+                    },
+                    x: {
+                        ticks: {
+                            color: textColor,
+                        },
+                        grid: {
+                            color: lineColor,
+                        },
                     }
-                },
-                legend: {
-                    labels: {
-                        color: textColor,
-                    },
-                },
-            },
-            scales: {
-                y: {
-                    type: 'logarithmic',
-                    ticks: {
-                        color: textColor,
-                    },
-                    grid: {
-                        color: lineColor,
-                    },
-                },
-                x: {
-                    ticks: {
-                        color: textColor,
-                    },
-                    grid: {
-                        color: lineColor,
-                    },
                 }
             }
-        }
-    });
-</script>
+        });
+    </script>
+</form>

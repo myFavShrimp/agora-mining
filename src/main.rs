@@ -5,6 +5,7 @@ use config::Config;
 use database::{power_generation, Entity};
 use sqlx::PgPool;
 use templates::plotting::to_data_sets;
+use time::Date;
 
 mod agora;
 mod config;
@@ -52,6 +53,8 @@ async fn graph_handler(State(state): State<Arc<AppState>>) -> impl IntoResponse 
 
     templates::PlottingTemplate {
         data_sets: to_data_sets(result.unwrap()),
+        from: agora::AGORA_API_FROM_DATE,
+        to: Date::MAX,
     }
 }
 
