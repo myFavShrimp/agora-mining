@@ -65,7 +65,7 @@ fn default_from() -> Date {
 #[derive(Deserialize, Debug, Clone)]
 struct GraphFormData {
     #[serde(default = "default_data_sets")]
-    data_sets: Vec<AgoraEntities>,
+    used_data_sets: Vec<AgoraEntities>,
     #[serde(default = "default_from")]
     from: Date,
     #[serde(default = "default_to")]
@@ -89,6 +89,7 @@ async fn graph_handler(
         data_sets: to_data_sets(result.unwrap()),
         from: form_data.from,
         to: form_data.to,
+        used_data_sets: form_data.used_data_sets,
     }
 }
 
