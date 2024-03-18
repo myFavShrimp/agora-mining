@@ -1,6 +1,7 @@
 use std::sync::Arc;
 
-use axum::{extract::State, http::StatusCode, response::IntoResponse, routing::get, Form, Router};
+use axum::{extract::State, http::StatusCode, response::IntoResponse, routing::get, Router};
+use axum_extra::extract::Query;
 use config::Config;
 use database::{agora_entities::AgoraEntities, power_generation, Entity};
 use serde::Deserialize;
@@ -74,7 +75,7 @@ struct GraphFormData {
 
 async fn graph_handler(
     State(state): State<Arc<AppState>>,
-    Form(form_data): Form<GraphFormData>,
+    Query(form_data): Query<GraphFormData>,
 ) -> impl IntoResponse {
     dbg!(&form_data);
 

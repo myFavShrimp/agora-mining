@@ -24,7 +24,11 @@
             <div class="{{class_name.graph_dataset_selection}}">
                 {% for checkbox in checkboxes %}
                 <label>
-                    <input class="{{class_name.graph_dataset_input}}" type="checkbox">
+                    <input class="{{class_name.graph_dataset_input}}" name="used_data_sets" value={{ serde_json::to_string(checkbox).unwrap()|safe }} type="checkbox"
+                        {% if used_data_sets.contains(checkbox) %}
+                            checked
+                        {% endif %}
+                    >
                     {{ AgoraEntities::get_title(checkbox)|e }}
                 </label>
                 {% endfor%}
@@ -32,11 +36,11 @@
             <div class="{{class_name.graph_toolbar_items}}">
                 <div class="{{class_name.graph_toolbar_item}}">
                     <label for="from">Von</label>
-                    <input class="{{class_name.graph_toolbar_datepicker}}" name="from_date" type="date" value="{{ self.formatted_from().unwrap() }}">
+                    <input class="{{class_name.graph_toolbar_datepicker}}" name="from" type="date" value="{{ self.formatted_from().unwrap() }}">
                 </div>
                 <div class="{{class_name.graph_toolbar_item}}">
                     <label for="to">Bis</label>
-                    <input class="{{class_name.graph_toolbar_datepicker}}" name="to_date" type="date" value="{{ self.formatted_to().unwrap() }}">
+                    <input class="{{class_name.graph_toolbar_datepicker}}" name="to" type="date" value="{{ self.formatted_to().unwrap() }}">
                 </div>
             </div>
             <button>Submit</button>
