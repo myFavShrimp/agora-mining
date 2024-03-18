@@ -40,26 +40,9 @@ impl Fields {
     }
 }
 
-impl PowerGeneration {
-    fn get_by_kind(&self, kind: &Fields) -> Option<f64> {
-        match kind {
-            Fields::Biomass => self.biomass,
-            Fields::HardCoal => self.hard_coal,
-            Fields::Hydro => self.hydro,
-            Fields::Lignite => self.lignite,
-            Fields::NaturalGas => self.natural_gas,
-            Fields::Nuclear => self.nuclear,
-            Fields::Other => self.other,
-            Fields::PumpedStorageGeneration => self.pumped_storage_generation,
-            Fields::Solar => self.solar,
-            Fields::TotalConventionalPowerPlant => self.total_conventional_power_plant,
-            Fields::WindOffshore => self.wind_offshore,
-            Fields::WindOnshore => self.wind_onshore,
-        }
-    }
-}
-
 pub fn to_data_sets(data: Vec<PowerGeneration>) -> Vec<PlottingTemplateDataSet> {
+    // where
+    //     D: Entity<F> + std::fmt::Debug,
     let mut result_map: HashMap<Fields, PlottingTemplateDataSet> = HashMap::new();
 
     for item in data {
@@ -69,7 +52,7 @@ pub fn to_data_sets(data: Vec<PowerGeneration>) -> Vec<PlottingTemplateDataSet> 
                     .date_id
                     .format(format_description!("[day].[month].[year] [hour]:[minute]"))
                     .unwrap(),
-                y: item.get_by_kind(&kind),
+                y: item.get_by_field(&kind),
             };
 
             if let Some(existing_data) = result_map.get_mut(&kind) {

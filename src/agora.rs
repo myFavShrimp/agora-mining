@@ -41,11 +41,11 @@ where
             let parsed_date = PrimitiveDateTime::parse(&date, format_description)?;
 
             if let Some(existing_data) = result_map.get_mut(&parsed_date) {
-                existing_data.set_by_field(kind, value);
+                existing_data.set_by_field(&kind, value);
             } else {
                 let mut new_data = D::default();
                 new_data.set_id(parsed_date);
-                new_data.set_by_field(kind, value);
+                new_data.set_by_field(&kind, value);
                 result_map.insert(parsed_date, new_data);
             }
         }

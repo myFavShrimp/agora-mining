@@ -10,7 +10,8 @@ pub trait Entity<F>: Sized {
     fn unit(field: &F) -> String;
     fn set_id(&mut self, date: PrimitiveDateTime);
     fn all_fields() -> Vec<F>;
-    fn set_by_field(&mut self, field: F, value: Option<f64>);
+    fn set_by_field(&mut self, field: &F, value: Option<f64>);
+    fn get_by_field(&self, field: &F) -> Option<f64>;
     fn api_view_name() -> &'static str;
     fn api_kpi_name() -> &'static str;
     fn api_filter_values_key() -> &'static str;

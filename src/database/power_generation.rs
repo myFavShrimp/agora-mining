@@ -120,7 +120,7 @@ impl Entity<Fields> for PowerGeneration {
         ]
     }
 
-    fn set_by_field(&mut self, field: Fields, value: Option<f64>) {
+    fn set_by_field(&mut self, field: &Fields, value: Option<f64>) {
         match field {
             Fields::Biomass => self.biomass = value,
             Fields::HardCoal => self.hard_coal = value,
@@ -134,6 +134,23 @@ impl Entity<Fields> for PowerGeneration {
             Fields::TotalConventionalPowerPlant => self.total_conventional_power_plant = value,
             Fields::WindOffshore => self.wind_offshore = value,
             Fields::WindOnshore => self.wind_onshore = value,
+        }
+    }
+
+    fn get_by_field(&self, field: &Fields) -> Option<f64> {
+        match field {
+            Fields::Biomass => self.biomass,
+            Fields::HardCoal => self.hard_coal,
+            Fields::Hydro => self.hydro,
+            Fields::Lignite => self.lignite,
+            Fields::NaturalGas => self.natural_gas,
+            Fields::Nuclear => self.nuclear,
+            Fields::Other => self.other,
+            Fields::PumpedStorageGeneration => self.pumped_storage_generation,
+            Fields::Solar => self.solar,
+            Fields::TotalConventionalPowerPlant => self.total_conventional_power_plant,
+            Fields::WindOffshore => self.wind_offshore,
+            Fields::WindOnshore => self.wind_onshore,
         }
     }
 
