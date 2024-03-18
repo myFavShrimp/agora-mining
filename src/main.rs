@@ -3,10 +3,9 @@ use std::sync::Arc;
 use axum::{extract::State, http::StatusCode, response::IntoResponse, routing::get, Router};
 use axum_extra::extract::Query;
 use config::Config;
-use database::{agora_entities::AgoraEntities, power_generation, Entity};
+use database::agora_entities::AgoraEntities;
 use serde::Deserialize;
 use sqlx::PgPool;
-use templates::plotting::to_data_sets;
 use time::{Date, Duration};
 
 mod agora;
@@ -79,15 +78,16 @@ async fn graph_handler(
 ) -> impl IntoResponse {
     dbg!(&form_data);
 
-    let result = power_generation::PowerGeneration::find_all_ordered_by_date(
+    let result = AgoraEntities::plotting_data(
         &state.postgres_pool,
+        &form_data.used_data_sets,
         &form_data.from,
         &form_data.to,
     )
     .await;
 
     templates::PlottingTemplate {
-        data_sets: to_data_sets(result.unwrap()),
+        data_sets: result,
         from: form_data.from,
         to: form_data.to,
         used_data_sets: form_data.used_data_sets,

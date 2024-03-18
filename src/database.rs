@@ -7,8 +7,10 @@ pub mod power_generation;
 pub mod power_import_export;
 
 pub trait Entity<F>: Sized {
+    fn chart_display_name(field: &F) -> &'static str;
     fn unit(field: &F) -> String;
     fn set_id(&mut self, date: PrimitiveDateTime);
+    fn id(&self) -> PrimitiveDateTime;
     fn all_fields() -> Vec<F>;
     fn set_by_field(&mut self, field: &F, value: Option<f64>);
     fn get_by_field(&self, field: &F) -> Option<f64>;

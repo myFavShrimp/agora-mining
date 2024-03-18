@@ -99,6 +99,27 @@ pub enum Fields {
 // }
 
 impl Entity<Fields> for PowerGeneration {
+    fn chart_display_name(field: &Fields) -> &'static str {
+        match field {
+            Fields::Biomass => "Bioenergie",
+            Fields::HardCoal => "Steinkohle",
+            Fields::Hydro => "Wasserkraft",
+            Fields::Lignite => "Braunkohle",
+            Fields::NaturalGas => "Erdgas",
+            Fields::Nuclear => "Kernkraft",
+            Fields::Other => "Andere",
+            Fields::PumpedStorageGeneration => "Pumpspeicherkraftwerk",
+            Fields::Solar => "Solar",
+            Fields::TotalConventionalPowerPlant => "Konventionelles Kraftwerk insgesamt",
+            Fields::WindOffshore => "Offshore-Wind",
+            Fields::WindOnshore => "Onshore-Wind",
+        }
+    }
+
+    fn id(&self) -> PrimitiveDateTime {
+        self.date_id
+    }
+
     fn unit(_field: &Fields) -> String {
         "mW/h".to_string()
     }

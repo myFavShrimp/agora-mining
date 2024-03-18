@@ -29,6 +29,20 @@ pub enum Fields {
 }
 
 impl Entity<Fields> for PowerEmission {
+    fn chart_display_name(field: &Fields) -> &'static str {
+        match field {
+            Fields::HardCoal => "Steinkohle",
+            Fields::Lignite => "Braunkohle",
+            Fields::NaturalGas => "Erdgas",
+            Fields::Other => "Andere",
+            Fields::TotalGridEmissions => "Netzemissionen insgesamt",
+        }
+    }
+
+    fn id(&self) -> PrimitiveDateTime {
+        self.date_id
+    }
+
     fn unit(_field: &Fields) -> String {
         "tCO₂/h".to_string()
     }

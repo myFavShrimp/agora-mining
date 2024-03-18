@@ -4,7 +4,7 @@ use time::Date;
 
 use crate::templates::plotting::{to_data_sets, PlottingTemplateDataSet};
 
-use super::{power_emission, power_generation, Entity};
+use super::{power_emission, power_generation, power_import_export, Entity};
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
 pub enum AgoraEntities {
@@ -32,7 +32,7 @@ impl AgoraEntities {
 
     pub async fn plotting_data(
         connection: &PgPool,
-        entities: Vec<AgoraEntities>,
+        entities: &[AgoraEntities],
         from: &Date,
         to: &Date,
     ) -> Vec<PlottingTemplateDataSet> {
@@ -49,15 +49,21 @@ impl AgoraEntities {
                     data_set.extend(to_data_sets(result.unwrap()));
                 }
                 AgoraEntities::PowerEmission => {
-                    // let result = power_emission::PowerEmission::find_all_ordered_by_date(
-                    //     connection, &from, &to,
-                    // )
-                    // .await;
+                    let result = power_emission::PowerEmission::find_all_ordered_by_date(
+                        connection, &from, &to,
+                    )
+                    .await;
 
-                    // data_set.extend(to_data_sets(result.unwrap()));
-                    todo!()
+                    data_set.extend(to_data_sets(result.unwrap()));
                 }
-                AgoraEntities::PowerImportExport => todo!(),
+                AgoraEntities::PowerImportExport => {
+                    let result = power_import_export::PowerImportExport::find_all_ordered_by_date(
+                        connection, &from, &to,
+                    )
+                    .await;
+
+                    data_set.extend(to_data_sets(result.unwrap()));
+                }
             }
         }
 

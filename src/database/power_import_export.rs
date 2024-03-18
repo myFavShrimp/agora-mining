@@ -53,6 +53,28 @@ pub enum Fields {
 }
 
 impl Entity<Fields> for PowerImportExport {
+    fn chart_display_name(field: &Fields) -> &'static str {
+        match field {
+            Fields::Poland => "Polen",
+            Fields::France => "Frankreich",
+            Fields::Norway => "Norwegen",
+            Fields::Denmark => "Dänemark",
+            Fields::Sweden => "Schweden",
+            Fields::Austria => "Östereich",
+            Fields::Belgium => "Belgien",
+            Fields::Netherlands => "Niederlande",
+            Fields::Czech => "Tschechische Republik",
+            Fields::Luxembourg => "Luxemburg",
+            Fields::Switzerland => "Schweiz",
+            Fields::NetTotal => "Gesamt Im- & Export",
+            Fields::PowerPrice => "Strompreis",
+        }
+    }
+
+    fn id(&self) -> PrimitiveDateTime {
+        self.date_id
+    }
+
     fn unit(field: &Fields) -> String {
         match field {
             Fields::Poland
