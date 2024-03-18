@@ -65,7 +65,10 @@ pub fn to_data_sets(data: Vec<PowerGeneration>) -> Vec<PlottingTemplateDataSet> 
     for item in data {
         for kind in PowerGeneration::all_fields() {
             let new_data = PlottingTemplateDataSetData {
-                x: item.date_id.format(format_description!("[day].[month].[year] [hour]:[minute]")).unwrap(),
+                x: item
+                    .date_id
+                    .format(format_description!("[day].[month].[year] [hour]:[minute]"))
+                    .unwrap(),
                 y: item.get_by_kind(&kind),
             };
 
@@ -75,7 +78,7 @@ pub fn to_data_sets(data: Vec<PowerGeneration>) -> Vec<PlottingTemplateDataSet> 
                 let new_data_set = PlottingTemplateDataSet {
                     label: kind.chart_display_name(),
                     data: vec![new_data],
-                    unit: PowerGeneration::unit(),
+                    unit: PowerGeneration::unit(&kind),
                 };
                 result_map.insert(kind, new_data_set);
             }

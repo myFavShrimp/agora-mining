@@ -29,7 +29,7 @@ pub enum Fields {
 }
 
 impl Entity<Fields> for PowerEmission {
-    fn unit() -> String {
+    fn unit(_field: &Fields) -> String {
         "tCO₂/h".to_string()
     }
 

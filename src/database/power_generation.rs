@@ -99,7 +99,7 @@ pub enum Fields {
 // }
 
 impl Entity<Fields> for PowerGeneration {
-    fn unit() -> String {
+    fn unit(_field: &Fields) -> String {
         "mW/h".to_string()
     }
 
