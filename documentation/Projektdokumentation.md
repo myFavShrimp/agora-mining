@@ -114,12 +114,12 @@ Unsere Software strebt hohe Qualitätsstandards an, insbesondere in den Bereiche
 | 7  | Datenbankanbindung  | Über eine Methode kann ein Datensatz in die Datenbank eingetragen werden. Testklasse mit Beispieldaten verwenden.  | 5  |
 | 8  | Alle Daten in DBS speichern  | Es existiert ein Button, der die Daten des gesamten Zeitraums von der Webseite holt und in das DBS einspeichert.  | 10  |
 | 9  | Installationsdokumentation  | Information an die Lehrkraft, wie das Programm installiert, konfiguriert und gestartet wird.  | 10  |
-| 10  | _Content Cell_  | _Content Cell_  | _Content Cell_  |
+| 10  | Mehrere Datensätzen sind auswählbar  | Es werden mehr als nur ein Datensatz zur Auswahl zur Verfügung stehen  | 0  |
 | S1  | Nachträgliches Hinzufügen von Daten  | Es werden die neusten Daten von der Webseite geholt und mit den Daten im DBS vereint. Es soll nichts altes gelöscht werden.  | 10  |
-| S2  | Die GUI ist optisch ansprechend  | _Content Cell_  | 5  |
-| S3  | _Content Cell_  | _Content Cell_  | _Content Cell_  |
+| S2  | Die GUI ist optisch ansprechend  | DIe GUI soll optisch ansprechend sein für die User  | 5  |
+| S3  | Logarithmische Skala zum Anzeigen der Daten  | Damit die Anzeige nicht zu groß wird, soll die Skala logarithmisch dargestellt werden  | 0  |
 | K1  | Entwicklerdokumentation  | Sie beschreiben Ihr Vorgehen, Techniken, Bibliotheken, so dass jemand anderes ihre Software warten kann.  | 10  |
-| K2  | _Content Cell_  | _Content Cell_  | _Content Cell_  |
+| K2  | about Page  | EIne Seite in der kurz beschrieben wird worum es auf der Seite geht und wieso sie existiert  | 0  |
 
 ---
 
