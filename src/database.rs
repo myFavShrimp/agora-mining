@@ -7,7 +7,7 @@ pub mod power_emission;
 pub mod power_generation;
 pub mod power_import_export;
 
-#[derive(Deserialize, Serialize, Debug, Clone, Default)]
+#[derive(Deserialize, Serialize, Debug, Clone, Default, PartialEq)]
 pub enum Average {
     #[default]
     None,
@@ -24,6 +24,20 @@ impl Average {
             Average::Monthly,
             Average::Yearly,
         ]
+    }
+
+    pub fn all_with_at_top(to_top: &Average) -> Vec<Self> {
+        let all = Self::all();
+        let mut result = Vec::with_capacity(all.len());
+        result.push(to_top.clone());
+
+        for item in all {
+            if &item != to_top {
+                result.push(item);
+            }
+        }
+
+        result
     }
 
     pub fn display_name(&self) -> &'static str {

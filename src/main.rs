@@ -92,6 +92,7 @@ async fn graph_handler(
         from: form_data.from,
         to: form_data.to,
         used_data_sets: form_data.used_data_sets,
+        use_average: form_data.use_average,
     }
 }
 

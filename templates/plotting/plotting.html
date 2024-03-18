@@ -26,7 +26,7 @@
                 <div class="{{class_name.graph_toolbar_item}}">
                     <label for="use_average">Durchschnitt bilden</label>
                     <select id="use_average" name="use_average">
-                        {% for average_kind in Average::all() %}
+                        {% for average_kind in Average::all_with_at_top(self.use_average) %}
                         <option value={{ serde_json::to_string(average_kind).unwrap()|safe }}>{{ average_kind.display_name() }}</option>
                         {% endfor%}
                     </select>

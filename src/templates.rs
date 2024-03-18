@@ -20,6 +20,7 @@ pub struct PlottingTemplate {
     pub from: Date,
     pub to: Date,
     pub used_data_sets: Vec<AgoraEntities>,
+    pub use_average: Average,
 }
 
 fn format_date(date: &Date) -> Result<String, time::error::Format> {
