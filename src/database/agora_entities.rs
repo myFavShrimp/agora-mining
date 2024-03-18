@@ -4,13 +4,15 @@ use serde::{Deserialize, Serialize};
 pub enum AgoraEntities {
     PowerGeneration,
     PowerEmission,
+    PowerImportExport,
 }
 
 impl AgoraEntities {
     pub fn get_title(&self) -> &str {
         return match self {
-            AgoraEntities::PowerGeneration => { "Stromerzeugung" }
-            AgoraEntities::PowerEmission => { "C0₂-Emissionen" }
+            AgoraEntities::PowerGeneration => "Stromerzeugung",
+            AgoraEntities::PowerEmission => "C0₂-Emissionen",
+            AgoraEntities::PowerImportExport => "Stromimport, -export & -preis",
         };
     }
 
@@ -18,6 +20,7 @@ impl AgoraEntities {
         return vec![
             AgoraEntities::PowerGeneration,
             AgoraEntities::PowerEmission,
+            AgoraEntities::PowerImportExport,
         ];
     }
 }
