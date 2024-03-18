@@ -76,8 +76,6 @@ async fn graph_handler(
     State(state): State<Arc<AppState>>,
     Query(form_data): Query<GraphFormData>,
 ) -> impl IntoResponse {
-    dbg!(&form_data);
-
     let result = AgoraEntities::plotting_data(
         &state.postgres_pool,
         &form_data.used_data_sets,

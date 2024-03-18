@@ -159,6 +159,36 @@ impl Entity<Fields> for PowerEmission {
         .fetch_all(connection)
         .await
     }
+
+    async fn find_all_ordered_by_date_average_daily(
+        connection: &PgPool,
+        from: &Date,
+        to: &Date,
+    ) -> Result<Vec<Self>, sqlx::Error> {
+        sqlx::query_as!(
+            PowerEmission,
+            r#"
+                SELECT *
+                FROM (
+                    SELECT
+                        date_id::timestamp::date::timestamp as "date_id!",
+                        AVG(hard_coal) as hard_coal,
+                        AVG(lignite) as lignite,
+                        AVG(natural_gas) as natural_gas,
+                        AVG(other) as other,
+                        AVG(total_grid_emissions) as total_grid_emissions
+                    FROM power_emission
+                    WHERE date_id >= $1 AND date_id <= $2
+                    GROUP BY date_id::timestamp::date
+                ) as data
+                ORDER BY data."date_id!" ASC
+            "#,
+            from.midnight(),
+            to.midnight(), // TODO: last minute of day
+        )
+        .fetch_all(connection)
+        .await
+    }
 }
 
 impl Default for PowerEmission {

@@ -34,6 +34,11 @@ pub trait Entity<F>: Sized {
         from: &Date,
         to: &Date,
     ) -> Result<Vec<Self>, sqlx::Error>;
+    async fn find_all_ordered_by_date_average_daily(
+        connection: &PgPool,
+        from: &Date,
+        to: &Date,
+    ) -> Result<Vec<Self>, sqlx::Error>;
 }
 
 #[derive(Debug, thiserror::Error)]
