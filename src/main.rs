@@ -5,7 +5,6 @@ use config::Config;
 use database::{power_generation, Entity};
 use sqlx::PgPool;
 use templates::plotting::to_data_sets;
-use time::Date;
 
 mod agora;
 mod config;
@@ -48,18 +47,25 @@ async fn landing_page_handler() -> impl IntoResponse {
 }
 
 async fn graph_handler(State(state): State<Arc<AppState>>) -> impl IntoResponse {
-    let result =
-        power_generation::PowerGeneration::find_all_ordered_by_date(&state.postgres_pool).await;
+    let to_date =
+        agora::AGORA_API_FROM_DATE.replace_month(agora::AGORA_API_FROM_DATE.month().nth_next(1));
+
+    let result = power_generation::PowerGeneration::find_all_ordered_by_date(
+        &state.postgres_pool,
+        &agora::AGORA_API_FROM_DATE,
+        &to_date.unwrap(),
+    )
+    .await;
 
     templates::PlottingTemplate {
         data_sets: to_data_sets(result.unwrap()),
         from: agora::AGORA_API_FROM_DATE,
-        to: Date::MAX,
+        to: to_date.unwrap(),
     }
 }
 
 async fn refresh_data_handler(State(state): State<Arc<AppState>>) -> impl IntoResponse {
-    match agora::sync_all_entities_with_agora_api(&state.postgres_pool).await {
+    match dbg!(agora::sync_all_entities_with_agora_api(&state.postgres_pool).await) {
         Ok(_) => (
             StatusCode::OK,
             [("HX-Retarget", format!("#{}", templates::REFRESH_BUTTON_ID))],

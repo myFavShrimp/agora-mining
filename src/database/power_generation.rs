@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 use sqlx::PgPool;
-use time::PrimitiveDateTime;
+use time::{Date, PrimitiveDateTime};
 
 use super::Entity;
 
@@ -210,12 +210,16 @@ impl Entity<Fields> for PowerGeneration {
 
     async fn find_all_ordered_by_date(
         connection: &PgPool,
+        from: &Date,
+        to: &Date,
     ) -> Result<Vec<PowerGeneration>, sqlx::Error> {
         sqlx::query_as!(
             PowerGeneration,
             "
-                SELECT * FROM power_generation ORDER BY date_id ASC
+                SELECT * FROM power_generation WHERE date_id >= $1 AND date_id <= $2 ORDER BY date_id ASC
             ",
+            from.midnight(),
+            to.midnight(), // TODO: last minute of day
         )
         .fetch_all(connection)
         .await

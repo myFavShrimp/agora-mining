@@ -1,5 +1,5 @@
 use sqlx::{migrate::MigrateDatabase, PgPool};
-use time::PrimitiveDateTime;
+use time::{Date, PrimitiveDateTime};
 
 pub mod agora_entities;
 pub mod power_emission;
@@ -26,7 +26,11 @@ pub trait Entity<F>: Sized {
     async fn delete_all(
         connection: &mut sqlx::Transaction<'_, sqlx::Postgres>,
     ) -> Result<Vec<Self>, sqlx::Error>;
-    async fn find_all_ordered_by_date(connection: &PgPool) -> Result<Vec<Self>, sqlx::Error>;
+    async fn find_all_ordered_by_date(
+        connection: &PgPool,
+        from: &Date,
+        to: &Date,
+    ) -> Result<Vec<Self>, sqlx::Error>;
 }
 
 #[derive(Debug, thiserror::Error)]
