@@ -53,7 +53,10 @@ impl AgoraEntities {
                             connection, &from, &to,
                         )
                         .await,
-                        Average::Monthly => todo!(),
+                        Average::Monthly => power_generation::PowerGeneration::find_all_ordered_by_date_average_monthly(
+                            connection, &from, &to,
+                        )
+                        .await,
                         Average::Yearly => todo!(),
                     };
 
@@ -73,7 +76,12 @@ impl AgoraEntities {
                             )
                             .await
                         }
-                        Average::Monthly => todo!(),
+                        Average::Monthly => {
+                            power_emission::PowerEmission::find_all_ordered_by_date_average_monthly(
+                                connection, &from, &to,
+                            )
+                            .await
+                        }
                         Average::Yearly => todo!(),
                     };
 
@@ -89,7 +97,10 @@ impl AgoraEntities {
                             connection, &from, &to,
                         )
                         .await,
-                        Average::Monthly => todo!(),
+                        Average::Monthly => power_import_export::PowerImportExport::find_all_ordered_by_date_average_monthly(
+                            connection, &from, &to,
+                        )
+                        .await,
                         Average::Yearly => todo!(),
                     };
 

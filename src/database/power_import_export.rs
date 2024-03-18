@@ -273,6 +273,44 @@ impl Entity<Fields> for PowerImportExport {
         .fetch_all(connection)
         .await
     }
+
+    async fn find_all_ordered_by_date_average_monthly(
+        connection: &PgPool,
+        from: &Date,
+        to: &Date,
+    ) -> Result<Vec<Self>, sqlx::Error> {
+        sqlx::query_as!(
+            PowerImportExport,
+            r#"
+                SELECT *
+                FROM (
+                    SELECT
+                        date_trunc('month', date_id) as "date_id!",
+                        AVG(poland) as poland,
+                        AVG(france) as france,
+                        AVG(norway) as norway,
+                        AVG(denmark) as denmark,
+                        AVG(sweden) as sweden,
+                        AVG(austria) as austria,
+                        AVG(belgium) as belgium,
+                        AVG(netherlands) as netherlands,
+                        AVG(czech) as czech,
+                        AVG(luxembourg) as luxembourg,
+                        AVG(switzerland) as switzerland,
+                        AVG(net_total) as net_total,
+                        AVG(power_price) as power_price
+                    FROM power_import_export
+                    WHERE date_id >= $1 AND date_id <= $2
+                    GROUP BY "date_id!"
+                ) as data
+                ORDER BY data."date_id!" ASC
+            "#,
+            from.midnight(),
+            to.midnight(), // TODO: last minute of day
+        )
+        .fetch_all(connection)
+        .await
+    }
 }
 
 impl Default for PowerImportExport {
