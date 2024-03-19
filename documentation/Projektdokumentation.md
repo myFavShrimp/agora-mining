@@ -70,6 +70,8 @@ Die regelmäßigen Sprint-Meetings dienen dazu, den Fortschritt zu überprüfen,
 
 ## Analysephase
 ### Ist-Analyse
+Es wurde der Prozess der Datenerfassung auf der Agora-Website untersucht, um zu verstehen, wie die Daten bisher manuell gesammelt und verarbeitet wurden. Es wurde ermittelt, dass dieser manuelle Prozess zeitaufwändig und fehleranfällig ist, was die Notwendigkeit einer Automatisierung deutlich machte. 
+Die Anforderungen und Erwartungen der Stakeholder ergaben, dass die Lehrer des Oberstufenzentrums und potenzielle Benutzer der Software, eine effiziente Automatisierung der Datenerfassung und -verarbeitung sowie eine benutzerfreundliche Benutzeroberfläche benötigen, um die Daten und Ergebnisse selbst noch weiter interpretieren und verwenden.
 
 ### Wirtschaftlichkeitsanalyse
 #### Kosten:
