@@ -111,7 +111,7 @@ async fn graph_handler(
         .into_response(),
         Err(e) => {
             tracing::error!(
-                "{:?}",
+                "\n{:?}",
                 eyre::Report::new(e).wrap_err("Retrieving plotting data from database failed")
             );
 
@@ -129,7 +129,7 @@ async fn refresh_data_handler(State(state): State<Arc<AppState>>) -> impl IntoRe
         ),
         Err(e) => {
             tracing::error!(
-                "{:?}",
+                "\n{:?}",
                 eyre::Report::new(e).wrap_err("Updating database from agora api failed")
             );
 
