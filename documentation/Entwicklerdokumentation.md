@@ -12,43 +12,23 @@
     - Datenbank erstellen und migrieren: `make init-db`
     - Serveranwendung kompilieren und starten: `cargo run`
 
-3. **Coding Guidelines und Best Practices:**
-   - Festgelegte Codierungsrichtlinien und -standards für das Projekt.
-   - Best Practices für Design, Entwicklung, und Dokumentation.
+3. **Datenbankmodell und Schema:**
+   - Beschreibung des Datenbankmodells und der Tabellenschemata.
+   - Beispiele für SQL-Abfragen und Datenbankoperationen.
 
 4. **API-Dokumentation:**
    - Ausführliche Dokumentation aller APIs, einschließlich Endpunkte, Parameter, Rückgabewerte und Beispiele.
    - Authentifizierungs- und Autorisierungsanleitungen für API-Zugriff.
 
-5. **Datenbankmodell und Schema:**
-   - Beschreibung des Datenbankmodells und der Tabellenschemata.
-   - Beispiele für SQL-Abfragen und Datenbankoperationen.
-
-6. **Code-Struktur und -Organisation:**
+5. **Code-Struktur und -Organisation:**
    - Erklärung der Code-Struktur, Verzeichnisse und Module.
    - Beschreibung der Verantwortlichkeiten verschiedener Teile des Codes.
 
-7. **Funktionale und Nicht-funktionale Anforderungen:**
+6. **Funktionale und Nicht-funktionale Anforderungen:**
    - Liste der funktionalen Anforderungen und deren Implementierung.
    - Nicht-funktionale Anforderungen wie Leistung, Sicherheit und Skalierbarkeit.
 
-8. **Entwicklungs- und Testumgebung:**
-   - Konfiguration der Entwicklungsumgebung und Tools.
-   - Anleitung zur Ausführung von Tests und zur Verwendung von Testdaten.
-
-9. **Debugging und Fehlerbehebung:**
-   - Methoden zum Debuggen von Code und Lösungsansätze für häufige Probleme.
-   - Protokollierung und Fehlermeldungen.
-
-10. **Beitragsrichtlinien und Collaboration:**
-    - Informationen für Entwickler, die zum Projekt beitragen möchten (Pull Request Guidelines, Coding Standards).
-    - Prozess für Code-Rezensionen und Zusammenarbeit im Team.
-
-11. **Aktualisierungen und Versionskontrolle:**
-    - Richtlinien zur Versionsnummerierung und zum Veröffentlichungsprozess.
-    - Informationen zur Verwendung von Versionskontrollsystemen (z. B. Git).
-
-12. **Externe Ressourcen und Bibliotheken:**
+7. **Externe Ressourcen und Bibliotheken:**
 
 Rustbibliotheken:
     - **askama**, um HTML-Templates mit Rust zu generieren
@@ -73,14 +53,3 @@ Javascriptbibliotheken:
 
 CSS-Bibliotheken:
    - **Normalize.css**, um Abhängigkeiten von Browserstylings so weit wie möglich aufzuheben
-
-15. **Sicherheitsrichtlinien:**
-    - Sicherheitsüberlegungen und bewährte Verfahren im Code.
-    - Verwendung von Verschlüsselung, Validierung und Schutz vor bekannten Sicherheitslücken.
-
-16. **Leistungs- und Skalierbarkeitsaspekte:**
-    - Anleitung zur Leistungsüberwachung und Optimierung.
-    - Skalierbarkeitsrichtlinien und bewährte Verfahren.
-
-17. **Lizenzinformationen:**
-    - Klare Angaben zur Lizenzierung des Codes und der verwendeten Bibliotheken.
