@@ -39,7 +39,7 @@ Rustbibliotheken:
 - **dotenv**, zur Verwendung von Umgebungsvariablen aus einer `.env`-Datei
 - **eyre**, für bessere Fehlermeldungen beim Initialisieren des Servers
 - **reqwest**, als HTTP-Client
-- **serde**, zu serialiseren und deserialisieren von Daten
+- **serde**, zum serialiseren und deserialisieren von Daten
     - **serde-env**, um Umgebungsvariablen zu serialiseren und deserialisieren
     - **serde_json**, um Daten im JSON-Format zu serialiseren und deserialisieren
 - **sqlx**, zur Anbindung und Verwendung der PostgreSQL-Datenbank
