@@ -5,12 +5,13 @@
    Dieses Projekt ist eine Serveranwendung und wurde in Rust umgesetzt. Das Frontend besteht aus Templates welche vom Server gerendert und zurückgegeben werden. Für Interaktivität wurde das htmx-Framework verwendet,       welches es ermöglich HTML-Komponenten dynamisch auszutauschen. Als Datenbank wurde das Open-Source-Datenbanksystem PostgreSQL verwendet. 
    
 ## 2. **Installation und Einrichtung:**
-    - Rust installieren ([rust-lang.org](https://www.rust-lang.org/learn/get-started))
-    - Docker installieren ([docker.com](https://www.docker.com/))
-    - `.env`-Datei verlinken: `make link-env`
-    - Datenbanksystem hochfahren: `docker compose up -d`
-    - Datenbank erstellen und migrieren: `make init-db`
-    - Serveranwendung kompilieren und starten: `cargo run`
+
+- Rust installieren ([rust-lang.org](https://www.rust-lang.org/learn/get-started))
+- Docker installieren ([docker.com](https://www.docker.com/))
+- `.env`-Datei verlinken: `make link-env`
+- Datenbanksystem hochfahren: `docker compose up -d`
+- Datenbank erstellen und migrieren: `make init-db`
+- Serveranwendung kompilieren und starten: `cargo run`
 
 ## 3. **Datenbankmodell und Schema:**
    - Beschreibung des Datenbankmodells und der Tabellenschemata.
