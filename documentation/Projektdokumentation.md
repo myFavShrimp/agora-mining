@@ -75,7 +75,7 @@ Die analytische Funktionen zur Interpretation der Energiedaten, wie Trendanalyse
 | 5  | Favicon einbinden  |
 
 ### Abweichungen von der Projektaufgabenstellung
-Da wir während er Bearbeitungszeit dieses Projektes keine erweiterte Aufgabenstellung bekommen haben können wir keine Abweichungen feststellen und dokumentieren.
+Da wir während er Bearbeitungszeit dieses Projektes keine erweiterte Aufgabenstellung bekommen haben, können wir keine Abweichungen feststellen und dokumentieren. Wir haben daher die Anforderungen der unangepassten Aufgabe selbstständig erweitert.
 
 ### Ressourcenplan
 
