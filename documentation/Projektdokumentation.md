@@ -19,7 +19,6 @@
    - [Zielplattform](#zielplattform)
    - [Benutzeroberflächendesign](#benutzeroberflächendesign)
    - [Datenmodell](#datenmodell)
-   - [Maßnahmen zur Qualitätssicherung](#maßnahmen-zur-qualitätssicherung)
 5. [Implementierungsphase](#implementierungsphase)
    - [Datenstruktur](#datenstruktur)
    - [Benutzeroberfläche](#benutzeroberfläche)
@@ -162,11 +161,8 @@ Die Farbwahl wurde unter Zuhilfenahme von Googles Material3 Farbpicker getroffen
 Simplizität der Oberflächen mit runden Ecken sollte modernen Standards entsprechen
 
 ### Datenmodell
-> Entwurf/Beschreibung der Datenstrukturen (z.B. ERM und/oder Tabellenmodell, XML-Schemas) mit kurzer Beschreibung der wichtigsten (!) verwendeten Entitäten.
-### Maßnahmen zur Qualitätssicherung
->  Welche Maßnahmen werden ergriffen, um die Qualität des Projektergebnisses (siehe Kapitel 3.5) zu sichern (z.B. automatische Tests, Anwendertests)?
-
-> Ggfs. Definition von Testfällen und deren Durchführung (durch Programme/Benutzer).
+![ER-Modell](https://github.com/myFavShrimp/agora-mining/blob/main/documentation/resources/ERM.png)
+Die ER-Modelle zeigen unsere verwendeten Datensätze die wir von der Agora-Webseite benutzen. Die Attribute beschreiben dabei die verschiedenen Energiequellen des jeweiligen Datensatzes von denen es möglich ist anzuzeigen.
 
 ---
 
@@ -175,10 +171,6 @@ Simplizität der Oberflächen mit runden Ecken sollte modernen Standards entspre
 > Beschreibung der angelegten Datenbank (z.B. Generierung von SQL aus Modellierungswerkzeug oder händisches Anlegen), XML-Schemas usw.
 
 ### Benutzeroberfläche
-> Beschreibung der Implementierung der Benutzeroberfläche, falls dies separat zur Implementierung der Geschäftslogik erfolgt (z.B. bei HTML-Oberflächen und Stylesheets).
-> Ggfs. Beschreibung des Corporate Designs und dessen Umsetzung in der Anwendung.
-> Screenshots der Anwendung (TODO: Montag)
-
 Allgemein haben wir versucht uns bei dem Design an der aktuellen Version Material3 von Googles Material Design zu orientieren. Dementsprechend verwenden wir viele Rundungen und flach wirkende Oberflächen. Auch unsere Farbpalette wurde mit Hilfe des m3 Material Theme Builders aufgebaut, als Grundlage wurde Aufgrund persönlicher Präferenz ein Lilaton gewählt.
 
 Wir verwenden Normalize.css, um browserübergreifende Konsistenz in der Darstellung von HTML-Elementen zu gewährleisten. Es bietet den Vorteil, standardisierte und vorhersagbare Stilgrundlagen zu schaffen, ohne dabei unnötige oder problematische Zurücksetzungen vorzunehmen. Durch die gezielte Normalisierung werden konsistente Designs über verschiedene Browser hinweg ermöglicht, wodurch Entwickler weniger Zeit mit der Bewältigung von Browserinkonsistenzen verbringen und sich stattdessen auf die Gestaltung benutzerfreundlicher Benutzeroberflächen konzentrieren können.
