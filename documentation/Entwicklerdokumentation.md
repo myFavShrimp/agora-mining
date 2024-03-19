@@ -31,22 +31,23 @@
 7. **Externe Ressourcen und Bibliotheken:**
 
 Rustbibliotheken:
-    - **askama**, um HTML-Templates mit Rust zu generieren
-        - **askama_axum**, zur Integration von askama mit dem axum Framework
-    - **axum**, als Framework für Webrequests
-        - **axum-extra** für die Deserialisierung von Form-Daten in Request-URLs
-    - **dotenv**, zur Verwendung von Umgebungsvariablen aus einer `.env`-Datei
-    - **eyre**, für bessere Fehlermeldungen beim Initialisieren des Servers
-    - **reqwest**, als HTTP-Client
-    - **serde**, zu serialiseren und deserialisieren von Daten
-        - **serde-env**, um Umgebungsvariablen zu serialiseren und deserialisieren
-        - **serde_json**, um Daten im JSON-Format zu serialiseren und deserialisieren
-    - **sqlx**, zur Anbindung und Verwendung der PostgreSQL-Datenbank
-    - **thiserror**, um eigene Fehlermeldungen zu bauen, welche dem Rust-Fehler-Datentypen entsprechen 
-    - **time**, als Zeitenbibliothek
-    - **tokio**, für eine Asynchrone-Laufzeit
-    - **tower**, für Komponenten zum Aufbau eines Servers, wie timeouts, ratelimiting und loadbalancing
-    - **turf**, eine Bibliothek die es ermöglicht CSS und SCSS während der Compilezeit zu erzeugen und in die entstehende Binary einzupflegen
+
+- **askama**, um HTML-Templates mit Rust zu generieren
+    - **askama_axum**, zur Integration von askama mit dem axum Framework
+- **axum**, als Framework für Webrequests
+    - **axum-extra** für die Deserialisierung von Form-Daten in Request-URLs
+- **dotenv**, zur Verwendung von Umgebungsvariablen aus einer `.env`-Datei
+- **eyre**, für bessere Fehlermeldungen beim Initialisieren des Servers
+- **reqwest**, als HTTP-Client
+- **serde**, zu serialiseren und deserialisieren von Daten
+    - **serde-env**, um Umgebungsvariablen zu serialiseren und deserialisieren
+    - **serde_json**, um Daten im JSON-Format zu serialiseren und deserialisieren
+- **sqlx**, zur Anbindung und Verwendung der PostgreSQL-Datenbank
+- **thiserror**, um eigene Fehlermeldungen zu bauen, welche dem Rust-Fehler-Datentypen entsprechen 
+- **time**, als Zeitenbibliothek
+- **tokio**, für eine Asynchrone-Laufzeit
+- **tower**, für Komponenten zum Aufbau eines Servers, wie timeouts, ratelimiting und loadbalancing
+- **turf**, eine Bibliothek die es ermöglicht CSS und SCSS während der Compilezeit zu erzeugen und in die entstehende Binary einzupflegen
 
 Javascriptbibliotheken:
    - **chart.js**, eine Bibliothek zur Darstellung von Graphen mit JavaScript
