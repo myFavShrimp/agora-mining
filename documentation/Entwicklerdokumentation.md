@@ -1,10 +1,10 @@
 # Entwicklerdokumentation
 
-1. **Übersicht und Architektur:**
-   - Allgemeine Beschreibung des Projekts, seiner Ziele und der zugrunde liegenden Architektur.
-   - Diagramme oder Grafiken, die die Gesamtstruktur des Systems illustrieren.
-
-2. **Installation und Einrichtung:**
+## 1. **Übersicht und Architektur:**
+   
+   Dieses Projekt ist eine Serveranwendung und wurde in Rust umgesetzt. Das Frontend besteht aus Templates welche vom Server gerendert und zurückgegeben werden. Für Interaktivität wurde das htmx-Framework verwendet,       welches es ermöglich HTML-Komponenten dynamisch auszutauschen. Als Datenbank wurde das Open-Source-Datenbanksystem PostgreSQL verwendet. 
+   
+## 2. **Installation und Einrichtung:**
     - Rust installieren ([rust-lang.org](https://www.rust-lang.org/learn/get-started))
     - Docker installieren ([docker.com](https://www.docker.com/))
     - `.env`-Datei verlinken: `make link-env`
@@ -12,23 +12,29 @@
     - Datenbank erstellen und migrieren: `make init-db`
     - Serveranwendung kompilieren und starten: `cargo run`
 
-3. **Datenbankmodell und Schema:**
+## 3. **Datenbankmodell und Schema:**
    - Beschreibung des Datenbankmodells und der Tabellenschemata.
    - Beispiele für SQL-Abfragen und Datenbankoperationen.
 
-4. **API-Dokumentation:**
-   - Ausführliche Dokumentation aller APIs, einschließlich Endpunkte, Parameter, Rückgabewerte und Beispiele.
-   - Authentifizierungs- und Autorisierungsanleitungen für API-Zugriff.
+## 4. **API-Dokumentation:**
+   
+   Es gibt keine API im klassischen Sinne, sondern wir haben einen Endpunkt (`/graph`) welcher Formdaten entgegennimmt und eine HTML-Response liefert.
+   Der Endpunkt erwartet `used_data_sets`, eine Liste von ausgewählten Datensätzen (bspw. PowerGeneration und PowerEmission), ein `from`- und `to`-Datum, nach ISO-8601, und `use_average` welches die Werte `None`,          `Daily`, `Monthly`, `Yearly` annimmt. <br>
+   Weiter gibt es die Routen `/about`, `/refresh` und  `/`.
+   - `/about` führt zu einer Seite mit einer kurzen Beschreibung des Projektes und einem Verweis auf das Repository.
+   - `/refresh` aktualisiert die Daten welche in der Datenbank hinterlegt sind
+   - `/` ist die Landingpage
+   
+## 5. **Code-Struktur und -Organisation:**
 
-5. **Code-Struktur und -Organisation:**
-   - Erklärung der Code-Struktur, Verzeichnisse und Module.
-   - Beschreibung der Verantwortlichkeiten verschiedener Teile des Codes.
+   Es gibt insgesamt fünf Module, `database`, `agora`, `templates`, `plotting` und `config`.<br>
+   Das Modul `database` enthält die Datenbankentitäten und die Querylogik.
+   In `agora` ist die Logik für die API-Anfragen gekapselt.
+   Das Modul `templates` enthält die HTML-Templates welche gerendert werden können, sowie das Untermodul `plotting`, zum umwandeln der Datenbankdaten in Graphdaten.
+   Und das letzte Modul ist `config`, in welchem die Einstellungen des Servers definiert sind.
 
-6. **Funktionale und Nicht-funktionale Anforderungen:**
-   - Liste der funktionalen Anforderungen und deren Implementierung.
-   - Nicht-funktionale Anforderungen wie Leistung, Sicherheit und Skalierbarkeit.
 
-7. **Externe Ressourcen und Bibliotheken:**
+## 6. **Externe Ressourcen und Bibliotheken:**
 
 Rustbibliotheken:
 
@@ -39,7 +45,7 @@ Rustbibliotheken:
 - **dotenv**, zur Verwendung von Umgebungsvariablen aus einer `.env`-Datei
 - **eyre**, für bessere Fehlermeldungen beim Initialisieren des Servers
 - **reqwest**, als HTTP-Client
-- **serde**, zu serialiseren und deserialisieren von Daten
+- **serde**, zum serialiseren und deserialisieren von Daten
     - **serde-env**, um Umgebungsvariablen zu serialiseren und deserialisieren
     - **serde_json**, um Daten im JSON-Format zu serialiseren und deserialisieren
 - **sqlx**, zur Anbindung und Verwendung der PostgreSQL-Datenbank
@@ -51,6 +57,7 @@ Rustbibliotheken:
 
 Javascriptbibliotheken:
    - **chart.js**, eine Bibliothek zur Darstellung von Graphen mit JavaScript
+   - **htmx**, ein Framework welches es ermöglich Requests direkt aus HTML-Elementen zu feuern und diese dynamisch auszutauschen
 
 CSS-Bibliotheken:
    - **Normalize.css**, um Abhängigkeiten von Browserstylings so weit wie möglich aufzuheben
