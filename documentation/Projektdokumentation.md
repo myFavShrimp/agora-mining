@@ -119,11 +119,10 @@ Unsere Software strebt hohe Qualitätsstandards an, insbesondere in den Bereiche
 
 ## Entwurfsphase
 ### Zielplattform 
-> Beschreibung der Kriterien zur Auswahl der Zielplattform (u.a. Programmiersprache, Datenbank, Client/Server, Hardware).
-> Rust als Typensichere, kompilierte und sehr schnelle Sprachen, bietet von Haus aus viele Vorteile und war für uns spannend zur Verwendung in solch einem Projekt um Erfahrung zu sammeln
+Rust als Typensichere, kompilierte und sehr schnelle Sprachen, bietet von Haus aus viele Vorteile und war für uns spannend zur Verwendung in solch einem Projekt um Erfahrung zu sammeln
 
 ### Benutzeroberflächendesign 
-> Wir haben eine lokal gehostete Webanwendung(?) gewählt, in der Annahme dass dies die größte Menge an möglichen Usecases abdeckt ohne dass wir verschiedene Umgebungen, Betriebssysteme etc. selbst handhaben müssen.
+Wir haben eine lokal gehostete Webanwendung gewählt, in der Annahme dass dies die größte Menge an möglichen Usecases abdeckt ohne dass wir verschiedene Umgebungen, Betriebssysteme etc. selbst handhaben müssen.
 
 Ein simples Webseitendesign mit einer Navigationsleiste oben und dem Inhalt der jeweiligen Seite darunter, aus Gewohnheitsgründen sollte dieser Aufbau für einen generischen Nutzer einfach verständlich und verwendbar sein.
 Die Farbwahl erfolgte anhand eigener Präferenzen und ist ganz modern in einem ewigen Dark Mode um weniger Anstrengend für die Augen des Nutzers zu sein 
@@ -171,8 +170,12 @@ Wir haben uns entschieden, auf umfangreiche Tests zu verzichten, da wir direkt i
 ---
 
 ## Fazit
-- Fehlerhafte Library (Compilierungsfehler) für das Graphendarstellen benutzt (Woche 4)
-- Graphen nicht mehr über Server rendern lassen - dadurch sind wir viel dynamischer und schneller
 ### Soll-/Ist-Vergleich
+Der Soll-/Ist-Vergleich zeigt, dass die Ziele des Projekts erfolgreich erreicht wurden. Wir konnten ein vollständiges ER-Modell und relationales Modell für die Datenbank erstellen, User Stories definieren und die relevanten Daten von der Webseite extrahieren und anzeigen. Die GUI wurde mit einer Auswahlmöglichkeit für den Zeitraum erfolgreich implementiert, ebenso wie die Datenbankanbindung und die Speicherung aller Daten. Auch das nachträgliche Hinzufügen von Daten und die optisch ansprechende Gestaltung der GUI wurden erreicht.
+
 ### Lessons Learned
-### Ausblick
+Durch das Projekt haben wir wichtige Erkenntnisse aus spezifischen Herausforderungen gewonnen. Die Nutzung einer fehlerhaften Library für das Graphendarstellen führte zu Komplikationen und Compilierungsfehlern in Woche 4. Dies verdeutlicht die Bedeutung der sorgfältigen Auswahl und Überprüfung von externen Bibliotheken, um potenzielle Probleme frühzeitig zu erkennen und zu vermeiden.
+
+Des Weiteren haben wir festgestellt, dass das Rendern von Graphen über den Server zwar eine anfängliche Lösung war, aber nicht optimal in Bezug auf Dynamik und Geschwindigkeit. Durch die Umstellung auf eine clientseitige Darstellung der Graphen konnten wir eine deutlich verbesserte Leistung erzielen. Diese Erfahrung zeigt, wie wichtig es ist, verschiedene Ansätze zu prüfen und die Architektur der Anwendung kontinuierlich zu optimieren, um eine optimale Benutzererfahrung zu gewährleisten.
+
+Außerdem haben wir gemerkt wie wichtig es ist, Funktionen nach ihrer Relevanz zu priorisieren und flexibel auf unvorhergesehene Änderungen zu reagieren. Klare Kommunikation, effektive Zusammenarbeit und gründliche Dokumentation sind entscheidend für den Erfolg eines Projekts. Zudem ist eine effektive Zeitplanung und -verwaltung sowie die Berücksichtigung der Benutzerbedürfnisse von großer Bedeutung für eine erfolgreiche Entwicklung.
