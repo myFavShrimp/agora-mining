@@ -1,4 +1,32 @@
 # Konzept
+1. [Einleitung](#einleitung)
+   - [Projektbeschreibung](#projektbeschreibung)
+   - [Projektziel](#projektziel)
+   - [Projektschnittstellen](#projektschnittstellen)
+   - [Projektabgrenzung](#projektabgrenzung)
+2. [Projektplanung](#projektplanung)
+   - [Meilensteine](#meilensteine)
+   - [Abweichungen von der Projektaufgabenstellung](#abweichungen-von-der-projektaufgabenstellung)
+   - [Ressourcenplan](#ressourcenplan)
+   - [Entwicklungsprozess](#entwicklungsprozess)
+3. [Analysephase](#analysephase)
+   - [Ist-Analyse](#ist-analyse)
+   - [Wirtschaftlichkeitsanalyse](#wirtschaftlichkeitsanalyse)
+   - [Qualitätsanforderungen](#qualitätsanforderungen)
+   - [Anforderungen](#anforderungen)
+4. [Entwurfsphase](#entwurfsphase)
+   - [Zielplattform](#zielplattform)
+   - [Benutzeroberflächendesign](#benutzeroberflächendesign)
+   - [Datenmodell](#datenmodell)
+   - [Maßnahmen zur Qualitätssicherung](#maßnahmen-zur-qualitätssicherung)
+5. [Implementierungsphase](#implementierungsphase)
+   - [Datenstruktur](#datenstruktur)
+   - [Benutzeroberfläche](#benutzeroberfläche)
+6. [Testdokumentation](#testdokumentation)
+7. [Fazit](#fazit)
+   - [Soll-/Ist-Vergleich](#soll-ist-vergleich)
+   - [Lessons Learned](#lessons-learned)
+
 ## Einleitung
 ### Projektbeschreibung
 Dieses Projekt entsteht im Rahmen der Ausbildung zum Fachinformatiker Anwendungsentwicklung am Oberstufenzentrum Informations- und Medizintechnik in Berlin. Es soll in einer Gruppenarbeit über 5 Wochen eine Software entwickelt werden. Die Aufgabe ist die Entwicklung einer Software zum Extrahieren von Energiedaten der Website [Agora](https://www.agora-energiewende.de/service/agorameter/) und Überführung in eine Datenbank.
