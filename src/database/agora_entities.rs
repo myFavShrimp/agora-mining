@@ -36,7 +36,7 @@ impl AgoraEntities {
         from: &Date,
         to: &Date,
         use_average: &Average,
-    ) -> Vec<PlottingTemplateDataSet> {
+    ) -> Result<Vec<PlottingTemplateDataSet>, sqlx::Error> {
         let mut data_set = Vec::new();
 
         for entity in entities {
@@ -47,23 +47,23 @@ impl AgoraEntities {
                             power_generation::PowerGeneration::find_all_ordered_by_date(
                                 connection, &from, &to,
                             )
-                            .await
+                            .await?
                         }
                         Average::Daily => power_generation::PowerGeneration::find_all_ordered_by_date_average_daily(
                             connection, &from, &to,
                         )
-                        .await,
+                        .await?,
                         Average::Monthly => power_generation::PowerGeneration::find_all_ordered_by_date_average_monthly(
                             connection, &from, &to,
                         )
-                        .await,
+                        .await?,
                         Average::Yearly => power_generation::PowerGeneration::find_all_ordered_by_date_average_yearly(
                             connection, &from, &to,
                         )
-                        .await,
+                        .await?,
                     };
 
-                    data_set.extend(to_data_sets(result.unwrap()));
+                    data_set.extend(to_data_sets(result));
                 }
                 AgoraEntities::PowerEmission => {
                     let result = match use_average {
@@ -71,55 +71,55 @@ impl AgoraEntities {
                             power_emission::PowerEmission::find_all_ordered_by_date(
                                 connection, &from, &to,
                             )
-                            .await
+                            .await?
                         }
                         Average::Daily => {
                             power_emission::PowerEmission::find_all_ordered_by_date_average_daily(
                                 connection, &from, &to,
                             )
-                            .await
+                            .await?
                         }
                         Average::Monthly => {
                             power_emission::PowerEmission::find_all_ordered_by_date_average_monthly(
                                 connection, &from, &to,
                             )
-                            .await
+                            .await?
                         }
                         Average::Yearly => {
                             power_emission::PowerEmission::find_all_ordered_by_date_average_yearly(
                                 connection, &from, &to,
                             )
-                            .await
+                            .await?
                         }
                     };
 
-                    data_set.extend(to_data_sets(result.unwrap()));
+                    data_set.extend(to_data_sets(result));
                 }
                 AgoraEntities::PowerImportExport => {
                     let result = match use_average {
                         Average::None => power_import_export::PowerImportExport::find_all_ordered_by_date(
                             connection, &from, &to,
                         )
-                        .await,
+                        .await?,
                         Average::Daily => power_import_export::PowerImportExport::find_all_ordered_by_date_average_daily(
                             connection, &from, &to,
                         )
-                        .await,
+                        .await?,
                         Average::Monthly => power_import_export::PowerImportExport::find_all_ordered_by_date_average_monthly(
                             connection, &from, &to,
                         )
-                        .await,
+                        .await?,
                         Average::Yearly => power_import_export::PowerImportExport::find_all_ordered_by_date_average_yearly(
                             connection, &from, &to,
                         )
-                        .await,
+                        .await?,
                     };
 
-                    data_set.extend(to_data_sets(result.unwrap()));
+                    data_set.extend(to_data_sets(result));
                 }
             }
         }
 
-        data_set
+        Ok(data_set)
     }
 }

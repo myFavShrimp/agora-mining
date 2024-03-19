@@ -4,9 +4,12 @@ use axum::{extract::State, http::StatusCode, response::IntoResponse, routing::ge
 use axum_extra::extract::Query;
 use config::Config;
 use database::{agora_entities::AgoraEntities, Average};
+use eyre::Context;
 use serde::Deserialize;
 use sqlx::PgPool;
 use time::{Date, Duration};
+use tower_http::trace::TraceLayer;
+use tracing::Level;
 
 mod agora;
 mod config;
@@ -20,6 +23,18 @@ pub struct AppState {
 
 #[tokio::main]
 async fn main() -> eyre::Result<()> {
+    #[cfg(debug_assertions)]
+    let trace_level = Level::TRACE;
+    #[cfg(not(debug_assertions))]
+    let trace_level = Level::INFO;
+
+    tracing::subscriber::set_global_default(
+        tracing_subscriber::FmtSubscriber::builder()
+            .with_max_level(trace_level)
+            .finish(),
+    )
+    .wrap_err("Error initializing logging")?;
+
     let config = Config::from_env();
     let address = config.address();
 
@@ -33,16 +48,14 @@ async fn main() -> eyre::Result<()> {
         .route("/about", get(about_page_handler))
         .route("/refresh", get(refresh_data_handler))
         .route("/graph", get(graph_handler))
-        //.route("favicon")
-        .with_state(state);
+        .with_state(state)
+        .layer(TraceLayer::new_for_http());
 
     let listener = tokio::net::TcpListener::bind(address).await?;
     axum::serve(listener, app).await?;
 
     Ok(())
 }
-
-//async fn fav_icon_handler() -> impl IntoResponse {}
 
 async fn landing_page_handler() -> impl IntoResponse {
     templates::LandingPageTemplate
@@ -87,12 +100,23 @@ async fn graph_handler(
     )
     .await;
 
-    templates::PlottingTemplate {
-        data_sets: result,
-        from: form_data.from,
-        to: form_data.to,
-        used_data_sets: form_data.used_data_sets,
-        use_average: form_data.use_average,
+    match result {
+        Ok(plotting_data) => templates::PlottingTemplate {
+            data_sets: plotting_data,
+            from: form_data.from,
+            to: form_data.to,
+            used_data_sets: form_data.used_data_sets,
+            use_average: form_data.use_average,
+        }
+        .into_response(),
+        Err(e) => {
+            tracing::error!(
+                "{:?}",
+                eyre::Report::new(e).wrap_err("Retrieving plotting data from database failed")
+            );
+
+            (StatusCode::OK, "Datenabfrage fehlgeschlagen").into_response()
+        }
     }
 }
 
@@ -103,11 +127,18 @@ async fn refresh_data_handler(State(state): State<Arc<AppState>>) -> impl IntoRe
             [("HX-Retarget", format!("#{}", templates::REFRESH_BUTTON_ID))],
             "Updated",
         ),
-        Err(_) => (
-            StatusCode::OK,
-            [("HX-Retarget", format!("#{}", templates::REFRESH_BUTTON_ID))],
-            "Update Failed",
-        ),
+        Err(e) => {
+            tracing::error!(
+                "{:?}",
+                eyre::Report::new(e).wrap_err("Updating database from agora api failed")
+            );
+
+            (
+                StatusCode::OK,
+                [("HX-Retarget", format!("#{}", templates::REFRESH_BUTTON_ID))],
+                "Update fehlgeschlagen",
+            )
+        }
     }
 }
 
