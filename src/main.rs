@@ -21,6 +21,16 @@ pub struct AppState {
     pub postgres_pool: PgPool,
 }
 
+static BANNER: &str = r#"
+                                       __  __ _       _             
+     /\                               |  \/  (_)     (_)            
+    /  \   __ _  ___  _ __ __ _ ______| \  / |_ _ __  _ _ __   __ _ 
+   / /\ \ / _` |/ _ \| '__/ _` |______| |\/| | | '_ \| | '_ \ / _` |
+  / ____ | (_| | (_) | | | (_| |      | |  | | | | | | | | | | (_| |
+ /_/    \_\__, |\___/|_|  \__,_|      |_|  |_|_|_| |_|_|_| |_|\__, |
+           __/ |                                               __/ |
+          |___/                                               |___/ "#;
+
 #[tokio::main]
 async fn main() -> eyre::Result<()> {
     #[cfg(debug_assertions)]
@@ -34,6 +44,8 @@ async fn main() -> eyre::Result<()> {
             .finish(),
     )
     .wrap_err("Error initializing logging")?;
+
+    tracing::info!("{}", BANNER);
 
     let config = Config::from_env();
     let address = config.address();
@@ -52,6 +64,7 @@ async fn main() -> eyre::Result<()> {
         .layer(TraceLayer::new_for_http());
 
     let listener = tokio::net::TcpListener::bind(address).await?;
+
     axum::serve(listener, app).await?;
 
     Ok(())
