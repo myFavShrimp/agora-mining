@@ -1,4 +1,5 @@
 # Konzept
+## Inhaltsverzeichnis
 1. [Einleitung](#einleitung)
    - [Projektbeschreibung](#projektbeschreibung)
    - [Projektziel](#projektziel)
@@ -26,6 +27,7 @@
 7. [Fazit](#fazit)
    - [Soll-/Ist-Vergleich](#soll-ist-vergleich)
    - [Lessons Learned](#lessons-learned)
+---
 
 ## Einleitung
 ### Projektbeschreibung
