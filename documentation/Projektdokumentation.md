@@ -162,7 +162,7 @@ Simplizität der Oberflächen mit runden Ecken sollte modernen Standards entspre
 
 ### Datenmodell
 ![ER-Modell](https://github.com/myFavShrimp/agora-mining/blob/main/documentation/resources/ERM.png)
-Die ER-Modelle zeigen unsere verwendeten Datensätze die wir von der Agora-Webseite benutzen. Die Attribute beschreiben dabei die verschiedenen Energiequellen des jeweiligen Datensatzes von denen es möglich ist anzuzeigen.
+> Abbildung 1: Die ER-Modelle zeigen unsere verwendeten Datensätze die wir von der Agora-Webseite benutzen. Die Attribute beschreiben dabei die verschiedenen Energiequellen des jeweiligen Datensatzes von denen es möglich ist anzuzeigen.
 
 ---
 
@@ -179,8 +179,11 @@ Architektonisch gibt es einen Router welcher anhand der angefragten Routen versc
 Herz dieses Projektes ist der Graph auf welchem die vom Backend zur Verfügung gestellten Daten dargestellt werden. 
 Da Rust, als relativ junge Programmiersprache, aktuell noch keine Bibliotheken hat welche es an Umfang und Funktionalität mit chart.js aufnehmen können, haben wir uns dafür entschieden chart.js per Script in unser Template für die Darstellung des Graphen einzubinden.
 Dabei werden unsere Daten über die serde-Bibliothek zu JSON serialisiert, welches dann an das Script weitergereicht wird. 
-Der Graph selbst wird auch über JSON gesteuert, es wurde beispielsweise konfiguriert dass die y-Achse logarithmisch dargestellt werden soll da durch große Diskrepanzen in den Werten der verschiedenen Daten sonst ein extrem unleserlicher Graph entstehen würde.
+Der Graph selbst wird auch über JSON gesteuert, es wurde beispielsweise, wie in Abbildung 1 zu sehen ist, konfiguriert dass die y-Achse logarithmisch dargestellt werden soll. Dies war notwendig da sonst durch große Diskrepanzen in den Werten der verschiedenen Daten ein extrem unleserlicher Graph entstehen würde.
 Mit etwas JavaScript-Stringformatierung können auch eigene Labels für die Datensätze generiert werden. Dies ist notwendig da wir beispielsweise zeitgleich die Menge der ausgestoßenen Emissionen in Tonnen CO2 und die produzierte Strommenge in MW/h auf dem selben Graphen darstellen können und bei einer einfachen Achsenbeschriftung dementsprechend Verwirrung aufkommen könnte.
+
+![Abbildung 2: Der Graph mit logarithmischer Skalierung für die Y-Achse](resources/agora-mining-graph.png)
+> Abbildung 2: Der Graph mit logarithmischer Skalierung für die Y-Achse
 
 ---
 
