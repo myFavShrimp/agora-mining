@@ -5,7 +5,12 @@
    - Diagramme oder Grafiken, die die Gesamtstruktur des Systems illustrieren.
 
 2. **Installation und Einrichtung:**
-    - 
+    - Rust installieren ([rust-lang.org](https://www.rust-lang.org/learn/get-started))
+    - Docker installieren ([docker.com](https://www.docker.com/))
+    - `.env`-Datei verlinken: `make link-env`
+    - Datenbanksystem hochfahren: `docker compose up -d`
+    - Datenbank erstellen und migrieren: `make init-db`
+    - Serveranwendung kompilieren und starten: `cargo run`
 
 3. **Coding Guidelines und Best Practices:**
    - Festgelegte Codierungsrichtlinien und -standards für das Projekt.
