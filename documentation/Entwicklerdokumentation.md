@@ -5,8 +5,7 @@
    - Diagramme oder Grafiken, die die Gesamtstruktur des Systems illustrieren.
 
 2. **Installation und Einrichtung:**
-   - Schritt-für-Schritt-Anleitung zur lokalen Entwicklungsumgebung und zur Einrichtung des Projekts.
-   - Abhängigkeiten und Bibliotheken, die für die Entwicklung benötigt werden.
+    - 
 
 3. **Coding Guidelines und Best Practices:**
    - Festgelegte Codierungsrichtlinien und -standards für das Projekt.
@@ -47,16 +46,16 @@
 12. **Externe Ressourcen und Bibliotheken:**
 
 Rustbibliotheken:
-   - **askama**, um HTML-Templates mit Rust zu generieren
-       - **askama_axum**, zur Integration von askama mit dem axum Framework
-   - **axum**, als Framework für Webrequests
-       - **axum-extra** für die Deserialisierung von Form-Daten in Request-URLs
-   - **dotenv**, zur Verwendung von Umgebungsvariablen aus einer `.env`-Datei
-   - **eyre**, für bessere Fehlermeldungen beim Initialisieren des Servers
-   - **reqwest**, als HTTP-Client
-   - **serde**, zu serialiseren und deserialisieren von Daten
-       - **serde-env**, um Umgebungsvariablen zu serialiseren und deserialisieren
-       - **serde_json**, um Daten im JSON-Format zu serialiseren und deserialisieren
+    - **askama**, um HTML-Templates mit Rust zu generieren
+        - **askama_axum**, zur Integration von askama mit dem axum Framework
+    - **axum**, als Framework für Webrequests
+        - **axum-extra** für die Deserialisierung von Form-Daten in Request-URLs
+    - **dotenv**, zur Verwendung von Umgebungsvariablen aus einer `.env`-Datei
+    - **eyre**, für bessere Fehlermeldungen beim Initialisieren des Servers
+    - **reqwest**, als HTTP-Client
+    - **serde**, zu serialiseren und deserialisieren von Daten
+        - **serde-env**, um Umgebungsvariablen zu serialiseren und deserialisieren
+        - **serde_json**, um Daten im JSON-Format zu serialiseren und deserialisieren
     - **sqlx**, zur Anbindung und Verwendung der PostgreSQL-Datenbank
     - **thiserror**, um eigene Fehlermeldungen zu bauen, welche dem Rust-Fehler-Datentypen entsprechen 
     - **time**, als Zeitenbibliothek
