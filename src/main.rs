@@ -85,7 +85,7 @@ fn default_to() -> Date {
 fn default_from() -> Date {
     let from_date = time::OffsetDateTime::now_utc().date();
 
-    from_date.checked_sub(Duration::days(30)).unwrap()
+    from_date.checked_sub(Duration::days(14)).unwrap()
 }
 
 #[derive(Deserialize, Debug, Clone)]
