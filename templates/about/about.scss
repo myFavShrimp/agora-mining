@@ -1,1 +1,26 @@
 @import "color";
+
+.about_container {
+  display: flex;
+  gap: 1em;
+  flex-direction: column;
+  padding: 1em;
+
+  .about_block {
+    background: $agora-container-on-background;
+    border-radius: 1em;
+    padding: 1em;
+
+    h1, h2 {
+      margin: 0;
+    }
+
+    a {
+      color: color-mix(in srgb, $agora-container-primary, #fff 40%);
+
+      &:visited {
+        color: color-mix(in srgb, $agora-container-primary, #fff 40%);
+      }
+    }
+  }
+}

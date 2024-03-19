@@ -55,6 +55,13 @@
         width: fit-content;
         padding-right: 1em;
 
+        select {
+          background: none;
+          border-radius: 1em;
+          color: #cfc3cd;
+          border-color: #cfc3cd;
+        }
+
         .graph_toolbar_datepicker {
           background: transparent;
           border-radius: 1em;
@@ -99,46 +106,45 @@
         transition: .2s;
         box-shadow: 0 2px 5px 0 $agora-button-shadow;
       }
+    }
+  }
+}
 
-      .refresh {
-        border-radius: 10px;
-        display: flex;
-        justify-content: center;
-        width: max-content;
-        min-width: 4em;
+.refresh {
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  width: max-content;
+  min-width: 3em;
 
-        .spinner {
-          display: none;
-          margin: auto;
-          width: 1.15rem;
-          height: 1.15rem;
-          border: 5px solid $agora-container-primary-text;
-          border-bottom-color: #55006b;
-          border-radius: 50%;
-          box-sizing: border-box;
-          animation: rotation 1s linear infinite;
-        }
+  .spinner {
+    display: none;
+    margin: auto;
+    width: 1rem;
+    height: 1rem;
+    border: 5px solid $agora-container-primary-text;
+    border-bottom-color: #55006b;
+    border-radius: 50%;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+  }
 
-        &.htmx-request {
-          .spinner {
-            display: inline-block;
-          }
+  &.htmx-request {
+    .spinner {
+      display: inline-block;
+    }
 
-          .linkText {
-            display: none
-          }
-        }
+    .linkText {
+      display: none
+    }
+  }
 
-        @keyframes rotation {
-          0% {
-            transform: rotate(0deg);
-          }
-          100% {
-            transform: rotate(360deg);
-          }
-        }
-      }
-
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
     }
   }
 }

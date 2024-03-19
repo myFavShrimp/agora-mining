@@ -13,10 +13,11 @@
             <div class="{{class_name.graph_dataset_selection}}">
                 {% for checkbox in checkboxes %}
                 <label>
-                    <input class="{{class_name.graph_dataset_input}}" name="used_data_sets" value={{ serde_json::to_string(checkbox).unwrap()|safe }} type="checkbox"
-                        {% if used_data_sets.contains(checkbox) %}
-                            checked
-                        {% endif %}
+                    <input class="{{class_name.graph_dataset_input}}" name="used_data_sets" value={{
+                           serde_json::to_string(checkbox).unwrap()|safe }} type="checkbox"
+                           {% if used_data_sets.contains(checkbox) %}
+                           checked
+                           {% endif %}
                     >
                     {{ AgoraEntities::get_title(checkbox)|e }}
                 </label>
@@ -27,7 +28,9 @@
                     <label for="use_average">Durchschnitt bilden</label>
                     <select id="use_average" name="use_average">
                         {% for average_kind in Average::all_with_at_top(self.use_average) %}
-                        <option value={{ serde_json::to_string(average_kind).unwrap()|safe }}>{{ average_kind.display_name() }}</option>
+                        <option value={{ serde_json::to_string(average_kind).unwrap()|safe }}>{{
+                            average_kind.display_name() }}
+                        </option>
                         {% endfor%}
                     </select>
                 </div>
@@ -47,14 +50,11 @@
             <div>Aktualisieren:</div>
             <div class="{{class_name.graph_buttons}}">
                 <button class="{{class_name.graph_button}}">Graph</button>
-                <button class="{{class_name.graph_button}}">
-                    <a class="{{class_name.refresh}}" hx-get="/refresh">
+                <button class="{{class_name.graph_button}} {{class_name.refresh}}" hx-get="/refresh">
                     <span class="{{class_name.link_text}}"
                           id="{{crate::templates::REFRESH_BUTTON_ID}}">Datenbank</span>
                         <span class="{{class_name.spinner}}"></span>
-                    </a>
                 </button>
-
             </div>
         </div>
     </div>
