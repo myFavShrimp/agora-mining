@@ -88,6 +88,10 @@ fn default_from() -> Date {
     from_date.checked_sub(Duration::days(14)).unwrap()
 }
 
+fn default_use_log() -> bool {
+    true
+}
+
 #[derive(Deserialize, Debug, Clone)]
 struct GraphFormData {
     #[serde(default = "default_data_sets")]
@@ -98,7 +102,7 @@ struct GraphFormData {
     to: Date,
     #[serde(default)]
     use_average: Average,
-    #[serde(default)]
+    #[serde(default = "default_use_log")]
     use_log: bool,
 }
 
