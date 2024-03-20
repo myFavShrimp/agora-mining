@@ -35,6 +35,14 @@
                     </select>
                 </div>
                 <div class="{{class_name.graph_toolbar_item}}">
+                    <label for="use_log">Logarithmische Darstellung</label>
+                    <input id="use_log" class="{{class_name.graph_dataset_input}}" name="use_log" value="true" type="checkbox"
+                           {% if use_log %}
+                           checked
+                           {% endif %}
+                    >
+                </div>
+                <div class="{{class_name.graph_toolbar_item}}">
                     <label for="from">Von</label>
                     <input class="{{class_name.graph_toolbar_datepicker}}" id="from" name="from" type="date"
                            value="{{ self.formatted_from().unwrap() }}">
@@ -100,7 +108,7 @@
                 },
                 scales: {
                     y: {
-                        type: 'logarithmic',
+                        type: {% if use_log %}'logarithmic'{% else %}'linear'{% endif %},
                         ticks: {
                             color: textColor,
                         },

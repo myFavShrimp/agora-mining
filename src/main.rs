@@ -98,6 +98,8 @@ struct GraphFormData {
     to: Date,
     #[serde(default)]
     use_average: Average,
+    #[serde(default)]
+    use_log: bool,
 }
 
 async fn graph_handler(
@@ -120,6 +122,7 @@ async fn graph_handler(
             to: form_data.to,
             used_data_sets: form_data.used_data_sets,
             use_average: form_data.use_average,
+            use_log: form_data.use_log,
         }
         .into_response(),
         Err(e) => {
